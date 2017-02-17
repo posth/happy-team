@@ -10,13 +10,17 @@ import { AuthService } from "./auth/auth.service";
 import { ErrorComponent } from "./errors/error.component";
 import { ErrorService } from "./errors/error.service";
 import { MessageModule } from "./messages/message.module";
+import { UserComponent } from './user/user.component';
+import { HealthComponent } from './health/health.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         AuthenticationComponent,
         HeaderComponent,
-        ErrorComponent
+        ErrorComponent,
+        UserComponent,
+        HealthComponent
     ],
     imports: [
         BrowserModule,

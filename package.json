@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "build": "del-cli public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch",
     "build:prod": "del-cli public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del-cli 'public/js/app/**/*.js' 'public/js/app/**/*.js.map' '!public/js/app/bundle.js' '!public/js/app/*.chunk.js' 'front/app/**/*.ngfactory.ts' 'front/app/**/*.shim.ts'"
   },
@@ -45,6 +45,7 @@
     "awesome-typescript-loader": "^2.2.4",
     "del-cli": "^0.2.0",
     "html-loader": "^0.4.4",
+    "nodemon": "^1.11.0",
     "raw-loader": "^0.5.1",
     "typescript": "2.0.3",
     "webpack": "2.1.0-beta.21",

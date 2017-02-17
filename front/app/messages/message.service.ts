@@ -11,8 +11,7 @@ export class MessageService {
     private messages: Message[] = [];
     messageIsEdit = new EventEmitter<Message>();
 
-    constructor(private http: Http, private errorService: ErrorService) {
-    }
+    constructor(private http: Http, private errorService: ErrorService) { }
 
     addMessage(message: Message) {
         const body = JSON.stringify(message);

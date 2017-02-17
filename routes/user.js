@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
+var Health = require('../models/health');
 
 router.post('/', function (req, res, next) {
     var user = new User({
@@ -12,6 +13,9 @@ router.post('/', function (req, res, next) {
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email
     });
+
+    //ADD Healths initial value here
+
     user.save(function(err, result) {
         if (err) {
             return res.status(500).json({
