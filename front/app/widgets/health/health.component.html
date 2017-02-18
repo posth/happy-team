@@ -2,8 +2,7 @@
     <h2>This is the team slider</h2>
     <input type="range">
 </div>
-<hr>
-<div class="col-md-6 col-md-offset-3">
+<div *ngIf="isLoggedIn()" class="col-md-6 col-md-offset-3">
     <h2>This is user specific slider</h2>
     <input type="range">
 </div>

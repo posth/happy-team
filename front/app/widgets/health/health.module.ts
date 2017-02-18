@@ -8,6 +8,7 @@ import { HealthComponent } from './health.component';
         HealthComponent
     ],
     imports: [
+        CommonModule
     ],
     exports: [
         HealthComponent

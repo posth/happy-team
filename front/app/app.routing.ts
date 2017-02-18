@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
 import { AuthenticationComponent } from "./auth/authentication.component";
-import { SigninComponent } from './auth/signin.component';
+import { SigninComponent } from './auth/signin/signin.component';
 import { TeamComponent } from './team/team.component';
 
 const APP_ROUTES: Routes = [

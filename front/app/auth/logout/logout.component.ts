@@ -9,10 +9,18 @@ import { AuthService } from "../auth.service";
     styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private _authService: AuthService, private router: Router) { }
 
     onLogout() {
-        this.authService.logout();
+        this._authService.logout();
+        this.router.navigate(['/', 'signin']);
+    }
+
+    isLoggedIn() {
+        return this._authService.isLoggedIn();
+    }
+
+    goSignin() {
         this.router.navigate(['/', 'signin']);
     }
 }
