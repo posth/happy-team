@@ -5,7 +5,10 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Message = require('../models/message');
 
+//Fetching messages from the database
 router.get('/', function (req, res, next) {
+
+    //If you don't pass anything to find function you get all the messages
     Message.find()
         .populate('user', 'firstName')
         .exec(function (err, messages) {
@@ -22,7 +25,10 @@ router.get('/', function (req, res, next) {
         });
 });
 
+// ------------  Every route below here should have a verified user otherwise the routes shouldn't be accessible  ------------------
+//On each route request, this method is used
 router.use('/', function (req, res, next) {
+    //Check if the user is issued a valid token - grabbing it from the request and checking it against our secret key from user.js
     jwt.verify(req.query.token, 'secret', function (err, decoded) {
         if (err) {
             return res.status(401).json({
@@ -30,11 +36,15 @@ router.use('/', function (req, res, next) {
                 error: err
             });
         }
+        //Let the request continue if it has a valid token, which is whichever route it requested
         next();
     })
 });
 
+//Making it post to store messages on the server - technically each path here is message/ before the path
 router.post('/', function (req, res, next) {
+
+    //Decoding the token, it's already valid which is why we decode now, and not verify as done in the previous function
     var decoded = jwt.decode(req.query.token);
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
@@ -47,6 +57,8 @@ router.post('/', function (req, res, next) {
             content: req.body.content,
             user: user
         });
+
+        //Save the message, and pass a callback function to handle errors
         message.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -54,8 +66,11 @@ router.post('/', function (req, res, next) {
                     error: err
                 });
             }
+            //pushing the new message from this user onto the messages array of this user in the db
             user.messages.push(result);
             user.save();
+
+            //If there is no error - 201 = everything is OK
             res.status(201).json({
                 message: 'Saved message',
                 obj: result
@@ -64,6 +79,7 @@ router.post('/', function (req, res, next) {
     });
 });
 
+//Used to change existing messages - passind the id of the message we want to update
 router.patch('/:id', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     Message.findById(req.params.id, function (err, message) {
@@ -73,6 +89,8 @@ router.patch('/:id', function (req, res, next) {
                 error: err
             });
         }
+
+        //If we don't receive a message
         if (!message) {
             return res.status(500).json({
                 title: 'No Message Found!',
@@ -85,7 +103,11 @@ router.patch('/:id', function (req, res, next) {
                 error: {message: 'Users do not match'}
             });
         }
+
+        //Update the content of the message
         message.content = req.body.content;
+
+        //Save the message
         message.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -122,6 +144,8 @@ router.delete('/:id', function (req, res, next) {
                 error: {message: 'Users do not match'}
             });
         }
+
+        //Delete the message
         message.remove(function (err, result) {
             if (err) {
                 return res.status(500).json({

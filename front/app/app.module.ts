@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
+import { ReactiveFormsModule } from '@angular/forms';
+import { MessageModule } from "./widgets/messages/message.module";
+import { HealthModule } from './widgets/health/health.module';
+import { AuthModule } from './auth/auth.module';
 
-import { AppComponent } from "./app.component";
+import { routing } from "./app.routing";
+
+import { AuthService } from "./auth/auth.service";
+import { ErrorService } from "./errors/error.service";
+
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { HeaderComponent } from "./header.component";
-import { routing } from "./app.routing";
-import { AuthService } from "./auth/auth.service";
 import { ErrorComponent } from "./errors/error.component";
-import { ErrorService } from "./errors/error.service";
-import { MessageModule } from "./messages/message.module";
 import { UserComponent } from './user/user.component';
-import { HealthComponent } from './health/health.component';
+import { TeamComponent } from './team/team.component';
+
+//Main component
+import { AppComponent } from "./app.component";
 
 @NgModule({
     declarations: [
@@ -20,13 +27,16 @@ import { HealthComponent } from './health/health.component';
         HeaderComponent,
         ErrorComponent,
         UserComponent,
-        HealthComponent
+        TeamComponent
     ],
     imports: [
         BrowserModule,
         routing,
         HttpModule,
-        MessageModule
+        MessageModule,
+        ReactiveFormsModule,
+        HealthModule,
+        AuthModule
     ],
     providers: [AuthService, ErrorService],
     bootstrap: [AppComponent]

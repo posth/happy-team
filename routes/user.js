@@ -11,10 +11,9 @@ router.post('/', function (req, res, next) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 10),
-        email: req.body.email
+        email: req.body.email,
+        admin: false
     });
-
-    //ADD Healths initial value here
 
     user.save(function(err, result) {
         if (err) {
