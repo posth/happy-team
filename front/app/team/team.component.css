@@ -1,3 +1,8 @@
 h1 {
     font-size: 40px;
+    text-align: center;
+}
+
+.board-widget {
+    margin: 5em 2em;
 }
