@@ -4,5 +4,5 @@
 </div>
 <div *ngIf="isLoggedIn()" class="col-md-6 col-md-offset-3">
     <h2>This is user specific slider</h2>
-    <input type="range">
+    <input #userInput (change)="setUserHealth(userInput.value)" type="range">
 </div>

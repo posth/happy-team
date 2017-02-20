@@ -32,5 +32,9 @@ export class HealthComponent implements OnInit {
     isLoggedIn() {
         return this._authService.isLoggedIn();
     }
+
+    setUserHealth(userHealth: number) {
+        console.log(userHealth);
+    }
     
 }
