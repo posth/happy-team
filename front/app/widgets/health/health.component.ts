@@ -58,7 +58,11 @@ export class HealthComponent implements OnInit {
     }
 
     setUserHealth(userHealth: number) {
-        console.log(userHealth);
+        const health = new Health(userHealth);
+        this._healthService.addHealth(health)
+        .subscribe(
+            data => console.log(data)
+        );
     }
 
     //Setters and getters for team part

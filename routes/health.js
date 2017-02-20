@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
         .exec(function (err, healths) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred on getting user',
                     error: err
                 });
             }
@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
             return res.status(500).json({
-                title: 'An error occurred',
+                title: 'An error occurred on post',
                 error: err
             });
         }
@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
         health.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred on save posting health',
                     error: err
                 });
             }

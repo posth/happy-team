@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred getting messages',
                     error: err
                 });
             }
@@ -49,7 +49,7 @@ router.post('/', function (req, res, next) {
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
             return res.status(500).json({
-                title: 'An error occurred',
+                title: 'An error occurred finding user',
                 error: err
             });
         }
@@ -62,7 +62,7 @@ router.post('/', function (req, res, next) {
         message.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred saving message',
                     error: err
                 });
             }
@@ -85,7 +85,7 @@ router.patch('/:id', function (req, res, next) {
     Message.findById(req.params.id, function (err, message) {
         if (err) {
             return res.status(500).json({
-                title: 'An error occurred',
+                title: 'An error occurred finding user',
                 error: err
             });
         }
@@ -111,7 +111,7 @@ router.patch('/:id', function (req, res, next) {
         message.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred saving message',
                     error: err
                 });
             }
@@ -128,7 +128,7 @@ router.delete('/:id', function (req, res, next) {
     Message.findById(req.params.id, function (err, message) {
         if (err) {
             return res.status(500).json({
-                title: 'An error occurred',
+                title: 'An error occurred finding message',
                 error: err
             });
         }
@@ -149,7 +149,7 @@ router.delete('/:id', function (req, res, next) {
         message.remove(function (err, result) {
             if (err) {
                 return res.status(500).json({
-                    title: 'An error occurred',
+                    title: 'An error occurred removing message',
                     error: err
                 });
             }
