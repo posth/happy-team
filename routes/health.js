@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Health = require('../models/health');
 
+//Get all health values
 router.get('/', function (req, res, next) {
     Health.find()
         .populate('user', 'firstName')
@@ -20,6 +21,24 @@ router.get('/', function (req, res, next) {
                 obj: healths
             });
         });
+});
+
+//Get latest health values
+router.get('/latest', function (req, res, next) {
+    // Health.find()
+    //     .populate('user', 'firstName')
+    //     .exec(function (err, healths) {
+    //         if (err) {
+    //             return res.status(500).json({
+    //                 title: 'An error occurred on getting user',
+    //                 error: err
+    //             });
+    //         }
+    //         res.status(200).json({
+    //             message: 'Success',
+    //             obj: healths
+    //         });
+    //     });
 });
 
 router.post('/', function (req, res, next) {

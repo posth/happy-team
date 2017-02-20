@@ -18,39 +18,32 @@ export class HealthComponent implements OnInit {
     //User health variables
     private healths: Health[];
     private userHealthValue: number;
+    private mostRecentHealthObject: Object;
 
     //Team range input disable
     private teamInputDisable: boolean;
     private teamHealthValue: number;
-    _teamHealthValueSubscription: Subscription;
 
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
 
         this.teamInputDisable = true;
-
-        //Subscribing to the health service for the team health value when it changes
-        this._teamHealthValueSubscription = this._healthService.teamHealthValueChanged$.subscribe(
-            teamHealthValue => this.teamHealthValue = teamHealthValue
-        );
     }
 
     ngOnInit() {
-        this._healthService.getHealth()
+        // this._healthService.getHealth()
+        //     .subscribe(
+        //     (healths: Health[]) => {
+        //         this.healths = healths;
+        //     }
+        //     );
+
+        this._healthService.getMostRecentHealth()
             .subscribe(
-            (healths: Health[]) => {
-                this.healths = healths;
+            (mostRecentHealthObject: Object) => {
+                this.mostRecentHealthObject = mostRecentHealthObject;
             }
             );
-
-        //Is there health for this user available already?
-        console.log(this.healths);
-
-        //If there is no user health it sets the value by default at 50
-        if (!this.healths) {
-            this.userHealthValue = 50;
-        }
-
     }
 
     isLoggedIn() {
@@ -59,10 +52,12 @@ export class HealthComponent implements OnInit {
 
     setUserHealth(userHealth: number) {
         const health = new Health(userHealth);
+
+        //Adding the health through the service to connect it to Mongo
         this._healthService.addHealth(health)
-        .subscribe(
+            .subscribe(
             data => console.log(data)
-        );
+            );
     }
 
     //Setters and getters for team part
