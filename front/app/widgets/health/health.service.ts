@@ -1,5 +1,7 @@
 import { Http, Response, Headers } from "@angular/http";
 import { Injectable, EventEmitter } from "@angular/core";
+
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from "rxjs";
 import 'rxjs/Rx';
 
@@ -9,11 +11,19 @@ import { ErrorService } from "../../errors/error.service";
 @Injectable()
 export class HealthService {
 
+    //Team variables
+    teamHealthValue: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+    teamHealthValueChanged$: Observable<number> = this.teamHealthValue.asObservable();
+
     private healths: Health[];
-    // messageIsEdit = new EventEmitter<Health>();
+    userHealthValueIsEdit = new EventEmitter<Health>();
 
-    constructor(private http: Http, private errorService: ErrorService) { }
+    constructor(private http: Http, private errorService: ErrorService) { 
+        //Getting the past team health on service instantiation 
+        this.getTeamHealth();
+    }
 
+    //Adding individual health of the user
     addHealth(health: Health) {
         const body = JSON.stringify(health);
         const headers = new Headers({'Content-Type': 'application/json'});
@@ -35,6 +45,7 @@ export class HealthService {
             });
     }
 
+    //Getting individual health of the user
     getHealth() {
         return this.http.get('http://localhost:3000/health')
             .map((response: Response) => {
@@ -54,4 +65,8 @@ export class HealthService {
             });
     }
 
+    //Getting team health calculation
+    getTeamHealth(): void {
+        this.teamHealthValue.next(100);
+    }
 }
