@@ -31,19 +31,19 @@ export class HealthComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this._healthService.getHealth()
-        //     .subscribe(
-        //     (healths: Health[]) => {
-        //         this.healths = healths;
-        //     }
-        //     );
-
-        this._healthService.getMostRecentHealth()
+        this._healthService.getHealth()
             .subscribe(
-            (mostRecentHealthObject: Object) => {
-                this.mostRecentHealthObject = mostRecentHealthObject;
+            (healths: Health[]) => {
+                this.healths = healths;
             }
             );
+
+        // this._healthService.getMostRecentHealth()
+        //     .subscribe(
+        //     (mostRecentHealthObject: Object) => {
+        //         this.mostRecentHealthObject = mostRecentHealthObject;
+        //     }
+        //     );
     }
 
     isLoggedIn() {
