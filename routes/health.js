@@ -25,6 +25,9 @@ router.get('/', function (req, res, next) {
 
 //Get latest health values
 router.get('/latest', function (req, res, next) {
+
+    //db.health.find().limit(1).sort({$natural: -1})
+    
     // Health.find()
     //     .populate('user', 'firstName')
     //     .exec(function (err, healths) {
