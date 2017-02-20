@@ -2,3 +2,5 @@
 .DS_Store
 db-server.bat
 db-client.bat
+debug.log
+/public/js/app/bundle.js
