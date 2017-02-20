@@ -1,9 +1,13 @@
 export class Health {
     
-    value: number;
+    currentHealth: number;
+    healthId?: string;
+    userId?: string;
 
-    constructor(value: number) {
-        this.value = value;
+    constructor(currentHealth: number, healthId?: string, userId?: string) {
+        this.currentHealth = currentHealth;
+        this.healthId = healthId;
+        this.userId = userId;
     }
     
 }

@@ -25,8 +25,6 @@ export class HealthComponent implements OnInit {
                     this.healths = healths;
                 }
             );
-
-        console.log(this.healths);
     }
 
     isLoggedIn() {
@@ -34,7 +32,11 @@ export class HealthComponent implements OnInit {
     }
 
     setUserHealth(userHealth: number) {
-        console.log(userHealth);
+        const health = new Health(userHealth);
+        this._healthService.addHealth(health)
+        .subscribe(
+            data => console.log(data)
+        );
     }
     
 }
