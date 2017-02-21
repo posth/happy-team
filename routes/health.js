@@ -47,8 +47,8 @@ router.get('/latest', function (req, res, next) {
 router.get('/team', function (req, res, next) {
 
     User.find()
-        .populate('user', 'firstName')
-        .exec(function (err, healths) {
+        .populate('healths')
+        .exec(function (err, users) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred on getting user',
@@ -57,12 +57,48 @@ router.get('/team', function (req, res, next) {
             }
 
             //TO DO grab the healths array and get average
+            let sum = 0;
+            let average = 0;
+            for(let i = 0; i < users.length; i++) {
+                for(let j = 0; j < users[i].healths.length; j++) {
+                    if(j === users[i].healths.length - 1) {
+                        sum += users[i].healths[j].currentHealth;
+                    }
+                }
+            }
+            console.log("Moyenne : " + parseInt(sum / users.length));
+            average = parseInt(sum / users.length);
 
             res.status(200).json({
                 message: 'Success',
-                obj: healths
+                obj: average
             });
         });
+
+    // User.aggregate(
+    //     [
+    //         {
+    //             "$match": {
+    //                 "to": req.user
+    //             }
+    //         }
+    //     ], function(err, healths) {
+    //         if (err) {
+    //             return res.status(500).json({
+    //                 title: 'An error occurred on getting user',
+    //                 error: err
+    //             });
+    //         }
+
+    //         //TO DO grab the healths array and get average
+
+    //         res.status(200).json({
+    //             message: 'Success',
+    //             obj: healths
+    //         });
+    //     }
+    // );
+
 });
 
 router.post('/', function (req, res, next) {

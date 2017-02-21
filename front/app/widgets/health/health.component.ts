@@ -22,7 +22,7 @@ export class HealthComponent implements OnInit {
     //Team range input disable
     private teamInputDisable: boolean;
     private teamHealthValue: number;
-    private mostRecentTeamHealthObject: Object;
+    private mostRecentTeamHealthObject: number;
 
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
@@ -68,12 +68,12 @@ export class HealthComponent implements OnInit {
     getMostRecentTeamHealth() {
         this._healthService.getMostRecentTeamHealth()
             .subscribe(
-            (mostRecentTeamHealthObject: Object) => {
+            (mostRecentTeamHealthObject: number) => {
                 this.mostRecentTeamHealthObject = mostRecentTeamHealthObject;
 
                 //TODO manage null/undefined/non-existent object
-                console.log('front end most recent team health object ->', this.mostRecentTeamHealthObject);
-
+                console.log('Moyenne de la dernière health de chaque user : ', this.mostRecentTeamHealthObject);
+                this.teamHealthValue = this.mostRecentTeamHealthObject;
 
             }
             );
