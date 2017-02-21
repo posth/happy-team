@@ -73,18 +73,14 @@ export class HealthService {
 
     //Getting the users most recent health
     getMostRecentHealth() {
-        return this.http.get('http://localhost:3000/health/latest')
+
+        const userId = localStorage.getItem('userId')
+            ? '?id=' + localStorage.getItem('userId')
+            : '';
+
+        return this.http.get('http://localhost:3000/health/latest' + userId)
             .map((response: Response) => {
                 const mostRecentHealthObject = response.json().obj;
-                // let transformedHealths: Health[] = [];
-                // for (let health of healths) {
-                //     transformedHealths.push(new Health(
-                //         health.value,
-                //         health._id,
-                //         health.user_id
-                //     ));
-                // }
-                // this.healths = transformedHealths;
                 return mostRecentHealthObject;
             })
             .catch((error: Response) => {

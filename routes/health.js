@@ -25,7 +25,8 @@ router.get('/', function (req, res, next) {
 
 //Get latest health values
 router.get('/latest', function (req, res, next) {
-    Health.find()
+
+    Health.find( { user: req.query.id })
         .limit(1)
         .sort({ $natural: -1 })
         .exec(function (err, health) {
