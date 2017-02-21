@@ -45,7 +45,7 @@ export class HealthComponent implements OnInit {
                 this.mostRecentHealthObject = mostRecentHealthObject;
 
                 //Grab the health value from the object
-                this.userHealthValue = this.mostRecentHealthObject[0]['currentHealth'];
+                this.userHealthValue = this.mostRecentHealthObject['currentHealth'];
             }
             );
 
