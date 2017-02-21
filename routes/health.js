@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
 //Get latest health values
 router.get('/latest', function (req, res, next) {
 
-    Health.find( { user: req.query.id })
+    Health.find({ user: req.query.id })
         .limit(1)
         .sort({ $natural: -1 })
         .exec(function (err, health) {
@@ -41,6 +41,28 @@ router.get('/latest', function (req, res, next) {
                 obj: health[0]
             });
         })
+});
+
+//Get latest team health values
+router.get('/team', function (req, res, next) {
+
+    Health.find()
+        .populate('user', 'firstName')
+        .exec(function (err, healths) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred on getting user',
+                    error: err
+                });
+            }
+
+            //TO DO grab the healths array and get average
+
+            res.status(200).json({
+                message: 'Success',
+                obj: healths
+            });
+        });
 });
 
 router.post('/', function (req, res, next) {

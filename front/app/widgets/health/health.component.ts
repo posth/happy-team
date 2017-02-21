@@ -22,6 +22,7 @@ export class HealthComponent implements OnInit {
     //Team range input disable
     private teamInputDisable: boolean;
     private teamHealthValue: number;
+    private mostRecentTeamHealthObject: Object;
 
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
@@ -37,6 +38,16 @@ export class HealthComponent implements OnInit {
             }
             );
 
+        //On init of this component grab the specific logged in user's latest health
+        this.getMostRecentUserHealth();
+
+        //On init of this component grab the team's most recent health average
+        this.getMostRecentTeamHealth();
+
+    }
+
+    //Getting individual most recent health from MongoDB
+    getMostRecentUserHealth() {
         this._healthService.getMostRecentHealth()
             .subscribe(
             (mostRecentHealthObject: Object) => {
@@ -51,7 +62,21 @@ export class HealthComponent implements OnInit {
 
             }
             );
+    }
 
+    //Getting the team health average from MongoDB
+    getMostRecentTeamHealth() {
+        this._healthService.getMostRecentTeamHealth()
+            .subscribe(
+            (mostRecentTeamHealthObject: Object) => {
+                this.mostRecentTeamHealthObject = mostRecentTeamHealthObject;
+
+                //TODO manage null/undefined/non-existent object
+                console.log('front end most recent team health object ->', this.mostRecentTeamHealthObject);
+
+
+            }
+            );
     }
 
     isLoggedIn() {
@@ -66,6 +91,12 @@ export class HealthComponent implements OnInit {
             .subscribe(
             data => console.log(data)
             );
+
+        //Grab most recent user input of individual health from MongoDB for the component to have just in case
+        this.getMostRecentUserHealth();
+
+        //Regrab the team average after new user input
+        this.getMostRecentTeamHealth();
     }
 
     //Setters and getters for team part

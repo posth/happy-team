@@ -14,7 +14,7 @@ export class HealthService {
     private healths: Health[];
     userHealthValueIsEdit = new EventEmitter<Health>();
 
-    constructor(private http: Http, private errorService: ErrorService) {}
+    constructor(private http: Http, private errorService: ErrorService) { }
 
     //Adding individual health of the user
     addHealth(health: Health) {
@@ -82,6 +82,20 @@ export class HealthService {
             .map((response: Response) => {
                 const mostRecentHealthObject = response.json().obj;
                 return mostRecentHealthObject;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
+
+    //Getting the team most recent health
+    getMostRecentTeamHealth() {
+
+        return this.http.get('http://localhost:3000/health/team')
+            .map((response: Response) => {
+                const mostRecentTeamHealthObject = response.json().obj;
+                return mostRecentTeamHealthObject;
             })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
