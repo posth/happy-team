@@ -4,7 +4,6 @@ import { HealthService } from './health.service';
 import { Health } from './health.model';
 
 import { AuthService } from '../../auth/auth.service';
-
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -38,12 +37,18 @@ export class HealthComponent implements OnInit {
             }
             );
 
-        // this._healthService.getMostRecentHealth()
-        //     .subscribe(
-        //     (mostRecentHealthObject: Object) => {
-        //         this.mostRecentHealthObject = mostRecentHealthObject;
-        //     }
-        //     );
+        this._healthService.getMostRecentHealth()
+            .subscribe(
+            (mostRecentHealthObject: Object) => {
+
+                //Grab the most recent health object from the db on initialization of this component    
+                this.mostRecentHealthObject = mostRecentHealthObject;
+
+                //Grab the health value from the object
+                this.userHealthValue = this.mostRecentHealthObject[0]['currentHealth'];
+            }
+            );
+
     }
 
     isLoggedIn() {
