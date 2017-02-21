@@ -46,7 +46,7 @@ router.get('/latest', function (req, res, next) {
 //Get latest team health values
 router.get('/team', function (req, res, next) {
 
-    Health.find()
+    User.find()
         .populate('user', 'firstName')
         .exec(function (err, healths) {
             if (err) {
