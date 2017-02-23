@@ -11,16 +11,16 @@ import { AuthService } from "../../auth/auth.service";
 export class LogoutComponent {
     constructor(private _authService: AuthService, private router: Router) { }
 
-    onLogout() {
+    onLogout(): void {
         this._authService.logout();
         // this.router.navigate(['/', 'signin']);
     }
 
-    isLoggedIn() {
+    isLoggedIn(): boolean {
         return this._authService.isLoggedIn();
     }
 
-    goSignin() {
+    goSignin(): void {
         this.router.navigate(['/', 'signin']);
     }
 }

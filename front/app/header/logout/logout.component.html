@@ -1,6 +1,6 @@
-<div *ngIf="isLoggedIn()" class="col-md-12 logout">
+<div *ngIf="isLoggedIn()" class="col-md-10 col-sm-10 logout">
     <button class="btn btn-danger" (click)="onLogout()">Logout</button>
 </div>
-<div *ngIf="!isLoggedIn()" class="col-md-12 signin">
+<div *ngIf="!isLoggedIn()" class="col-md-12 col-sm-12 signin">
     <button class="btn btn-primary" (click)="goSignin()">Sign In</button>
 </div>

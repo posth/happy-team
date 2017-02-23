@@ -1,3 +1,9 @@
-<div class="row">
+<div class="row header">
+    <div *ngIf="isAdmin() && isLoggedIn()" class="col-md-1 col-sm-1 admin">
+        <button class="btn btn-info" (click)="goAdmin()">Admin</button>
+    </div>
+    <div *ngIf="isLoggedIn()" class="col-md-1 col-sm-1 team">
+        <button class="btn btn-primary" (click)="goTeam()">Team</button>
+    </div>
     <app-logout></app-logout>
 </div>

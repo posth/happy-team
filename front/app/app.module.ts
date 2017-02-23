@@ -6,11 +6,13 @@ import { MessageModule } from "./widgets/messages/message.module";
 import { HealthModule } from './widgets/health/health.module';
 import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
+import { AdminModule } from './admin/admin.module';
 
 import { routing } from "./app.routing";
 
 import { AuthService } from "./auth/auth.service";
 import { ErrorService } from "./errors/error.service";
+import { AdminService } from './admin/admin.service';
 
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { ErrorComponent } from "./errors/error.component";
@@ -36,14 +38,14 @@ import { AppComponent } from "./app.component";
         ReactiveFormsModule,
         HealthModule,
         AuthModule,
-        HeaderModule
+        HeaderModule,
+        AdminModule
     ],
     providers: [
         AuthService,
-        ErrorService
+        ErrorService,
+        AdminService
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule { }

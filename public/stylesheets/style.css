@@ -28,3 +28,7 @@ input.ng-invalid.ng-touched {
 .happy-team-container{
   padding: 50px;
 }
+
+.sub-container {
+  padding: 40px;
+}
