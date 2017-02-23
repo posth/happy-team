@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from "./widgets/messages/message.module";
 import { HealthModule } from './widgets/health/health.module';
 import { AuthModule } from './auth/auth.module';
+import { HeaderModule } from './header/header.module';
 
 import { routing } from "./app.routing";
 
@@ -12,7 +13,6 @@ import { AuthService } from "./auth/auth.service";
 import { ErrorService } from "./errors/error.service";
 
 import { AuthenticationComponent } from "./auth/authentication.component";
-import { HeaderComponent } from "./header.component";
 import { ErrorComponent } from "./errors/error.component";
 import { UserComponent } from './user/user.component';
 import { TeamComponent } from './team/team.component';
@@ -24,7 +24,6 @@ import { AppComponent } from "./app.component";
     declarations: [
         AppComponent,
         AuthenticationComponent,
-        HeaderComponent,
         ErrorComponent,
         UserComponent,
         TeamComponent
@@ -36,9 +35,13 @@ import { AppComponent } from "./app.component";
         MessageModule,
         ReactiveFormsModule,
         HealthModule,
-        AuthModule
+        AuthModule,
+        HeaderModule
     ],
-    providers: [AuthService, ErrorService],
+    providers: [
+        AuthService,
+        ErrorService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

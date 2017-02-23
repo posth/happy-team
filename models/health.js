@@ -7,12 +7,6 @@ var schema = new Schema(
     {
         currentHealth: {type: Number, required: true},
         user: { type: Schema.Types.ObjectId, ref: 'User'}
-    },
-    {
-        capped: {
-            size: 1024,
-            max: 100
-        }
     }
 );
 
