@@ -10,6 +10,21 @@ import { ErrorService } from "../errors/error.service";
 export class AdminService {
     constructor(private http: Http, private errorService: ErrorService) { }
 
-    //TO DO - get admin status of current user on login and display admin button in header component
+    getAdminStatus() {
 
+        const userId = localStorage.getItem('userId')
+            ? '?id=' + localStorage.getItem('userId')
+            : '';
+
+        return this.http.get('http://localhost:3000/admin' + userId)
+            .map((response: Response) => {
+                const adminStatus = response.json().obj;
+
+                return adminStatus;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
 }

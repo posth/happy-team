@@ -1,9 +1,9 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-7 col-md-offset-3">
     <h2>This is the team slider</h2>
     <input [disabled]="teamInputDisable" type="range" max="100" min="0" value="{{teamHealthValue}}">
     {{teamHealthValue}}
 </div>
-<div *ngIf="isLoggedIn()" class="col-md-6 col-md-offset-3">
+<div *ngIf="isLoggedIn()" class="col-md-7 col-md-offset-3">
     <h2>This is user specific slider</h2>
     <input #userInput (change)="setUserHealth(userInput.value)" value="{{userHealthValue}}" max="100" min="0" type="range">
     {{userHealthValue}}

@@ -8,7 +8,7 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
     selector: 'app-message-list',
     template: `
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-7 col-md-offset-3">
             <app-message
                    [message]="message"
                     *ngFor="let message of messages"></app-message>

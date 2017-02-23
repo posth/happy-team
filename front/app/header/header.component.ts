@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { AuthService } from "../auth/auth.service";
+import { AdminService } from '../admin/admin.service';
 
 @Component({
     selector: 'app-header',
@@ -10,12 +11,19 @@ import { AuthService } from "../auth/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-    constructor(private router: Router, private _authService: AuthService) { }
+    private adminStatus: boolean;
 
-    ngOnInit() { }
+    constructor(private router: Router,
+        private _authService: AuthService,
+        private _adminService: AdminService) { }
 
-    isAdmin(): boolean {
-        return true;
+    ngOnInit() { 
+        this._adminService.getAdminStatus()
+            .subscribe(
+                (adminStatus: boolean) => {
+                    this.adminStatus = adminStatus;
+                }
+            );
     }
 
     goAdmin(): void {
