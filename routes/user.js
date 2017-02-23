@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 var Health = require('../models/health');
+var Message = require('../models/message');
 
 router.post('/', function (req, res, next) {
     var user = new User({
@@ -12,8 +13,25 @@ router.post('/', function (req, res, next) {
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
-        admin: false
+        admin: false,
+        health: [],
+        messages: []
     });
+
+    var health = new Health({
+        currentHealth: 50,
+        user: user
+    });
+    user.healths.push(health);
+    health.save();
+
+    var message = new Message({
+        content: 'First!',
+        user: user
+    });
+
+    message.save();
+    user.messages.push(message);
 
     user.save(function(err, result) {
         if (err) {

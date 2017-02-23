@@ -47,7 +47,7 @@ export class HealthService {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
-    }
+    } 
 
     //Getting all the users past healths
     getHealth() {

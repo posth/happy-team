@@ -13,7 +13,7 @@ export class MessageService {
 
     constructor(private http: Http, private errorService: ErrorService) { }
 
-    addMessage(message: Message) {
+    addMessage(message: Message) { 
 
         //convert the message into a JSON object
         const body = JSON.stringify(message);
@@ -41,6 +41,8 @@ export class MessageService {
                 return message;
             })
             .catch((error: Response) => {
+                console.log('message service error ->>', error);
+
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });

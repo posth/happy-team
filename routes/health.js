@@ -51,7 +51,7 @@ router.get('/team', function (req, res, next) {
         .exec(function (err, userIds) {
 
             //Temporary top level array to stock health values
-            var array = [];
+            var arrayHealth = [];
 
             if (err) {
                 return res.status(500).json({
@@ -76,12 +76,12 @@ router.get('/team', function (req, res, next) {
 
                         //if they have a health property you push it onto the array
                         if (health[0]) {
-                            array.push(health[0]['currentHealth']);
+                            arrayHealth.push(health[0]['currentHealth']);
                         }
 
                         //If you are at the last iteration you send the response with the average
                         if (i == userIds.length - 1) {
-                            var sum = array.reduce(function (acc, val) {
+                            var sum = arrayHealth.reduce(function (acc, val) {
                                 return acc + val;
                             })
 

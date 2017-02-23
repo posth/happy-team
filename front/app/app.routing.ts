@@ -1,14 +1,14 @@
 import { Routes, RouterModule } from "@angular/router";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { SigninComponent } from './auth/signin/signin.component';
-// import { SignupComponent } from './auth/signup/signup.component';
+import { SignupComponent } from './auth/signup/signup.component';
 import { TeamComponent } from './team/team.component';
 import { AdminComponent } from './admin/admin.compontent';
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'signin', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
-    // { path: 'signup', component: SignupComponent },
+    { path: 'signup', component: SignupComponent },
     { path: 'team', component: TeamComponent },
     { path: 'admin', component: AdminComponent },
     { path: '**', redirectTo: 'signin' }
