@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
             .subscribe(
                 (adminStatus: boolean) => {
                     this.adminStatus = adminStatus;
+                    console.log('admin status is ', this.adminStatus);
                 }
             );
     }

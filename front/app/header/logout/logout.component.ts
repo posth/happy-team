@@ -13,7 +13,7 @@ export class LogoutComponent {
 
     onLogout(): void {
         this._authService.logout();
-        // this.router.navigate(['/', 'signin']);
+        this.router.navigate(['/', 'signin']);
     }
 
     isLoggedIn(): boolean {
