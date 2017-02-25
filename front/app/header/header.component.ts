@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/', 'team']);
     }
 
+    goUser(): void {
+        this.router.navigate(['/', 'user']);
+    }
+
     isLoggedIn(): boolean {
         return this._authService.isLoggedIn();
     }

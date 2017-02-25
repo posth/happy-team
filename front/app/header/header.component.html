@@ -5,5 +5,8 @@
     <div *ngIf="isLoggedIn()" class="col-md-1 col-sm-1 team">
         <button class="btn btn-primary" (click)="goTeam()">Team</button>
     </div>
+    <div *ngIf="isLoggedIn()" class="col-md-1 col-sm-1 user">
+        <button class="btn btn-primary" (click)="goUser()">User</button>
+    </div>
     <app-logout></app-logout>
 </div>
