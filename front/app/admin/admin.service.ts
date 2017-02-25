@@ -42,8 +42,10 @@ export class AdminService {
                 let transformedUsers: User[] = [];
 
                 for(let user of users) {
+                    console.log('service', user);
                     transformedUsers.push(new User(
                         user.email,
+                        '',
                         user.firstName,
                         user.lastName,
                         user.admin,
