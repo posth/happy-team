@@ -4,7 +4,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { TeamComponent } from './team/team.component';
 import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.compontent';
+import { AdminComponent } from './admin/admin.component';
 
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'signin', pathMatch: 'full' },

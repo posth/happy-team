@@ -29,8 +29,25 @@ router.get('/', function (req, res, next) {
          obj: false
       });
     }
-
-
 });
+
+//Get all users that exist for admin to see
+router.get('/users', function(req, res, next) {
+
+    User.find()
+        .exec(function (err, users) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred on getting list of users',
+                    error: err
+                });
+            }
+
+            res.status(200).json({
+                message: 'Success',
+                obj: users
+            });
+        })
+})
 
 module.exports = router;
