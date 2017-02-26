@@ -13,6 +13,7 @@ import { routing } from "./app.routing";
 import { AuthService } from "./auth/auth.service";
 import { ErrorService } from "./errors/error.service";
 import { AdminService } from './admin/admin.service';
+import { HeaderService } from './header/header.service';
 
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { ErrorComponent } from "./errors/error.component";
@@ -44,7 +45,8 @@ import { AppComponent } from "./app.component";
     providers: [
         AuthService,
         ErrorService,
-        AdminService
+        AdminService,
+        HeaderService
     ],
     bootstrap: [AppComponent]
 })

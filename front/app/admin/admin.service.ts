@@ -22,7 +22,6 @@ export class AdminService {
         return this.http.get('http://localhost:3000/admin' + userId)
             .map((response: Response) => {
                 const adminStatus = response.json().obj;
-
                 return adminStatus;
             })
             .catch((error: Response) => {

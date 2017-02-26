@@ -12,18 +12,19 @@ import { AuthService } from "../auth.service";
 export class SigninComponent {
     myForm: FormGroup;
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService,
+        private router: Router) { }
 
     onSubmit() {
         const user = new User(this.myForm.value.email, this.myForm.value.password);
         this.authService.signin(user)
             .subscribe(
-                data => {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('userId', data.userId);
-                    this.router.navigateByUrl('/team');
-                },
-                error => console.error(error)
+            data => {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.userId);
+                this.router.navigateByUrl('/team');
+            },
+            error => console.error(error)
             );
         this.myForm.reset();
     }
