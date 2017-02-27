@@ -7,6 +7,7 @@ import { HealthModule } from './widgets/health/health.module';
 import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
 import { AdminModule } from './admin/admin.module';
+import { MaterialModule } from '@angular/material';
 
 import { routing } from "./app.routing";
 
@@ -40,7 +41,8 @@ import { AppComponent } from "./app.component";
         HealthModule,
         AuthModule,
         HeaderModule,
-        AdminModule
+        AdminModule,
+        MaterialModule
     ],
     providers: [
         AuthService,

@@ -28,19 +28,13 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() { }
 
-    goAdmin(): void {
-        this.router.navigate(['/', 'admin']);
-    }
-
-    goTeam(): void {
-        this.router.navigate(['/', 'team']);
-    }
-
-    goUser(): void {
-        this.router.navigate(['/', 'user']);
-    }
-
     isLoggedIn(): boolean {
         return this._authService.isLoggedIn();
     }
+
+    onLogout(): void {
+        this._authService.logout();
+         this.router.navigate(['/', 'signin']);
+    }
+
 }

@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LogoutComponent } from './logout/logout.component';
 import { HeaderComponent } from './header.component';
+
+import { MaterialModule } from '@angular/material';
+
+import { routing } from "../app.routing";
 
 @NgModule({
     declarations: [
-        LogoutComponent,
         HeaderComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        MaterialModule,
+        routing
     ],
     exports: [
         HeaderComponent

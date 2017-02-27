@@ -8,7 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-health-user',
-    templateUrl: './health-user.component.html'
+    templateUrl: './health-user.component.html',
+    styleUrls: ['./health-user.component.css']
 })
 
 export class HealthUserComponent implements OnInit {

@@ -1,7 +1,6 @@
-<div class="row">
-    <app-signup></app-signup>
-</div>
-<div class="row">
+<app-signup>
+</app-signup>
+<md-card class="admin-user-description-total-card">
     <h3>Current users:</h3>
     <app-admin-user-description [user]="user" *ngFor="let user of users"></app-admin-user-description>
-</div>
+</md-card>

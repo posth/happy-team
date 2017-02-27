@@ -1,7 +1,5 @@
-<div class="row">
-    <h2>Sign up new user</h2>
-</div>
-<div class="col-md-8 col-md-offset-2">
+<md-card class="signup-form-card">
+<h2>Sign up new user</h2>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="firstName">First Name</label>
@@ -40,4 +38,4 @@
                 type="submit"
                 [disabled]="!myForm.valid">Submit</button>
     </form>
-</div>
+</md-card>

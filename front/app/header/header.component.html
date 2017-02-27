@@ -1,12 +1,21 @@
-<div class="row header">
-    <div *ngIf="adminStatus && isLoggedIn()" class="col-md-1 col-sm-1 admin">
-        <button class="btn btn-info" (click)="goAdmin()">Admin</button>
-    </div>
-    <div *ngIf="isLoggedIn()" class="col-md-1 col-sm-1 team">
-        <button class="btn btn-primary" (click)="goTeam()">Team</button>
-    </div>
-    <div *ngIf="isLoggedIn()" class="col-md-1 col-sm-1 user">
-        <button class="btn btn-primary" (click)="goUser()">User</button>
-    </div>
-    <app-logout></app-logout>
-</div>
+<md-card class="header-card">
+    <nav>
+        <ul class="nav nav-pills">
+            <li routerLinkActive="active" *ngIf="adminStatus && isLoggedIn()" [routerLink]="['/admin']" class="admin">
+                <a md-button class="col-md-3 col-sm-3 btn btn-info">Admin</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="isLoggedIn()" [routerLink]="['/team']" class="team">
+                <a md-button class="col-md-3 col-sm-3 btn btn-primary">Team</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="isLoggedIn()" [routerLink]="['/user']" class="user">
+                <a md-button class="col-md-3 col-sm-3 btn btn-primary">User</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="isLoggedIn()" class="logout">
+                <a md-button class="col-md-3 col-sm-3 btn btn-danger" (click)="onLogout()">Logout</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="!isLoggedIn()" [routerLink]="['/signin']" class=" signin">
+                <a md-button class="col-md-3 col-sm-3 btn btn-primary">Sign In</a>
+            </li>
+        </ul>
+    </nav>
+</md-card>

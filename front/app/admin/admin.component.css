@@ -1,3 +1,7 @@
 h1 {
     font-style: italic;
 }
+
+.admin-user-description-total-card {
+    margin: 5%;
+}
