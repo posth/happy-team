@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 
 import { HealthService } from './health.service';
 import { Health } from './health.model';
 
 import { AuthService } from '../../auth/auth.service';
+
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from "rxjs/Observable";
 
 @Component({
     selector: 'app-health',
@@ -12,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./health.component.css']
 })
 
-export class HealthComponent implements OnInit {
+export class HealthComponent implements OnInit, OnDestroy {
 
     //User health variables
     private healths: Health[];
@@ -20,7 +22,10 @@ export class HealthComponent implements OnInit {
     //Team range input disable
     private teamInputDisable: boolean;
     private teamHealthValue: number;
-    private mostRecentTeamHealthObject: number;
+
+    //Team data subscriptions for live data feed
+    private teamHealthSubscription: Subscription;
+    private timerSubscription: Subscription;
 
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
@@ -37,23 +42,34 @@ export class HealthComponent implements OnInit {
             );
 
         //On init of this component grab the team's most recent health average
-        this.getMostRecentTeamHealth();
-
-    }
-
-    //Getting the team health average from MongoDB
-    getMostRecentTeamHealth() {
         this._healthService.getMostRecentTeamHealth()
             .subscribe(
-            (mostRecentTeamHealthObject: number) => {
-                this.mostRecentTeamHealthObject = mostRecentTeamHealthObject;
-
-                //TODO manage null/undefined/non-existent object
-                console.log('Moyenne de la dernière health de chaque user : ', this.mostRecentTeamHealthObject);
-                this.teamHealthValue = this.mostRecentTeamHealthObject;
-
-            }
+                (teamHealthValue: number) => {
+                    this.teamHealthValue = teamHealthValue;
+                    this.refreshTeamHealth();
+                }
             );
+    }
+
+    //Unsubscribe on component destruction to prevent memory leak   
+    ngOnDestroy() {
+        if(this.teamHealthSubscription) {
+            this.teamHealthSubscription.unsubscribe();
+        }
+        if(this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+        }
+    }
+
+    refreshTeamHealth(): void {
+        this.teamHealthSubscription = this._healthService.getMostRecentTeamHealth().subscribe(teamHealthValue => {
+            this.teamHealthValue = teamHealthValue;
+            this.subscribeToRecentTeamHealth();
+        })
+    }
+
+    subscribeToRecentTeamHealth(): void {
+        this.timerSubscription = Observable.timer(3000).first().subscribe(() => this.refreshTeamHealth());
     }
 
     isLoggedIn() {
