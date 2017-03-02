@@ -40,6 +40,7 @@ export class HealthService {
                     result.obj._id,
                     result.obj.user._id
                 );
+
                 this.healths.push(health);
                 return health;
             })

@@ -46,9 +46,9 @@ router.get('/latest', function (req, res, next) {
 //Get latest team health values
 router.get('/team', function (req, res, next) {
 
-    //Grab all distinct users from MongoDB
-    User.distinct("_id")
-        .exec(function (err, userIds) {
+    User.find()
+        .populate('healths')
+        .exec(function (err, users) {
 
             if (err) {
                 return res.status(500).json({
@@ -57,36 +57,16 @@ router.get('/team', function (req, res, next) {
                 });
             }
 
-            let healthUserLoopLength = userIds.length;
-            //Temporary top level array to stock health values
-            let arrayHealth = [];
-
             let sum = 0;
-            let average = 0;
+            let totalUsers = users.length;
 
-            //Loop through each distinct user in the health collection
-            for (let userId of userIds) {
-                Health.find({ user: userId })
-                    .limit(1)
-                    .sort({ $natural: -1 })
-                    .exec(function (err, health) {
+            users.forEach(function (user) {
+                let lastHealthObject = user['healths'].pop();
+                let mostRecentHealth = lastHealthObject['currentHealth'];
+                sum += mostRecentHealth;
+            })
 
-                        if (err) {
-                            return res.status(500).json({
-                                title: 'An error occurred in looping through most recent health of unique users in health collection',
-                                error: err
-                            });
-                        }
-                        //if they have a health property you push it onto the array
-                        if (health[0]) {
-                            arrayHealth.push(health[0]['currentHealth']);
-                        }
-                        sum = arrayHealth.reduce(function (acc, val) {
-                            return acc + val;
-                        })
-                        average = sum / userIds.length;
-                    })
-            }
+            let average = sum / totalUsers;
 
             res.status(201).json({
                 message: 'Saved message',
@@ -108,6 +88,9 @@ router.post('/', function (req, res, next) {
             currentHealth: req.body.currentHealth,
             user: user
         });
+
+
+
         health.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
