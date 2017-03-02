@@ -50,9 +50,6 @@ router.get('/team', function (req, res, next) {
     User.distinct("_id")
         .exec(function (err, userIds) {
 
-            //Temporary top level array to stock health values
-            var arrayHealth = [];
-
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred on getting unique user ids in team GET',
@@ -60,9 +57,16 @@ router.get('/team', function (req, res, next) {
                 });
             }
 
+            let healthUserLoopLength = userIds.length;
+            //Temporary top level array to stock health values
+            let arrayHealth = [];
+
+            let sum = 0;
+            let average = 0;
+
             //Loop through each distinct user in the health collection
-            for (let healthUserLoop = 0; healthUserLoop < userIds.length; healthUserLoop++) {
-                Health.find({ user: userIds[healthUserLoop] })
+            for (let userId of userIds) {
+                Health.find({ user: userId })
                     .limit(1)
                     .sort({ $natural: -1 })
                     .exec(function (err, health) {
@@ -73,30 +77,21 @@ router.get('/team', function (req, res, next) {
                                 error: err
                             });
                         }
-
                         //if they have a health property you push it onto the array
                         if (health[0]) {
                             arrayHealth.push(health[0]['currentHealth']);
                         }
-
-                        //If you are at the last iteration you send the response with the average
-                        if (healthUserLoop == userIds.length - 1) {
-                            var sum = arrayHealth.reduce(function (acc, val) {
-                                return acc + val;
-                            })
-
-                            console.log('---------the sum is-> ', sum);
-
-                            var average = sum / userIds.length;
-
-                            res.status(201).json({
-                                message: 'Saved message',
-                                obj: average
-                            });
-
-                        }
+                        sum = arrayHealth.reduce(function (acc, val) {
+                            return acc + val;
+                        })
+                        average = sum / userIds.length;
                     })
             }
+
+            res.status(201).json({
+                message: 'Saved message',
+                obj: average
+            });
         })
 });
 
