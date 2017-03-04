@@ -43,36 +43,20 @@ router.get('/latest', function (req, res, next) {
         })
 });
 
+var healthController = require("../controllers/healthController.js");
+
 //Get latest team health values
 router.get('/team', function (req, res, next) {
 
-    User.find()
-        .populate('healths')
-        .exec(function (err, users) {
+    let average = healthController.getAverage();
 
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred on getting unique user ids in team GET',
-                    error: err
-                });
-            }
+    console.log('-------------module return', average);
 
-            let sum = 0;
-            let totalUsers = users.length;
+    res.status(201).json({
+        message: 'Saved message',
+        obj: average
+    });
 
-            users.forEach(function (user) {
-                let lastHealthObject = user['healths'].pop();
-                let mostRecentHealth = lastHealthObject['currentHealth'];
-                sum += mostRecentHealth;
-            })
-
-            let average = sum / totalUsers;
-
-            res.status(201).json({
-                message: 'Saved message',
-                obj: average
-            });
-        })
 });
 
 router.post('/', function (req, res, next) {

@@ -88,3 +88,19 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/*
+  Sockets
+*/
+
+var io = require('socket.io').listen(server);
+var healthController = require("../controllers/healthController.js");
+
+io.on('connection', function (socket) {
+
+  socket.emit('getLatestTeamHealthValue',healthController.getAverage());
+
+  socket.on('healthUpdate', function(health) {
+      console.log('received health', health);
+  })
+});

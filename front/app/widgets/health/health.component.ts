@@ -69,7 +69,7 @@ export class HealthComponent implements OnInit, OnDestroy {
     }
 
     subscribeToRecentTeamHealth(): void {
-        this.timerSubscription = Observable.timer(1000).first().subscribe(() => this.refreshTeamHealth());
+        this.timerSubscription = Observable.timer(3000).first().subscribe(() => this.refreshTeamHealth());
     }
 
     isLoggedIn() {
