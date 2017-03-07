@@ -72,6 +72,6 @@ export class HealthUserComponent implements OnInit {
             data => console.log(data)
             );
 
-        this.socket.emit('healthUpdate');
+        // this.socket.emit('healthUpdate');
     }
 }

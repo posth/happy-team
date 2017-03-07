@@ -5,6 +5,9 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Health = require('../models/health');
 
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
 //Get all health values
 router.get('/', function (req, res, next) {
     Health.find()
@@ -22,8 +25,6 @@ router.get('/', function (req, res, next) {
             });
         });
 });
-
-var healthController = require("../controllers/healthController.js");
 
 //Get latest health values
 router.get('/latest', function (req, res, next) {
@@ -88,6 +89,8 @@ router.get('/team', function (req, res, next) {
 
 });
 
+var healthController = require("../controllers/healthController.js");
+
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
     User.findById(decoded.user._id, function (err, user) {
@@ -111,6 +114,9 @@ router.post('/', function (req, res, next) {
             }
             user.healths.push(result);
             user.save();
+
+            // eventEmitter.emit('postComplete');
+
             res.status(201).json({
                 message: 'Saved health',
                 obj: result
