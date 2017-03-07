@@ -23,9 +23,10 @@ router.get('/', function (req, res, next) {
         });
 });
 
+var healthController = require("../controllers/healthController.js");
+
 //Get latest health values
 router.get('/latest', function (req, res, next) {
-
     Health.find({ user: req.query.id })
         .limit(1)
         .sort({ $natural: -1 })
@@ -43,19 +44,47 @@ router.get('/latest', function (req, res, next) {
         })
 });
 
-var healthController = require("../controllers/healthController.js");
-
 //Get latest team health values
 router.get('/team', function (req, res, next) {
 
-    let average = healthController.getAverage();
+    // let average = healthController.getAverage();
 
-    console.log('-------------module return', average);
+    // console.log('-------------module return', average);
 
-    res.status(201).json({
-        message: 'Saved message',
-        obj: average
-    });
+    // if (average == null) {
+    //     User.find()
+    //         .populate('healths')
+    //         .exec(function (err, users) {
+
+    //             if (err) {
+    //                 return res.status(500).json({
+    //                     title: 'An error occurred on getting unique user ids in team GET',
+    //                     error: err
+    //                 });
+    //             }
+
+    //             let sum = 0;
+    //             let totalUsers = users.length;
+
+    //             users.forEach(function (user) {
+    //                 let lastHealthObject = user['healths'].pop();
+    //                 let mostRecentHealth = lastHealthObject['currentHealth'];
+    //                 sum += mostRecentHealth;
+    //             })
+
+    //             let average = sum / totalUsers;
+
+    //             res.status(201).json({
+    //                 message: 'Saved message',
+    //                 obj: average
+    //             });
+    //         })
+    // }
+
+    // res.status(201).json({
+    //     message: 'Saved message',
+    //     obj: average
+    // });
 
 });
 
@@ -73,8 +102,6 @@ router.post('/', function (req, res, next) {
             user: user
         });
 
-
-
         health.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -85,7 +112,7 @@ router.post('/', function (req, res, next) {
             user.healths.push(result);
             user.save();
             res.status(201).json({
-                message: 'Saved message',
+                message: 'Saved health',
                 obj: result
             });
         });

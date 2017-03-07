@@ -16,8 +16,8 @@ import { Observable } from "rxjs/Observable";
 export class MessageListComponent implements OnInit, OnDestroy {
     messages: Message[];
 
-    private messagesSubscription: Subscription;
-    private timerSubscription: Subscription;
+    // private messagesSubscription: Subscription;
+    // private timerSubscription: Subscription;
 
     constructor(private messageService: MessageService,
         private _authService: AuthService) { }
@@ -27,34 +27,34 @@ export class MessageListComponent implements OnInit, OnDestroy {
             .subscribe(
             (messages: Message[]) => {
                 this.messages = messages;
-                this.refreshMessageList();
+                // this.refreshMessageList();
             }
             );
     }
 
     //Unsubscribe on component destruction to prevent memory leak
     ngOnDestroy() {
-        if(this.messagesSubscription) {
-            this.messagesSubscription.unsubscribe();
-        }
-        if(this.timerSubscription) {
-            this.timerSubscription.unsubscribe();
-        }
+        // if(this.messagesSubscription) {
+        //     this.messagesSubscription.unsubscribe();
+        // }
+        // if(this.timerSubscription) {
+        //     this.timerSubscription.unsubscribe();
+        // }
     }
 
     isLoggedIn() {
         return this._authService.isLoggedIn();
     }
 
-    refreshMessageList(): void {
-        this.messagesSubscription = this.messageService.getMessages().subscribe(messages => {
-            this.messages = messages;
-            this.subscribeToMessageList();
-        });
-    }
+    // refreshMessageList(): void {
+    //     this.messagesSubscription = this.messageService.getMessages().subscribe(messages => {
+    //         this.messages = messages;
+    //         this.subscribeToMessageList();
+    //     });
+    // }
 
-    subscribeToMessageList(): void {
-        this.timerSubscription = Observable.timer(3000).first().subscribe(() => this.refreshMessageList());
-    }
+    // subscribeToMessageList(): void {
+    //     this.timerSubscription = Observable.timer(3000).first().subscribe(() => this.refreshMessageList());
+    // }
 
 }

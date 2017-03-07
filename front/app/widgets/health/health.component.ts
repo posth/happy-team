@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { HealthService } from './health.service';
 import { Health } from './health.model';
@@ -14,7 +14,7 @@ import { Observable } from "rxjs/Observable";
     styleUrls: ['./health.component.css']
 })
 
-export class HealthComponent implements OnInit, OnDestroy {
+export class HealthComponent implements OnInit {
 
     //User health variables
     private healths: Health[];
@@ -25,53 +25,20 @@ export class HealthComponent implements OnInit, OnDestroy {
 
     //Team data subscriptions for live data feed
     private teamHealthSubscription: Subscription;
-    private timerSubscription: Subscription;
 
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
 
         this.teamInputDisable = true;
+
+        this.teamHealthSubscription = this._healthService.latestTeamHealthValueChanged$.subscribe(
+            latestTeamHealthValue => this.teamHealthValue = latestTeamHealthValue
+        );
+
     }
 
-    ngOnInit() {
-        this._healthService.getHealth()
-            .subscribe(
-            (healths: Health[]) => {
-                this.healths = healths;
-            }
-            );
-
-        //On init of this component grab the team's most recent health average
-        this._healthService.getMostRecentTeamHealth()
-            .subscribe(
-                (teamHealthValue: number) => {
-                    this.teamHealthValue = teamHealthValue;
-                    this.refreshTeamHealth();
-                }
-            );
-    }
-
-    //Unsubscribe on component destruction to prevent memory leak   
-    ngOnDestroy() {
-        if(this.teamHealthSubscription) {
-            this.teamHealthSubscription.unsubscribe();
-        }
-        if(this.timerSubscription) {
-            this.timerSubscription.unsubscribe();
-        }
-    }
-
-    refreshTeamHealth(): void {
-        this.teamHealthSubscription = this._healthService.getMostRecentTeamHealth().subscribe(teamHealthValue => {
-            this.teamHealthValue = teamHealthValue;
-            this.subscribeToRecentTeamHealth();
-        })
-    }
-
-    subscribeToRecentTeamHealth(): void {
-        this.timerSubscription = Observable.timer(3000).first().subscribe(() => this.refreshTeamHealth());
-    }
-
+    ngOnInit() {}
+ 
     isLoggedIn() {
         return this._authService.isLoggedIn();
     }

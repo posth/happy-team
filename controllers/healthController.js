@@ -1,40 +1,47 @@
 var User = require('../models/user');
-var Health = require('../models/health');
+var TeamHealth = require('../models/teamHealth');
 
 //For exporting ES5 style
 var exports = module.exports = {};
 
-var currentAverage;
+exports.setLatestTeamHealthValue = function () {
+    //Generate promise from MongoDB Query
+    function getHealths() {
+        var healthsPromise = User.find().populate('healths').exec();
+        return healthsPromise;
+    }
 
-function getLatestTeamHealthValue(setAverage) {
+    //Use the promise
+    var healthsPromiseResult = getHealths();
 
-    //Testing callbacks
-    User.find()
-        .populate('healths')
-        .exec(function (err, users) {
+    //Grab the data from the promise
+    healthsPromiseResult.then(function (users) {
+        let sum = 0;
+        let totalUsers = users.length;
+        var newAverage;
 
-            let sum = 0;
-            let totalUsers = users.length;
+        users.forEach(function (user) {
+            let lastHealthObject = user['healths'].pop();
 
-            users.forEach(function (user) {
-                let lastHealthObject = user['healths'].pop();
-                let mostRecentHealth = lastHealthObject['currentHealth'];
-                sum += mostRecentHealth;
-            })
+            console.log('-------latest health', lastHealthObject);
 
-            let newAverage = sum / totalUsers;
-  
-            setAverage(newAverage);
+            let mostRecentHealth = lastHealthObject['currentHealth'];
+            sum += mostRecentHealth;
         })
+
+        newAverage = sum / totalUsers;
+
+        var teamHealth = new TeamHealth({
+            teamHealth: newAverage,
+            currentTime: new Date()
+        });
+
+        teamHealth.save();
+
+        console.log('---------------health controller average model ->', teamHealth);
+    })
 }
 
-exports.getAverage = function () {
 
-    getLatestTeamHealthValue(function setAverage(newAverage) {
-        currentAverage = newAverage;
-    });
-
-    return currentAverage;
-}
 
 

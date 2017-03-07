@@ -6,6 +6,8 @@ import { Health } from '../health.model';
 import { AuthService } from '../../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 
+import * as io from 'socket.io-client';
+
 @Component({
     selector: 'app-health-user',
     templateUrl: './health-user.component.html',
@@ -19,8 +21,12 @@ export class HealthUserComponent implements OnInit {
     private userHealthValue: number;
     private mostRecentHealthObject: Object;
 
+    private url: string = 'http://localhost:3000';
+    socket: any = null;
+
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
+        this.socket = io(this.url);
     }
 
     ngOnInit() {
@@ -66,9 +72,6 @@ export class HealthUserComponent implements OnInit {
             data => console.log(data)
             );
 
-        //Grab most recent user input of individual health from MongoDB for the component to have just in case
-        this.getMostRecentUserHealth();
+        this.socket.emit('healthUpdate');
     }
-
-
 }

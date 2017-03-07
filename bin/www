@@ -21,6 +21,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -98,9 +99,10 @@ var healthController = require("../controllers/healthController.js");
 
 io.on('connection', function (socket) {
 
-  socket.emit('getLatestTeamHealthValue',healthController.getAverage());
-
-  socket.on('healthUpdate', function(health) {
-      console.log('received health', health);
+  socket.on('healthUpdate', function () {
+    //   socket.broadcast.emit('getLatestTeamHealthValue', currentAverage);
+    healthController.setLatestTeamHealthValue();
   })
 });
+
+

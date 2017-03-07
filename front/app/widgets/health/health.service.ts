@@ -8,13 +8,28 @@ import 'rxjs/Rx';
 import { Health } from "./health.model";
 import { ErrorService } from "../../errors/error.service";
 
+import * as io from 'socket.io-client';
+
 @Injectable()
 export class HealthService {
 
     private healths: Health[];
     userHealthValueIsEdit = new EventEmitter<Health>();
 
-    constructor(private http: Http, private errorService: ErrorService) { }
+    private url: string = 'http://localhost:3000';
+    socket: any = null;
+
+    // private latestTeamHealthValue: number;
+    latestTeamHealthValue: BehaviorSubject<number> = new BehaviorSubject<number>(undefined);
+    latestTeamHealthValueChanged$: Observable<number> = this.latestTeamHealthValue.asObservable();
+
+    constructor(private http: Http, private errorService: ErrorService) {
+        this.socket = io(this.url);
+        this.socket.on('getLatestTeamHealthValue', function (latestTeamHealth) {
+            this.latestTeamHealthValue.next(latestTeamHealth);
+            console.log('health service latest team health value from socket ------>', this.latestTeamHealthValue.value);
+        }.bind(this));
+    }
 
     //Adding individual health of the user
     addHealth(health: Health) {
@@ -26,6 +41,7 @@ export class HealthService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
+
         /**
          * This sets up the Observable and doesn't send the request.
          * Someone needs to subscribe to this observable for it to send.
@@ -42,13 +58,14 @@ export class HealthService {
                 );
 
                 this.healths.push(health);
+                // this.socket.emit('healthUpdate');
                 return health;
             })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
-    } 
+    }
 
     //Getting all the users past healths
     getHealth() {
@@ -96,6 +113,8 @@ export class HealthService {
         return this.http.get('http://localhost:3000/health/team')
             .map((response: Response) => {
                 const mostRecentTeamHealthObject = response.json().obj;
+                //returns a number of the team health
+                console.log('-------- getting most recent health on init', mostRecentTeamHealthObject);
                 return mostRecentTeamHealthObject;
             })
             .catch((error: Response) => {
