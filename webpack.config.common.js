@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        'app': './front/app/main.ts'
+        'app': './app/main.ts'
     },
 
     resolve: {

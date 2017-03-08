@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
-var User = require('../models/user');
+var User = require('../../user/models/user');
 var Message = require('../models/message');
 
 //Fetching messages from the database

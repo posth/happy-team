@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 //Helper object to help create blueprints of the models
 var Schema = mongoose.Schema;
 
-var User = require('./user');
+var User = require('../../user/models/user');
 
 //This is a blueprint
 var schema = new Schema({

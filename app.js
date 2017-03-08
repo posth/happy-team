@@ -6,11 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var appRoutes = require('./routes/app');
-var messageRoutes = require('./routes/messages');
-var userRoutes = require('./routes/user');
-var healthRoutes = require('./routes/health');
-var adminRoutes = require('./routes/admin');
+var appRoutes = require('./server/app');
+var messageRoutes = require('./server/messages/routes/messages');
+var userRoutes = require('./server/user/routes/user');
+var healthRoutes = require('./server/health/routes/health');
+var adminRoutes = require('./server/admin/routes/admin');
 
 var app = express();
 mongoose.connect('localhost:27017/happy-team');

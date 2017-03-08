@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app.js');
 var debug = require('debug')('node-rest:server');
 var http = require('http');
 
@@ -95,7 +95,7 @@ function onListening() {
 */
 
 var io = require('socket.io').listen(server);
-var healthController = require("../controllers/healthController.js");
+var healthController = require("../server/health/controllers/healthController.js");
 
 io.on('connection', function (socket) {
 

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
-var User = require('../models/user');
+var User = require('../../user/models/user');
 var Health = require('../models/health');
 
 var events = require('events');

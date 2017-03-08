@@ -1,5 +1,5 @@
-var User = require('../models/user');
-var TeamHealth = require('../models/teamHealth');
+var User = require('../../user/models/user');
+var TeamHealth = require('../../health/models/teamHealth');
 
 //For exporting ES5 style
 var exports = module.exports = {};

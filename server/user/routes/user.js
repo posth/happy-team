@@ -4,8 +4,8 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
-var Health = require('../models/health');
-var Message = require('../models/message');
+var Health = require('../../health/models/health');
+var Message = require('../../messages/models/message');
 
 router.post('/', function (req, res, next) {
     var user = new User({
