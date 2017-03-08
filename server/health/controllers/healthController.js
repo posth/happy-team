@@ -26,7 +26,7 @@ exports.setLatestTeamHealthValue = function () {
             users.forEach(function (user) {
                 let lastHealthObject = user['healths'].pop();
 
-                console.log('----f---latest health', lastHealthObject);
+                console.log('----d---latest health', lastHealthObject);
 
                 let mostRecentHealth = lastHealthObject['currentHealth'];
                 sum += mostRecentHealth;
@@ -44,10 +44,6 @@ exports.setLatestTeamHealthValue = function () {
             console.log('---------------health controller average model ->', teamHealth);
         })
     }, 100);
-
-
-
-
 
 }
 

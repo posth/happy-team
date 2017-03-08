@@ -100,8 +100,8 @@ var healthController = require("../server/health/controllers/healthController.js
 io.on('connection', function (socket) {
 
   socket.on('healthUpdate', function () {
-    //   socket.broadcast.emit('getLatestTeamHealthValue', currentAverage);
-    healthController.setLatestTeamHealthValue();
+      // socket.broadcast.emit('getLatestTeamHealthValue', 100);
+    // healthController.setLatestTeamHealthValue();
   })
 });
 

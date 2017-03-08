@@ -5,8 +5,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../../user/models/user');
 var Health = require('../models/health');
 
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
+var healthEventEmitter = require('../events/healthEvents');
 
 //Get all health values
 router.get('/', function (req, res, next) {
@@ -115,7 +114,7 @@ router.post('/', function (req, res, next) {
             user.healths.push(result);
             user.save();
 
-            // eventEmitter.emit('postComplete');
+            healthEventEmitter.emit('healthPostComplete');
 
             res.status(201).json({
                 message: 'Saved health',
