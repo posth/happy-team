@@ -99,9 +99,55 @@ var healthController = require("../server/health/controllers/healthController.js
 
 io.on('connection', function (socket) {
 
-  socket.on('healthUpdate', function () {
-      // socket.broadcast.emit('getLatestTeamHealthValue', 100);
+  socket.on('healthUpdate', function (userInfo) {
+    // socket.broadcast.emit('getLatestTeamHealthValue', 100);
+    //console.log('--------------------------------------socket user info------------------', userInfo);
+
+    //Saving user health 
+    // healthController.setLatestUserHealthValue(userInfo);
+    //Saving user health promise
+    var setLatestUserHealthValueTemp = function (setLatestTeamHealthValue) {
+      var setLatestUserHealthValuePromise = new Promise(function (resolve, reject) {
+        healthController.setLatestUserHealthValue(userInfo);
+        resolve();
+      })
+      return setLatestUserHealthValuePromise;
+    }
+
+    //Setting team health 
     // healthController.setLatestTeamHealthValue();
+    //Setting team health promise
+    var setLatestTeamHealthValueTemp = function (getLatestTeamHealthValue) {
+      var getLatestTeamHealthValuePromise = new Promise(function (resolve, reject) {
+        healthController.setLatestTeamHealthValue();
+        resolve();
+      })
+      return getLatestTeamHealthValuePromise;
+    }
+
+    //Getting latest team health value
+    healthController.getLatestTeamHealthValue();
+    //Getting latest team health value promise
+    var getLatestTeamHealthValueTemp = function(setLatestTeamHealthValueTemp) {
+      var getLatestTeamHealthValuePromise = new Promise(function(resolve, reject) {
+        healthController.getLatestTeamHealthValue();
+        resolve();
+      })
+      return getLatestTeamHealthValuePromise;
+    }
+
+    //Setting off health path promises
+    // setLatestUserHealthValueTemp(setLatestTeamHealthValueTemp)
+    //   .then(getLatestTeamHealthValueTemp);
+    // setLatestUserHealthValueTemp()
+    //   .then(setLatestTeamHealthValueTemp)
+    //   .then(getLatestTeamHealthValueTemp);
+
+    getLatestTeamHealthValueTemp()
+      .then(setLatestTeamHealthValueTemp)
+      .then(setLatestUserHealthValueTemp);
+      console.log('---------------f----------------------------------------------------------------------------------');
+
   })
 });
 

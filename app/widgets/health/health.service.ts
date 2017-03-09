@@ -41,7 +41,6 @@ export class HealthService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-
         /**
          * This sets up the Observable and doesn't send the request.
          * Someone needs to subscribe to this observable for it to send.
@@ -58,13 +57,28 @@ export class HealthService {
                 );
 
                 this.healths.push(health);
-                // this.socket.emit('healthUpdate');
                 return health;
             })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
+    }
+
+    addHealthSocket(userHealth: number) {
+
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+
+        const healthToSend = {
+            userHealth: userHealth,
+            token: token
+        }
+
+        console.log(healthToSend);
+
+        this.socket.emit('healthUpdate', healthToSend);
     }
 
     //Getting all the users past healths

@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../../user/models/user');
 var Health = require('../models/health');
 
-var healthEventEmitter = require('../events/healthEvents');
+// var healthEventEmitter = require('../events/healthEvents');
 
 //Get all health values
 router.get('/', function (req, res, next) {
@@ -88,10 +88,13 @@ router.get('/team', function (req, res, next) {
 
 });
 
-var healthController = require("../controllers/healthController.js");
+// var healthController = require("../controllers/healthController.js");
 
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
+
+    console.log('- post request token ', req.query.token);
+
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
             return res.status(500).json({
@@ -114,7 +117,7 @@ router.post('/', function (req, res, next) {
             user.healths.push(result);
             user.save();
 
-            healthEventEmitter.emit('healthPostComplete');
+            // healthEventEmitter.emit('healthPostComplete');
 
             res.status(201).json({
                 message: 'Saved health',

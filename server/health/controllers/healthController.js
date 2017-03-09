@@ -1,5 +1,8 @@
+var Health = require('../models/health');
+
 var User = require('../../user/models/user');
 var TeamHealth = require('../../health/models/teamHealth');
+var jwt = require('jsonwebtoken');
 
 //For exporting ES5 style
 var exports = module.exports = {};
@@ -46,6 +49,35 @@ exports.getLatestTeamHealthValue = function () {
         resolve(latestTeamHealthValue);
     })
 
+}
+
+exports.setLatestUserHealthValue = function (userInfo) {
+
+    let token = userInfo.token;
+    let tokenTrimmed = token.slice(7);
+
+    var decoded = jwt.decode(tokenTrimmed);
+
+    // Mongoose DB promise
+    let userHealthPromise = User.findById(decoded.user._id).exec();
+
+    // Using the promise
+    userHealthPromise.then(function (user) {
+
+        var health = new Health({
+            currentHealth: userInfo['userHealth'],
+            user: user
+        });
+
+        health.save(function (err, result) {
+            user.healths.push(result);
+            user.save();
+
+            console.log('->>>!>@!@#      - saving user health', result.currentHealth);
+        });
+
+        // resolve();
+    })
 }
 
 
