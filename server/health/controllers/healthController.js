@@ -35,6 +35,9 @@ exports.setLatestUserHealthValue = function (userInfo) {
 
             resolve();
         })
+            .catch(error => {
+                console.error(error);
+            })
     })
 }
 
@@ -70,7 +73,10 @@ exports.setLatestTeamHealthValue = function () {
                 teamHealth.save();
 
                 resolve();
-            })}, 100)
+            }).catch(error => {
+                console.error(error);
+            })
+        }, 100)
     })
 }
 
@@ -87,6 +93,8 @@ exports.getLatestTeamHealthValue = function () {
                 let latestTeamHealthValue = latestTeamHealthObjectResult[0]['teamHealth'];
                 console.log('------T--- lastest team health is', latestTeamHealthObjectResult[0]['teamHealth']);
                 return resolve(latestTeamHealthValue);
+            }).catch(error => {
+                console.error(error);
             })
         }, 100)
 

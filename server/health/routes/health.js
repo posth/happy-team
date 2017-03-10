@@ -56,9 +56,7 @@ router.get('/team', function (req, res, next) {
                     error: err
                 });
             }
-
-            console.log(lastTeamHealth);
-
+            
             res.status(200).json({
                 message: 'Last team health received',
                 obj: lastTeamHealth[0].teamHealth
