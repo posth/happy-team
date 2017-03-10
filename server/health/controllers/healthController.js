@@ -33,7 +33,7 @@ exports.setLatestUserHealthValue = function (userInfo) {
                 console.log('->>>!>@!@#      - saving user health', result.currentHealth);
             });
 
-            //resolve();
+            resolve();
         })
     })
 }
@@ -42,47 +42,53 @@ exports.setLatestTeamHealthValue = function () {
 
     return new Promise((resolve, reject) => {
 
-        //Mongoose DB promise
-        var healthsPromise = User.find().populate('healths').exec();
+        setTimeout(function () {
 
-        healthsPromise.then(function (users) {
-            let sum = 0;
-            let totalUsers = users.length;
-            var newAverage;
+            //Mongoose DB promise
+            var healthsPromise = User.find().populate('healths').exec();
 
-            users.forEach(function (user) {
-                let lastHealthObject = user['healths'].pop();
-                let mostRecentHealth = lastHealthObject['currentHealth'];
+            healthsPromise.then(function (users) {
+                let sum = 0;
+                let totalUsers = users.length;
+                var newAverage;
 
-                console.log('last object for each user ----------------------', mostRecentHealth);
-                sum += mostRecentHealth;
-            })
+                users.forEach(function (user) {
+                    let lastHealthObject = user['healths'].pop();
+                    let mostRecentHealth = lastHealthObject['currentHealth'];
 
-            newAverage = sum / totalUsers;
+                    console.log('last object for each user ----------------------', mostRecentHealth);
+                    sum += mostRecentHealth;
+                })
 
-            var teamHealth = new TeamHealth({
-                teamHealth: newAverage,
-                currentTime: new Date()
-            });
+                newAverage = sum / totalUsers;
 
-            teamHealth.save();
+                var teamHealth = new TeamHealth({
+                    teamHealth: newAverage,
+                    currentTime: new Date()
+                });
 
-            resolve();
-        })
+                teamHealth.save();
+
+                resolve();
+            })}, 100)
     })
 }
 
 exports.getLatestTeamHealthValue = function () {
 
     return new Promise((resolve, reject) => {
-        //Mongoose DB promise
-        let teamHealthPromise = TeamHealth.find().limit(1).sort({ $natural: -1 });
+        setTimeout(function () {
 
-        //Using promise
-        teamHealthPromise.then(function (latestTeamHealthObjectResult) {
-            let latestTeamHealthValue = latestTeamHealthObjectResult[0]['teamHealth'];
-            console.log('------T--- lastest team health is', latestTeamHealthObjectResult[0]['teamHealth']);
-            return resolve(latestTeamHealthValue);
-        })
+            //Mongoose DB promise
+            let teamHealthPromise = TeamHealth.find().limit(1).sort({ $natural: -1 });
+
+            //Using promise
+            teamHealthPromise.then(function (latestTeamHealthObjectResult) {
+                let latestTeamHealthValue = latestTeamHealthObjectResult[0]['teamHealth'];
+                console.log('------T--- lastest team health is', latestTeamHealthObjectResult[0]['teamHealth']);
+                return resolve(latestTeamHealthValue);
+            })
+        }, 100)
+
     })
 }

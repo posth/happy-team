@@ -4,8 +4,7 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../../user/models/user');
 var Health = require('../models/health');
-
-// var healthEventEmitter = require('../events/healthEvents');
+var TeamHealth = require('../models/teamHealth');
 
 //Get all health values
 router.get('/', function (req, res, next) {
@@ -47,48 +46,25 @@ router.get('/latest', function (req, res, next) {
 //Get latest team health values
 router.get('/team', function (req, res, next) {
 
-    // let average = healthController.getAverage();
+    TeamHealth.find()
+        .limit(1)
+        .sort({$natural: -1})
+        .exec(function(err, lastTeamHealth) {
+            if(err) {
+                return res.status(500).json({
+                    title: "Error occured on getting last team health",
+                    error: err
+                });
+            }
 
-    // console.log('-------------module return', average);
+            console.log(lastTeamHealth);
 
-    // if (average == null) {
-    //     User.find()
-    //         .populate('healths')
-    //         .exec(function (err, users) {
-
-    //             if (err) {
-    //                 return res.status(500).json({
-    //                     title: 'An error occurred on getting unique user ids in team GET',
-    //                     error: err
-    //                 });
-    //             }
-
-    //             let sum = 0;
-    //             let totalUsers = users.length;
-
-    //             users.forEach(function (user) {
-    //                 let lastHealthObject = user['healths'].pop();
-    //                 let mostRecentHealth = lastHealthObject['currentHealth'];
-    //                 sum += mostRecentHealth;
-    //             })
-
-    //             let average = sum / totalUsers;
-
-    //             res.status(201).json({
-    //                 message: 'Saved message',
-    //                 obj: average
-    //             });
-    //         })
-    // }
-
-    // res.status(201).json({
-    //     message: 'Saved message',
-    //     obj: average
-    // });
-
+            res.status(200).json({
+                message: 'Last team health received',
+                obj: lastTeamHealth[0].teamHealth
+            });
+        })
 });
-
-// var healthController = require("../controllers/healthController.js");
 
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
@@ -116,8 +92,6 @@ router.post('/', function (req, res, next) {
             }
             user.healths.push(result);
             user.save();
-
-            // healthEventEmitter.emit('healthPostComplete');
 
             res.status(201).json({
                 message: 'Saved health',

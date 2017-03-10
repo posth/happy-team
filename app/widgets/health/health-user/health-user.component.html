@@ -1,4 +1,5 @@
 <md-card *ngIf="isLoggedIn()" class="user-health-mood-card">
     <h4>Enter your mood: </h4>
     <input #userInput (change)="setUserHealth(userInput.value)" value="{{userHealthValue}}" max="100" min="0" type="range">
+    {{userHealthValue}}
 </md-card>

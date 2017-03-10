@@ -101,21 +101,16 @@ io.on('connection', function (socket) {
 
   socket.on('healthUpdate', function (userInfo) {
 
-    let setLatestUserHealthValuePromise = healthController.setLatestUserHealthValue(userInfo);
-    //console.log('latest last user promise return type -> ', setLatestUserHealthValuePromise);
-
-    let setLatestTeamHealthValuePromise = healthController.setLatestTeamHealthValue();
-    //console.log('set latest team health value return type ->', setLatestTeamHealthValuePromise);
-
-    let getLatestTeamHealthValuePromise = healthController.getLatestTeamHealthValue();
-    //console.log('latest team health type -> ', getLatestTeamHealthValuePromise);
-
-    // getLatestTeamHealthValuePromise.then(function(result) {
-    //   console.log(' yo wassup team health is ->', result)
-    // });
-
-    console.log('----------------------------------------------------------------------------------------------');
+    //Health path when a user inputs their health, it adds it to the database, sets a team value and broadcasts it
+    healthController.setLatestUserHealthValue(userInfo)
+      .then(healthController.setLatestTeamHealthValue)
+      .then(healthController.getLatestTeamHealthValue)
+      .then(function (result) {
+        console.log('returned team health result', result);
+        socket.broadcast.emit('getLatestTeamHealthValue', result);
+      })
   })
+
 });
 
 

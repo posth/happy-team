@@ -6,8 +6,6 @@ import { Health } from '../health.model';
 import { AuthService } from '../../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 
-// import * as io from 'socket.io-client';
-
 @Component({
     selector: 'app-health-user',
     templateUrl: './health-user.component.html',
@@ -21,12 +19,8 @@ export class HealthUserComponent implements OnInit {
     private userHealthValue: number;
     private mostRecentHealthObject: Object;
 
-    // private url: string = 'http://localhost:3000';
-    // socket: any = null;
-
     constructor(private _healthService: HealthService,
         private _authService: AuthService) {
-        // this.socket = io(this.url);
     }
 
     ngOnInit() {
@@ -63,17 +57,11 @@ export class HealthUserComponent implements OnInit {
         return this._authService.isLoggedIn();
     }
 
+    //On each user input send health via socket
     setUserHealth(userHealth: number) {
         const health = new Health(userHealth);
 
-        // Adding the health through the service to connect it to Mongo
-        // this._healthService.addHealth(health)
-        //     .subscribe(
-        //     data => console.log(data)
-        //     );
-
+        //Send health to server via socket
         this._healthService.addHealthSocket(userHealth);
-
-        // this.socket.emit('healthUpdate', 'test');
     }
 }

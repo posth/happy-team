@@ -21,7 +21,7 @@ export class HealthComponent implements OnInit {
 
     //Team range input disable
     private teamInputDisable: boolean;
-    private teamHealthValue: number;
+    private teamHealthValue: number = 0;
 
     //Team data subscriptions for live data feed
     private teamHealthSubscription: Subscription;
@@ -34,6 +34,13 @@ export class HealthComponent implements OnInit {
         this.teamHealthSubscription = this._healthService.latestTeamHealthValueChanged$.subscribe(
             latestTeamHealthValue => this.teamHealthValue = latestTeamHealthValue
         );
+
+        this._healthService.getMostRecentTeamHealth()
+            .subscribe(
+                (mostRecentTeamHealthObject: number) => {
+                    this.teamHealthValue = mostRecentTeamHealthObject
+                }
+            )
 
     }
 
