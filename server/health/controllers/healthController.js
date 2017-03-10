@@ -7,79 +7,82 @@ var jwt = require('jsonwebtoken');
 //For exporting ES5 style
 var exports = module.exports = {};
 
+exports.setLatestUserHealthValue = function (userInfo) {
+
+    return new Promise(function (resolve, reject) {
+        let token = userInfo.token;
+        let tokenTrimmed = token.slice(7);
+
+        var decoded = jwt.decode(tokenTrimmed);
+
+        // Mongoose DB promise
+        let userHealthPromise = User.findById(decoded.user._id).exec();
+
+        // Using the promise
+        userHealthPromise.then((user) => {
+
+            var health = new Health({
+                currentHealth: userInfo['userHealth'],
+                user: user
+            });
+
+            health.save(function (err, result) {
+                user.healths.push(result);
+                user.save();
+
+                console.log('->>>!>@!@#      - saving user health', result.currentHealth);
+            });
+
+            //resolve();
+        })
+    })
+}
+
 exports.setLatestTeamHealthValue = function () {
 
-    //Mongoose DB promise
-    var healthsPromise = User.find().populate('healths').exec();
+    return new Promise((resolve, reject) => {
 
-    healthsPromise.then(function (users) {
-        let sum = 0;
-        let totalUsers = users.length;
-        var newAverage;
+        //Mongoose DB promise
+        var healthsPromise = User.find().populate('healths').exec();
 
-        users.forEach(function (user) {
-            let lastHealthObject = user['healths'].pop();
-            let mostRecentHealth = lastHealthObject['currentHealth'];
+        healthsPromise.then(function (users) {
+            let sum = 0;
+            let totalUsers = users.length;
+            var newAverage;
 
-            console.log('last object for each user ----------------------', mostRecentHealth);
-            sum += mostRecentHealth;
+            users.forEach(function (user) {
+                let lastHealthObject = user['healths'].pop();
+                let mostRecentHealth = lastHealthObject['currentHealth'];
+
+                console.log('last object for each user ----------------------', mostRecentHealth);
+                sum += mostRecentHealth;
+            })
+
+            newAverage = sum / totalUsers;
+
+            var teamHealth = new TeamHealth({
+                teamHealth: newAverage,
+                currentTime: new Date()
+            });
+
+            teamHealth.save();
+
+            resolve();
         })
-
-        newAverage = sum / totalUsers;
-
-        var teamHealth = new TeamHealth({
-            teamHealth: newAverage,
-            currentTime: new Date()
-        });
-
-        teamHealth.save();
     })
-
 }
 
 exports.getLatestTeamHealthValue = function () {
 
-    //Mongoose DB promise
-    let teamHealthPromise = TeamHealth.find().limit(1).sort({ $natural: -1 });
+    return new Promise((resolve, reject) => {
+        //Mongoose DB promise
+        let teamHealthPromise = TeamHealth.find().limit(1).sort({ $natural: -1 });
 
-    //Using promise
-    teamHealthPromise.then(function (latestTeamHealthObjectResult) {
-        let latestTeamHealthValue = latestTeamHealthObjectResult[0]['teamHealth'];
-        console.log('------T--- lastest team health is', latestTeamHealthObjectResult[0]['teamHealth']);
-        resolve(latestTeamHealthValue);
-    })
-
-}
-
-exports.setLatestUserHealthValue = function (userInfo) {
-
-    let token = userInfo.token;
-    let tokenTrimmed = token.slice(7);
-
-    var decoded = jwt.decode(tokenTrimmed);
-
-    // Mongoose DB promise
-    let userHealthPromise = User.findById(decoded.user._id).exec();
-
-    // Using the promise
-    userHealthPromise.then(function (user) {
-
-        var health = new Health({
-            currentHealth: userInfo['userHealth'],
-            user: user
-        });
-
-        health.save(function (err, result) {
-            user.healths.push(result);
-            user.save();
-
-            console.log('->>>!>@!@#      - saving user health', result.currentHealth);
-        });
-
-        // resolve();
+        //Using promise
+        teamHealthPromise.then(function (latestTeamHealthObjectResult) {
+            let latestTeamHealthValue = latestTeamHealthObjectResult[0]['teamHealth'];
+            console.log('------T--- lastest team health is', latestTeamHealthObjectResult[0]['teamHealth']);
+            return resolve(latestTeamHealthValue);
+        })
     })
 }
-
-
-
-
