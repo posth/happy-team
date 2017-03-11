@@ -8,9 +8,10 @@ var ObjectId = require('mongodb').ObjectID;
 //Get admin status of logged in user
 router.get('/', function (req, res, next) {
 
-    if(req.query.id) {
-        User.find(ObjectId(req.query.id.toString()), {admin: 1})
+    if (req.query.id) {
+        User.find(ObjectId(req.query.id.toString()), { admin: 1 })
             .exec(function (err, admin) {
+
                 if (err) {
                     return res.status(500).json({
                         title: 'An error occurred on getting user',
@@ -18,21 +19,28 @@ router.get('/', function (req, res, next) {
                     });
                 }
 
-                res.status(200).json({
-                    message: 'Success',
-                    obj: admin[0].admin
-                });
+                if (admin[0] == undefined) {
+                    res.status(200).json({
+                        message: 'Success',
+                        obj: false
+                    });
+                } else {
+                    res.status(200).json({
+                        message: 'Success',
+                        obj: admin[0].admin
+                    });
+                }
             })
     } else {
-         res.status(200).json({
-         message: 'Success',
-         obj: false
-      });
+        res.status(200).json({
+            message: 'Success',
+            obj: false
+        });
     }
 });
 
 //Get all users that exist for admin to see
-router.get('/users', function(req, res, next) {
+router.get('/users', function (req, res, next) {
 
     User.find()
         .exec(function (err, users) {

@@ -48,19 +48,26 @@ router.get('/team', function (req, res, next) {
 
     TeamHealth.find()
         .limit(1)
-        .sort({$natural: -1})
-        .exec(function(err, lastTeamHealth) {
-            if(err) {
+        .sort({ $natural: -1 })
+        .exec(function (err, lastTeamHealth) {
+            if (err) {
                 return res.status(500).json({
                     title: "Error occured on getting last team health",
                     error: err
                 });
             }
-            
-            res.status(200).json({
-                message: 'Last team health received',
-                obj: lastTeamHealth[0].teamHealth
-            });
+
+            if (lastTeamHealth[0] == undefined) {
+                res.status(200).json({
+                    message: 'Last team health received',
+                    obj: 50
+                });
+            } else {
+                res.status(200).json({
+                    message: 'Last team health received',
+                    obj: lastTeamHealth[0].teamHealth
+                });
+            }
         })
 });
 
