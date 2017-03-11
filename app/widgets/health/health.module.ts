@@ -2,26 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 
-import { HealthComponent } from './health.component';
-import { HealthUserComponent } from './health-user/health-user.component';
-
-import { HealthService } from './health.service';
+import { QuestionOneComponent } from './question-one/question-one.component';
+import { QuestionOneUserComponent } from './question-one/question-one-user/question-one-user.component';
+import { QuestionOneService } from './question-one/question-one.service';
 
 @NgModule({
     declarations: [
-        HealthComponent,
-        HealthUserComponent
+        QuestionOneComponent,
+        QuestionOneUserComponent
     ],
     imports: [
         CommonModule,
         MaterialModule
     ],
     exports: [
-        HealthComponent,
-        HealthUserComponent
+        QuestionOneComponent,
+        QuestionOneUserComponent
     ],
     providers: [
-        HealthService
+        QuestionOneService
     ]
 })
 

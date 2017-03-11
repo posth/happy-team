@@ -95,19 +95,19 @@ function onListening() {
 */
 
 var io = require('socket.io').listen(server);
-var healthController = require("../server/health/controllers/healthController.js");
+var healthController = require("../server/health/question-one/healthController.js");
 
 io.on('connection', function (socket) {
 
-  socket.on('healthUpdate', function (userInfo) {
+  socket.on('questionOneUpdate', function (userInfo) {
 
     //Health path when a user inputs their health, it adds it to the database, sets a team value and broadcasts it
     healthController.setLatestUserHealthValue(userInfo)
       .then(healthController.setLatestTeamHealthValue)
       .then(healthController.getLatestTeamHealthValue)
       .then(function (result) {
-        console.log('returned team health result', result);
-        socket.broadcast.emit('getLatestTeamHealthValue', result);
+        console.log('returned team question one result', result);
+        socket.broadcast.emit('getlatestTeamQuestionOneValue', result);
       })
   })
 

@@ -9,7 +9,10 @@ var mongoose = require('mongoose');
 var appRoutes = require('./server/app');
 var messageRoutes = require('./server/messages/routes/messages');
 var userRoutes = require('./server/user/routes/user');
-var healthRoutes = require('./server/health/routes/health');
+
+//Question one routes
+var healthRoutes = require('./server/health/question-one/health');
+
 var adminRoutes = require('./server/admin/routes/admin');
 
 var app = express();
