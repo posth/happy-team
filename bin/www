@@ -95,7 +95,12 @@ function onListening() {
 */
 
 var io = require('socket.io').listen(server);
+
+//Question One Controller
 var healthController = require("../server/health/question-one/healthController.js");
+
+//Question Two Controller
+var questionTwoController = require('../server/health/question-two/questionTwoController.js');
 
 io.on('connection', function (socket) {
 
@@ -108,6 +113,20 @@ io.on('connection', function (socket) {
       .then(function (result) {
         console.log('returned team question one result', result);
         socket.broadcast.emit('getlatestTeamQuestionOneValue', result);
+      })
+  })
+
+  socket.on('questionTwoUpdate', function (userInfo) {
+
+    console.log('user question two value received from socket -> ', userInfo);
+
+    //Health path when a user inputs their health, it adds it to the database, sets a team value and broadcasts it
+    questionTwoController.setLatestUserQuestionTwoValue(userInfo)
+      .then(questionTwoController.setLatestTeamQuestionTwoValue)
+      .then(questionTwoController.getLatestQuestionTwoValue)
+      .then(function (result) {
+        console.log('returned team question two result', result);
+        socket.broadcast.emit('getlatestTeamQuestionTwoValue', result);
       })
   })
 

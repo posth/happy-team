@@ -1,7 +1,7 @@
-var Health = require('../models/health');
-
 var User = require('../../user/models/user');
-var TeamHealth = require('../models/teamHealth');
+
+var TeamHealth = require('./teamHealthModel');
+var Health = require('./healthModel');
 var jwt = require('jsonwebtoken');
 
 //For exporting ES5 style

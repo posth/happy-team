@@ -1,0 +1,5 @@
+<md-card *ngIf="isLoggedIn()" class="user-health-mood-card">
+    <p>I am proud of the work that I do for my team:</p>
+    <input #userInput (change)="setUserQuestionTwoValue(userInput.value)" value="{{userQuestionTwoValue}}" max="100" min="0" type="range">
+    {{userQuestionTwoValue}}
+</md-card>

@@ -3,8 +3,8 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var User = require('../../user/models/user');
-var Health = require('../models/health');
-var TeamHealth = require('../models/teamHealth');
+var Health = require('./healthModel');
+var TeamHealth = require('./teamHealthModel');
 
 //Get all health values
 router.get('/', function (req, res, next) {

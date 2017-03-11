@@ -9,7 +9,8 @@ var schema = new Schema({
     email: {type: String, required: true, unique: true},
     admin: {type:Boolean, required: true},
     messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
-    healths: [{type: Schema.Types.ObjectId, ref: 'Health'}]
+    healths: [{type: Schema.Types.ObjectId, ref: 'Health'}],
+    questionTwoValues: [{type: Schema.Types.ObjectId, ref: 'UserQuestionTwoValue'}]
 });
 
 schema.plugin(mongooseUniqueValidator);

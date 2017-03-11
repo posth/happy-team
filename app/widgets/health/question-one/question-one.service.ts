@@ -42,8 +42,6 @@ export class QuestionOneService {
             token: token
         }
 
-        console.log(healthToSend);
-
         this.socket.emit('questionOneUpdate', healthToSend);
     }
 

@@ -4,7 +4,8 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
-var Health = require('../../health/models/health');
+var Health = require('../../health/question-one/healthModel');
+var UserQuestionTwoValue = require('../../health/question-two/userQuestionTwoModel');
 var Message = require('../../messages/models/message');
 
 router.post('/', function (req, res, next) {
@@ -15,15 +16,25 @@ router.post('/', function (req, res, next) {
         email: req.body.email,
         admin: false,
         health: [],
-        messages: []
+        messages: [],
+        questionTwoValues: []
     });
 
+    //Pushing a default question one value at the start
     var health = new Health({
         currentHealth: 50,
         user: user
     });
     user.healths.push(health);
     health.save();
+
+    //Pushing a default question two value at the start
+    var userQuestionTwoValue = new UserQuestionTwoValue({
+        userQuestionTwoValue: 50,
+        user: user
+    });
+    user.questionTwoValues.push(userQuestionTwoValue);
+    userQuestionTwoValue.save();
 
     var message = new Message({
         content: 'First!',
