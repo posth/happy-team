@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+// import { Subscription } from 'rxjs/Subscription';
 
-import { Health } from './health.model';
+import { TeamHealth } from './teamHealth.model';
 
-import { QuestionOneService } from './question-one/question-one.service';
-import { QuestionTwoService } from './question-two/question-two.service';
+import { QuestionResultsService } from './questions-results.service';
 
 @Component({
     selector: 'app-questions-results',
@@ -12,21 +12,30 @@ import { QuestionTwoService } from './question-two/question-two.service';
 })
 export class QuestionsResultsComponent {
 
-    private questionOneResults: Health[];
-    private questionTwoResults: Health[];
+    private questionOneResults: TeamHealth[];
+    private questionTwoResults: TeamHealth[];
 
-    constructor(private _questionOneService: QuestionOneService,
-        private _questionTwoService: QuestionTwoService) {
+    constructor(private _questionResultsService: QuestionResultsService) {
         this.getLatestQuestionOneResults();
         this.getLatestQuestionTwoResults();
     }
 
     getLatestQuestionOneResults() {
-        //todo GET all team health values - need to create a route + add to front service
+        this._questionResultsService.getAllQuestionOneValues()
+            .subscribe(
+            (allQuestionOneValues: TeamHealth[]) => {
+                this.questionOneResults = allQuestionOneValues
+            })
     }
 
     getLatestQuestionTwoResults() {
         //todo GET all team health values - need to create a route + add to front service
+        this._questionResultsService.getAllQuestionTwoValues()
+            .subscribe(
+            (allQuestionTwoValues: TeamHealth[]) => {
+                this.questionTwoResults = allQuestionTwoValues
+                console.log(this.questionTwoResults)
+            })
     }
-    
+
 }

@@ -72,6 +72,34 @@ router.get('/team', function (req, res, next) {
         })
 });
 
+//Get all team values for question two
+router.post('/questiontwoteamvalues', function(req, res, next) {
+
+    TeamQuestionTwoValue.find()
+        .exec(function(err, allTeamQuestionTwoValues) {
+            if(err) {
+                return res.status(500).json({
+                    title: "Error occured on getting on team health values for question two",
+                    error: err
+                })
+            }
+
+            //Checking if empty again - need to use Lodash to better check
+            //TODO add lodash check here
+            if(allTeamQuestionTwoValues[0] == undefined) {
+                res.status(200).json({
+                    message: 'There are no team healths!',
+                    obj: []
+                });
+            } else {
+                res.status(200).json({
+                    message: 'Here are all the last team healths',
+                    obj: allTeamQuestionTwoValues
+                })
+            }
+        })
+})
+
 router.post('/', function (req, res, next) {
 
     //Decoding the token from client to match user

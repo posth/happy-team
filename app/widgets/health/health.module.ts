@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 
 import { QuestionsResultsComponent } from './questions-results.component';
+import { QuestionResultsService } from './questions-results.service';
 
 import { QuestionOneComponent } from './question-one/question-one.component';
 import { QuestionOneUserComponent } from './question-one/question-one-user/question-one-user.component';
@@ -19,7 +20,7 @@ import { QuestionTwoService } from './question-two/question-two.service';
         QuestionOneUserComponent,
         QuestionTwoComponent,
         QuestionTwoUserComponent
-    ],
+    ], 
     imports: [
         CommonModule,
         MaterialModule
@@ -33,7 +34,8 @@ import { QuestionTwoService } from './question-two/question-two.service';
     ],
     providers: [
         QuestionOneService,
-        QuestionTwoService
+        QuestionTwoService,
+        QuestionResultsService
     ]
 })
 

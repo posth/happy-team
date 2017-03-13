@@ -4,18 +4,18 @@
             <div class="tab-container">
                 <h5>Results of Question One</h5>
                 <button (click)="getLatestQuestionOneResults()">Get latest results</button>
-                <span *ngFor="let questionOneResult of questionOneResults">
-                   TO DO
-                </span>
+                <p *ngFor="let questionOneResult of questionOneResults">
+                    {{questionOneResult.teamHealth}} on {{questionOneResult.teamHealthDate}}
+                </p>
             </div>
         </md-tab>
         <md-tab label="Results of Question Two">
             <div class="tab-container">
                 <h5>Results of Question Two</h5>
                 <button (click)="getLatestQuestionTwoResults()">Get latest results</button>
-                <span *ngFor="let questionTwoResult of questionTwoResults">
-                    TO DO
-                </span>
+                <p *ngFor="let questionTwoResult of questionTwoResults">
+                    {{questionTwoResult.teamHealth}} on {{questionTwoResult.teamHealthDate}}
+                </p>
             </div>
         </md-tab>
     </md-tab-group>

@@ -57,9 +57,10 @@ router.get('/team', function (req, res, next) {
                 });
             }
 
+            //Checking if empty to prevent crashing on running the application on first run
             if (lastTeamHealth[0] == undefined) {
                 res.status(200).json({
-                    message: 'Last team health received',
+                    message: 'Last team health does not exist',
                     obj: 50
                 });
             } else {
@@ -71,10 +72,36 @@ router.get('/team', function (req, res, next) {
         })
 });
 
+//Get all team values for question one
+router.post('/teamhealths', function(req, res, next) {
+
+    TeamHealth.find()
+        .exec(function(err, allTeamHealths) {
+            if(err) {
+                return res.status(500).json({
+                    title: "Error occured on getting on team health values for question one",
+                    error: err
+                })
+            }
+
+            //Checking if empty again - need to use Lodash to better check
+            //TODO add lodash check here
+            if(allTeamHealths[0] == undefined) {
+                res.status(200).json({
+                    message: 'There are no team healths!',
+                    obj: []
+                });
+            } else {
+                res.status(200).json({
+                    message: 'Here are all the last team healths',
+                    obj: allTeamHealths
+                })
+            }
+        })
+})
+
 router.post('/', function (req, res, next) {
     var decoded = jwt.decode(req.query.token);
-
-    console.log('- post request token ', req.query.token);
 
     User.findById(decoded.user._id, function (err, user) {
         if (err) {
