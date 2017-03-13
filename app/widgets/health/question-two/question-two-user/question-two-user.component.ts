@@ -40,15 +40,10 @@ export class QuestionTwoUserComponent implements OnInit {
     getMostRecentUserHealth() {
         this._QuestionTwoService.getUserMostRecentQuestionTwoValue()
             .subscribe(
-            (mostRecentHealthObject: Object) => {
+            (mostRecentHealth: number) => {
 
                 //Grab the most recent health object from the db on initialization of this component    
-                this.mostRecentHealthObject = mostRecentHealthObject;
-
-                if (this.mostRecentHealthObject) {
-                    //Grab the health value from the object
-                    this.userQuestionTwoValue = this.mostRecentHealthObject['currentHealth'];
-                }
+                this.userQuestionTwoValue = mostRecentHealth;
 
             }
             );

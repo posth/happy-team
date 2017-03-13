@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from '../auth/auth.module';
 import { MaterialModule } from '@angular/material';
+import { HealthModule} from '../widgets/health/health.module';
 
 import { AdminComponent } from './admin.component';
 import { AdminUserDescriptionComponent } from './admin-user-description/admin-user-description.component';
@@ -14,7 +15,8 @@ import { AdminUserDescriptionComponent } from './admin-user-description/admin-us
     imports: [
         CommonModule,
         AuthModule,
-        MaterialModule
+        MaterialModule,
+        HealthModule
     ],
     exports: [
         AdminComponent

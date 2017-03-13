@@ -1,0 +1,22 @@
+<md-card class="questions-results-container">
+    <md-tab-group>
+        <md-tab label="Results of Question One">
+            <div class="tab-container">
+                <h5>Results of Question One</h5>
+                <button (click)="getLatestQuestionOneResults()">Get latest results</button>
+                <span *ngFor="let questionOneResult of questionOneResults">
+                   TO DO
+                </span>
+            </div>
+        </md-tab>
+        <md-tab label="Results of Question Two">
+            <div class="tab-container">
+                <h5>Results of Question Two</h5>
+                <button (click)="getLatestQuestionTwoResults()">Get latest results</button>
+                <span *ngFor="let questionTwoResult of questionTwoResults">
+                    TO DO
+                </span>
+            </div>
+        </md-tab>
+    </md-tab-group>
+</md-card>

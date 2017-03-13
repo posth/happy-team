@@ -17,7 +17,7 @@ export class QuestionOneService {
     userQuestionOneValueIsEdit = new EventEmitter<Health>();
 
     private url: string = 'http://localhost:3000';
-    socket: any = null;
+    private socket: any = null;
 
     // private latestTeamQuestionOneValue: number;
     latestTeamQuestionOneValue: BehaviorSubject<number> = new BehaviorSubject<number>(undefined);
@@ -53,7 +53,7 @@ export class QuestionOneService {
                 let transformedHealths: Health[] = [];
                 for (let health of healths) {
                     transformedHealths.push(new Health(
-                        health.value,
+                        health.currentHealth,
                         health._id,
                         health.user_id
                     ));

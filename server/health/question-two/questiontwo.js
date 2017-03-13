@@ -36,9 +36,10 @@ router.get('/latest', function (req, res, next) {
                     error: err
                 });
             }
+
             res.status(200).json({
                 message: 'Success',
-                obj: health[0]
+                obj: health[0].userQuestionTwoValue
             });
         })
 });
@@ -65,7 +66,7 @@ router.get('/team', function (req, res, next) {
             } else {
                 res.status(200).json({
                     message: 'Last team health received',
-                    obj: lastTeamQuestionTwoValue[0].teamHealth
+                    obj: lastTeamQuestionTwoValue[0].teamQuestionTwoValue
                 });
             }
         })
