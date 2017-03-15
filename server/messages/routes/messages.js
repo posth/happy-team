@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+
 var User = require('../../user/models/user');
 var Message = require('../models/message');
 
@@ -16,6 +21,11 @@ router.get('/', function (req, res, next) {
                 return res.status(500).json({
                     title: 'An error occurred getting messages',
                     error: err
+                });
+            }
+            if(_.isEmpty(messages)) {
+                return res.status(200).json({
+                    title: 'There are no messages'
                 });
             }
             res.status(200).json({

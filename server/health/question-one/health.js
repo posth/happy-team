@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+
 var User = require('../../user/models/user');
 var Health = require('./healthModel');
 var TeamHealth = require('./teamHealthModel');
@@ -17,14 +22,19 @@ router.get('/', function (req, res, next) {
                     error: err
                 });
             }
+            if(_.isEmpty(healths)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
+                });
+            }
             res.status(200).json({
-                message: 'Success',
+                message: 'Success getting healths.',
                 obj: healths
             });
         });
 });
 
-//Get latest health values
+// Get latest health values
 router.get('/latest', function (req, res, next) {
     Health.find({ user: req.query.id })
         .limit(1)
@@ -34,6 +44,11 @@ router.get('/latest', function (req, res, next) {
                 return res.status(500).json({
                     title: 'An error occurred on getting user',
                     error: err
+                });
+            }
+            if(_.isEmpty(health)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
                 });
             }
             res.status(200).json({
@@ -56,19 +71,15 @@ router.get('/team', function (req, res, next) {
                     error: err
                 });
             }
-
-            //Checking if empty to prevent crashing on running the application on first run
-            if (lastTeamHealth[0] == undefined) {
-                res.status(200).json({
-                    message: 'Last team health does not exist',
-                    obj: 50
-                });
-            } else {
-                res.status(200).json({
-                    message: 'Last team health received',
-                    obj: lastTeamHealth[0].teamHealth
+            if(_.isEmpty(lastTeamHealth)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
                 });
             }
+            res.status(200).json({
+                message: 'Last team health received',
+                obj: lastTeamHealth[0].teamHealth
+            });
         })
 });
 
@@ -83,20 +94,18 @@ router.post('/teamhealths', function(req, res, next) {
                     error: err
                 })
             }
-
             //Checking if empty again - need to use Lodash to better check
             //TODO add lodash check here
             if(allTeamHealths[0] == undefined) {
-                res.status(200).json({
+                return res.status(200).json({
                     message: 'There are no team healths!',
                     obj: []
                 });
-            } else {
-                res.status(200).json({
-                    message: 'Here are all the last team healths',
-                    obj: allTeamHealths
-                })
-            }
+            } 
+            res.status(200).json({
+                message: 'Here are all the last team healths',
+                obj: allTeamHealths
+            })
         })
 })
 

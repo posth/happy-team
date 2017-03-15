@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+
 var User = require('../../user/models/user');
 var ObjectId = require('mongodb').ObjectID;
 
@@ -11,17 +16,15 @@ router.get('/', function (req, res, next) {
     if (req.query.id) {
         User.find(ObjectId(req.query.id.toString()), { admin: 1 })
             .exec(function (err, admin) {
-
                 if (err) {
                     return res.status(500).json({
                         title: 'An error occurred on getting user',
                         error: err
                     });
                 }
-
-                if (admin[0] == undefined) {
+                if (_.isEmpty(admin)) {
                     res.status(200).json({
-                        message: 'Success',
+                        message: "You're not admin.",
                         obj: false
                     });
                 } else {
@@ -50,7 +53,11 @@ router.get('/users', function (req, res, next) {
                     error: err
                 });
             }
-
+            if(_.isEmpty(users)) {
+                return res.status(200).json({
+                    title: 'There are no users.'
+                });
+            }
             res.status(200).json({
                 message: 'Success',
                 obj: users
