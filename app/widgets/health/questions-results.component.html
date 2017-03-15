@@ -2,11 +2,13 @@
     <md-tab-group>
         <md-tab label="Results of Question One">
             <div class="tab-container">
-                <h5>Results of Question One</h5>
                 <button (click)="getLatestQuestionOneResults()">Get latest results</button>
-                <p *ngFor="let questionOneResult of questionOneResults">
+                <!--<p *ngFor="let questionOneResult of questionOneResults">
                     {{questionOneResult.teamHealth}} on {{questionOneResult.teamHealthDate}}
-                </p>
+                </p>-->
+                <div class="chart-container">
+                    <svg id="chartOne"></svg>
+                </div>
             </div>
         </md-tab>
         <md-tab label="Results of Question Two">
