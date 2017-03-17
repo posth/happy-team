@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 
-import { QuestionsResultsComponent } from './questions-results.component';
-import { QuestionResultsService } from './questions-results.service';
+import { LineChartComponent } from './question-results/line-chart/line-chart.component';
+
+import { QuestionsResultsComponent } from './question-results/questions-results.component';
+import { QuestionResultsService } from './question-results//questions-results.service';
 
 import { QuestionOneComponent } from './question-one/question-one.component';
 import { QuestionOneUserComponent } from './question-one/question-one-user/question-one-user.component';
@@ -19,7 +21,8 @@ import { QuestionTwoService } from './question-two/question-two.service';
         QuestionOneComponent,
         QuestionOneUserComponent,
         QuestionTwoComponent,
-        QuestionTwoUserComponent
+        QuestionTwoUserComponent,
+        LineChartComponent
     ], 
     imports: [
         CommonModule,
@@ -30,7 +33,8 @@ import { QuestionTwoService } from './question-two/question-two.service';
         QuestionOneComponent,
         QuestionOneUserComponent,
         QuestionTwoComponent,
-        QuestionTwoUserComponent
+        QuestionTwoUserComponent,
+        LineChartComponent
     ],
     providers: [
         QuestionOneService,
