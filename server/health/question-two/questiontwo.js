@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+
 var User = require('../../user/models/user');
 var UserQuestionTwoValue = require('../question-two/userQuestionTwoModel');
 var TeamQuestionTwoValue = require('../question-two/teamQuestionTwoModel');
@@ -17,6 +22,11 @@ router.get('/', function (req, res, next) {
                     error: err
                 });
             }
+            if(_.isEmpty(health)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
+                });
+            }
             res.status(200).json({
                 message: 'Success',
                 obj: healths
@@ -24,7 +34,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
-//Get latest health values
+// Get latest health values
 router.get('/latest', function (req, res, next) {
     UserQuestionTwoValue.find({ user: req.query.id })
         .limit(1)
@@ -36,7 +46,11 @@ router.get('/latest', function (req, res, next) {
                     error: err
                 });
             }
-
+            if(_.isEmpty(health)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
+                });
+            }
             res.status(200).json({
                 message: 'Success',
                 obj: health[0].userQuestionTwoValue
@@ -44,7 +58,7 @@ router.get('/latest', function (req, res, next) {
         })
 });
 
-//Get latest team question two values
+// Get latest team question two values
 router.get('/team', function (req, res, next) {
 
     TeamQuestionTwoValue.find()
@@ -57,18 +71,15 @@ router.get('/team', function (req, res, next) {
                     error: err
                 });
             }
-
-            if (lastTeamQuestionTwoValue[0] == undefined) {
-                res.status(200).json({
-                    message: 'Last team health received',
-                    obj: 50
-                });
-            } else {
-                res.status(200).json({
-                    message: 'Last team health received',
-                    obj: lastTeamQuestionTwoValue[0].teamQuestionTwoValue
+            if(_.isEmpty(lastTeamHealth)) {
+                return res.status(200).json({
+                    message: 'There are no healths.'
                 });
             }
+            res.status(200).json({
+                message: 'Last team health received',
+                obj: lastTeamQuestionTwoValue[0].teamQuestionTwoValue
+            });
         })
 });
 
