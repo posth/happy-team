@@ -17,6 +17,9 @@ var questionTwoRoutes = require('./server/health/question-two/questiontwo');
 
 var adminRoutes = require('./server/admin/routes/admin');
 
+//Team goals routes
+var goalsRoutes = require('./server/goals/goals');
+
 var app = express();
 mongoose.connect('localhost:27017/happy-team');
 
@@ -39,11 +42,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+// all application routes
 app.use('/message', messageRoutes);
 app.use('/user', userRoutes);
 app.use('/health', healthRoutes);
 app.use('/questiontwo', questionTwoRoutes);
 app.use('/admin', adminRoutes);
+app.use('/goals', goalsRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

@@ -102,6 +102,9 @@ var healthController = require("../server/health/question-one/healthController.j
 //Question Two Controller
 var questionTwoController = require('../server/health/question-two/questionTwoController.js');
 
+//Goal Controller
+var goalsController = require('../server/goals/goalsController.js');
+
 io.on('connection', function (socket) {
 
   socket.on('questionOneUpdate', function (userInfo) {
@@ -128,6 +131,20 @@ io.on('connection', function (socket) {
         console.log('returned team question two result', result);
         socket.broadcast.emit('getlatestTeamQuestionTwoValue', result);
       })
+  })
+
+  //Socket for team goals
+  socket.on('addTeamGoal', function(goal) {
+    goalsController.addGoal(goal)
+      .catch(error => {
+        console.error(error);
+      })
+      .then(goalsController.getAllGoals)
+      .then(function(allTeamGoalsResult){
+        console.log('all new team goals results', allTeamGoalsResult);
+        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
+      })
+
   })
 
 });
