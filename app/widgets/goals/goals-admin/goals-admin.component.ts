@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Subscription } from 'rxjs/Subscription';
+// import { Subscription } from 'rxjs/Subscription';
 
 //Service
 import { GoalsService } from "../goals.service";
@@ -15,20 +15,10 @@ import { Goal } from "../goal.model";
 })
 
 export class GoalsAdminComponent {
-
     //Team goals
     private goals: Goal[];
 
-    private goal: Goal;
-
-    //Team goals subscription
-    private teamGoalsSubscription: Subscription;
-
     constructor(private _goalsService: GoalsService) {
-        this.teamGoalsSubscription = this._goalsService.allTeamGoalsChanged$.subscribe(
-            allTeamGoals => this.goals = allTeamGoals
-        );
-
         this.getTeamGoals();
     }
 
