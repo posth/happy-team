@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Subscription } from 'rxjs/Subscription';
 
 //Service
 import { GoalsService } from "../goals.service";
@@ -20,7 +21,16 @@ export class GoalsAdminComponent {
 
     private goal: Goal;
 
-    constructor(private _goalsService: GoalsService) { }
+    //Team goals subscription
+    private teamGoalsSubscription: Subscription;
+
+    constructor(private _goalsService: GoalsService) {
+        this.teamGoalsSubscription = this._goalsService.allTeamGoalsChanged$.subscribe(
+            allTeamGoals => this.goals = allTeamGoals
+        );
+
+        this.getTeamGoals();
+    }
 
     onSubmit(form: NgForm) {
         //TODO manage if it is to be edited - see message-input.component for example
@@ -31,5 +41,16 @@ export class GoalsAdminComponent {
         this._goalsService.addTeamGoal(goal);
 
         form.resetForm();
+        this.getTeamGoals();
+    }
+
+    getTeamGoals() {
+        //On first init of the page you get all the team goals
+        this._goalsService.getTeamGoals()
+            .subscribe(
+            (transformedGoals: Goal[]) => {
+                this.goals = transformedGoals;
+            }
+            )
     }
 }
