@@ -43,4 +43,9 @@ export class GoalsAdminComponent {
             }
             )
     }
+
+    deleteGoal(currentGoal: Goal) {
+        this._goalsService.deleteTeamGoal(currentGoal);
+        this.getTeamGoals();
+    }
 }

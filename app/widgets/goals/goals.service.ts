@@ -38,6 +38,10 @@ export class GoalsService {
         this.socket.emit('addTeamGoal', goal);
     }
 
+    deleteTeamGoal(goal: Goal) {
+        this.socket.emit('deleteTeamGoal', goal);
+    }
+
     getTeamGoals() {
         return this._http.get('http://localhost:3000/goals')
             .map((response: Response) => {
@@ -52,7 +56,8 @@ export class GoalsService {
                     transformedGoals.push(new Goal(
                         goal.content,
                         goal.completed,
-                        goal.date
+                        goal.date,
+                        goal._id
                     ));
                 }
 

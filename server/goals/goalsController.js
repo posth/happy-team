@@ -27,14 +27,32 @@ goalsExports.getAllGoals = function () {
 
     return new Promise((resolve, reject) => {
 
-        // Mongoose DB promise from Mongo DB results
-        let allTeamGoalsPromise = Goal.find().exec();
+        setTimeout(function () {
 
-        //Using the promise
-        allTeamGoalsPromise.then(function (allTeamGoalsResult) {
-            return resolve(allTeamGoalsResult);
-        }).catch(error => {
-            console.error(error);
+            // Mongoose DB promise from Mongo DB results
+            let allTeamGoalsPromise = Goal.find().exec();
+
+            //Using the promise
+            allTeamGoalsPromise.then(function (allTeamGoalsResult) {
+                return resolve(allTeamGoalsResult);
+            }).catch(error => {
+                console.error(error);
+            })
+        }, 100)
+    })
+}
+
+// //Deleting a team goal
+goalsExports.deleteGoal = function (goal) {
+    return new Promise((resolve, reject) => {
+
+        let goalId = goal.goalId;
+
+        Goal.findById(goalId, function (err, goal) {
+            console.log('promise -----------', goal);
+            goal.remove();
         })
+
+        resolve();
     })
 }

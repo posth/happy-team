@@ -147,6 +147,22 @@ io.on('connection', function (socket) {
 
   })
 
+  
+  socket.on('deleteTeamGoal', function (goal) {
+    console.log('socket goal', goal);
+
+    goalsController.deleteGoal(goal)
+      .catch(error => {
+        console.error(error);
+      })
+      .then(goalsController.getAllGoals)
+      .then(function (allTeamGoalsResult) {
+        console.log('all new team goals results after deleting one', allTeamGoalsResult);
+        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
+      })
+
+  })
+
 });
 
 
