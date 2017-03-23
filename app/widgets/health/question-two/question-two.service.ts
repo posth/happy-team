@@ -52,9 +52,6 @@ export class QuestionTwoService {
                 const healths = response.json().obj;
                 let transformedHealths: Health[] = [];
                 for (let health of healths) {
-
-                    console.log(health);
-
                     transformedHealths.push(new Health(
                         health.userQuestionTwoValue,
                         health._id,

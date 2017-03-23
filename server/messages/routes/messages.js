@@ -51,6 +51,9 @@ router.use('/', function (req, res, next) {
     })
 });
 
+//Messages Events
+var messagesEventModule = require('../messagesEvents.js');
+
 //Making it post to store messages on the server - technically each path here is message/ before the path
 router.post('/', function (req, res, next) {
 
@@ -80,6 +83,9 @@ router.post('/', function (req, res, next) {
             user.messages.push(result);
             user.save();
 
+            //Emitting that a new user message has been added
+            messagesEventModule.emitMessagesEvent();
+            
             //If there is no error - 201 = everything is OK
             res.status(201).json({
                 message: 'Saved message',
@@ -163,6 +169,9 @@ router.delete('/:id', function (req, res, next) {
                     error: err
                 });
             }
+
+            messagesEventModule.emitMessagesEvent();
+            
             res.status(200).json({
                 message: 'Deleted message',
                 obj: result
