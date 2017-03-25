@@ -87,4 +87,31 @@ router.post('/signin', function(req, res, next) {
     });
 });
 
+router.post('/delete', function(req, res,next) {
+
+    User.findById(req.body.id, function(err, user) {
+        if(err) {
+            return res.status(500).json({
+                title: 'An error occured finding this user',
+                error: err
+            });
+        }
+
+        user.remove(function(err, result) {
+            if(err) {
+                return res.status(500).json({
+                    title: 'An error occured removing this user',
+                    error: err
+                });
+            }
+
+            res.status(200).json({
+                message: 'Delete user',
+                obj: result
+            });
+        })
+    })
+
+})
+
 module.exports = router;
