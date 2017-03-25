@@ -54,6 +54,10 @@ export class GoalsService {
                 const goals = response.json().obj;
                 let transformedGoals: Goal[] = [];
 
+                if(goals == null) {
+                    return transformedGoals;
+                }
+
                 for (let goal of goals) {
                     transformedGoals.push(new Goal(
                         goal.content,
