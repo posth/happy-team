@@ -42,17 +42,33 @@ goalsExports.getAllGoals = function () {
     })
 }
 
-// //Deleting a team goal
+// Deleting a team goal
 goalsExports.deleteGoal = function (goal) {
     return new Promise((resolve, reject) => {
 
         let goalId = goal.goalId;
 
         Goal.findById(goalId, function (err, goal) {
-            console.log('promise -----------', goal);
             goal.remove();
         })
 
         resolve();
+    })
+}
+
+//Updating the status of the team goal
+goalsExports.completeGoal = function(goal) {
+    return new Promise((resolve, reject) => {
+
+        let goalId = goal.goalId;
+        let newCompletedStatus = !goal.completed;
+
+        Goal.findById(goalId, function(err, goal) {
+            goal.completed = newCompletedStatus;
+            goal.save();
+        });
+
+        resolve();
+
     })
 }

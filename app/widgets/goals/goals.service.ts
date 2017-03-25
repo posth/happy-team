@@ -42,6 +42,10 @@ export class GoalsService {
         this.socket.emit('deleteTeamGoal', goal);
     }
 
+    completeTeamGoal(goal: Goal) {
+        this.socket.emit('completeTeamGoal', goal);
+    }
+
     getTeamGoals() {
         return this._http.get('http://localhost:3000/goals')
             .map((response: Response) => {
@@ -49,8 +53,6 @@ export class GoalsService {
                 //TODO currently it is empty but to check if empty with lodash else map it
                 const goals = response.json().obj;
                 let transformedGoals: Goal[] = [];
-
-                console.log('---team goals are -> ', goals);
 
                 for (let goal of goals) {
                     transformedGoals.push(new Goal(

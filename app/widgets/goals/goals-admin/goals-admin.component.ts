@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, NgModel } from "@angular/forms";
 // import { Subscription } from 'rxjs/Subscription';
 
 //Service
@@ -48,4 +48,12 @@ export class GoalsAdminComponent {
         this._goalsService.deleteTeamGoal(currentGoal);
         this.getTeamGoals();
     }
+
+    completeGoal(currentGoal: Goal) {
+        console.log(currentGoal);
+
+        this._goalsService.completeTeamGoal(currentGoal);
+        this.getTeamGoals();
+    }
+
 }

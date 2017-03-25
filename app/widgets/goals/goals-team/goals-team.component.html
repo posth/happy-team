@@ -2,9 +2,8 @@
     <p> This is the goals team component </p>
     <ul>
         <li *ngFor="let goal of goals">
-            {{goal.content}}
-            {{goal.completed}}
-            {{goal.date}}
+            <p [ngClass]="{'completed': goal.completed}">{{goal.content}} 
+            </p>
         </li>
     </ul>
 </md-card>
