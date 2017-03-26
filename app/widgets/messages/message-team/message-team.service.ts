@@ -19,7 +19,6 @@ export class MessageTeamService {
     private socket: any = null;
 
     constructor(private _messageService: MessageService) {
-        console.log('message team service built');
         this.socket = io(this.url);
         this.socket.on("newUserMessageAdded", function () {
             this.getLatestTeamMessages();

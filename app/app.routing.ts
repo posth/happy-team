@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
-import { AuthenticationComponent } from "./auth/authentication.component";
+// import { AuthenticationComponent } from "./auth/authentication.component";
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { TeamComponent } from './team/team.component';

@@ -27,7 +27,6 @@ export class QuestionTwoService {
         this.socket = io(this.url);
         this.socket.on('getlatestTeamQuestionTwoValue', function (latestTeamQuestionTwoValue) {
             this.latestTeamQuestionTwoValue.next(latestTeamQuestionTwoValue);
-            console.log('question two service latest value from socket ------>', this.latestTeamQuestionTwoValue.value);
         }.bind(this));
     }
 
@@ -92,7 +91,6 @@ export class QuestionTwoService {
             .map((response: Response) => {
                 const mostRecentTeamHealthObject = response.json().obj;
                 //returns a number of the team health
-                console.log('-------- getting most recent question two on init', mostRecentTeamHealthObject);
                 return mostRecentTeamHealthObject;
             })
             .catch((error: Response) => {

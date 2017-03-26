@@ -15,9 +15,10 @@ import { routing } from "./app.routing";
 import { AuthService } from "./auth/auth.service";
 import { ErrorService } from "./errors/error.service";
 import { AdminService } from './admin/admin.service';
-import { HeaderService } from './header/header.service';
+// import { HeaderService } from './header/header.service';
+import { UserStatusService } from './user/user-status.service';
 
-import { AuthenticationComponent } from "./auth/authentication.component";
+// import { AuthenticationComponent } from "./auth/authentication.component";
 import { ErrorComponent } from "./errors/error.component";
 import { UserComponent } from './user/user.component';
 import { TeamComponent } from './team/team.component';
@@ -28,7 +29,7 @@ import { AppComponent } from "./app.component";
 @NgModule({
     declarations: [
         AppComponent,
-        AuthenticationComponent,
+        // AuthenticationComponent,
         ErrorComponent,
         UserComponent,
         TeamComponent
@@ -50,7 +51,8 @@ import { AppComponent } from "./app.component";
         AuthService,
         ErrorService,
         AdminService,
-        HeaderService
+        // HeaderService,
+        UserStatusService
     ],
     bootstrap: [AppComponent]
 })

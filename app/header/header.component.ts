@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from "../auth/auth.service";
 import { AdminService } from '../admin/admin.service';
-import { HeaderService } from '../header/header.service';
+// import { HeaderService } from '../header/header.service';
+import { UserStatusService } from '../user/user-status.service';
 
 @Component({
     selector: 'app-header',
@@ -20,8 +21,8 @@ export class HeaderComponent implements OnInit {
     constructor(private router: Router,
         private _authService: AuthService,
         private _adminService: AdminService,
-        private _headerService: HeaderService) {
-        this._adminStatusSubscription = this._headerService.adminStatusValueChanged$.subscribe(
+        private _userStatusService: UserStatusService) {
+        this._adminStatusSubscription = this._userStatusService.adminStatusValueChanged$.subscribe(
             adminStatusValue => this.adminStatus = adminStatusValue
         );
     }
