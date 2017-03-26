@@ -18,7 +18,6 @@ export class UserStatusService implements CanActivate{
 
     constructor(private _adminService: AdminService, private router: Router) {
         this.router.events.pairwise().subscribe((event) => {
-            console.log('changing route');
             this.setAdminStatusFromService();
             this.setLoggedInStatusFromService();
         });
@@ -26,8 +25,7 @@ export class UserStatusService implements CanActivate{
     }
 
     canActivate() {
-        console.log('admin status from user status sevice is can activate', this.adminStatusValue.value);
-        return this.adminStatusValue.value;
+        return this.isLoggedInValue.value;
     }
 
     setAdminStatusFromService() {
@@ -42,7 +40,6 @@ export class UserStatusService implements CanActivate{
 
     setLoggedInStatusFromService() {
         let loggedInStatus = sessionStorage.getItem('token') ? true : false;
-        console.log('logged in status of user ', loggedInStatus)
         this.isLoggedInValue.next(loggedInStatus);
     }
 }

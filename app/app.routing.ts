@@ -6,13 +6,27 @@ import { TeamComponent } from './team/team.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 
+import { UserStatusService } from './user/user-status.service';
+
 const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'signin', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'team', component: TeamComponent },
-    { path: 'user', component: UserComponent },
-    { path: 'admin', component: AdminComponent },
+    {
+        path: 'team',
+        component: TeamComponent,
+        canActivate: [UserStatusService]
+    },
+    {
+        path: 'user',
+        component: UserComponent,
+        canActivate: [UserStatusService]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [UserStatusService]
+    },
     { path: '**', redirectTo: 'signin' }
     // { path: 'auth', component: AuthenticationComponent, loadChildren: './auth/auth.module#AuthModule' }
 ];
