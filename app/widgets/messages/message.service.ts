@@ -28,8 +28,8 @@ export class MessageService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
         //Sending the token along with the request in a query string in the URL, if it exists
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //This sets up the Observable and doesn't send the request
@@ -93,8 +93,8 @@ export class MessageService {
 
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //Passing message ID to the path since the back end is expecting it
@@ -111,8 +111,8 @@ export class MessageService {
 
         this.messages.splice(this.messages.indexOf(message), 1);
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //Passing message ID to the path since the back end is expecting it - and deleting it

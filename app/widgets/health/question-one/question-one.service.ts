@@ -33,8 +33,8 @@ export class QuestionOneService {
 
     addQuestionOneUserValue(userHealth: number) {
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         const healthToSend = {
@@ -70,8 +70,8 @@ export class QuestionOneService {
     //Getting the users most recent health
     getUserMostRecentQuestionOneValue() {
 
-        const userId = localStorage.getItem('userId')
-            ? '?id=' + localStorage.getItem('userId')
+        const userId = sessionStorage.getItem('userId')
+            ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
         return this.http.get('http://localhost:3000/health/latest' + userId)

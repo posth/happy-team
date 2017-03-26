@@ -14,25 +14,29 @@ var Message = require('../models/message');
 router.get('/', function (req, res, next) {
 
     //If you don't pass anything to find function you get all the messages
-    Message.find()
-        .populate('user', 'firstName')
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred getting messages',
-                    error: err
+    setTimeout(function () {
+        Message.find()
+            .populate('user', 'firstName')
+            .exec(function (err, messages) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occurred getting messages',
+                        error: err
+                    });
+                }
+                if (_.isEmpty(messages)) {
+                    return res.status(200).json({
+                        title: 'There are no messages'
+                    });
+                }
+                res.status(200).json({
+                    message: 'Success',
+                    obj: messages
                 });
-            }
-            if(_.isEmpty(messages)) {
-                return res.status(200).json({
-                    title: 'There are no messages'
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
             });
-        });
+
+    }, 100);
+
 });
 
 // ------------  Every route below here should have a verified user otherwise the routes shouldn't be accessible  ------------------
@@ -85,7 +89,7 @@ router.post('/', function (req, res, next) {
 
             //Emitting that a new user message has been added
             messagesEventModule.emitMessagesEvent();
-            
+
             //If there is no error - 201 = everything is OK
             res.status(201).json({
                 message: 'Saved message',
@@ -110,13 +114,13 @@ router.patch('/:id', function (req, res, next) {
         if (!message) {
             return res.status(500).json({
                 title: 'No Message Found!',
-                error: {message: 'Message not found'}
+                error: { message: 'Message not found' }
             });
         }
         if (message.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: {message: 'Users do not match'}
+                error: { message: 'Users do not match' }
             });
         }
 
@@ -151,13 +155,13 @@ router.delete('/:id', function (req, res, next) {
         if (!message) {
             return res.status(500).json({
                 title: 'No Message Found!',
-                error: {message: 'Message not found'}
+                error: { message: 'Message not found' }
             });
         }
         if (message.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: {message: 'Users do not match'}
+                error: { message: 'Users do not match' }
             });
         }
 
@@ -171,7 +175,7 @@ router.delete('/:id', function (req, res, next) {
             }
 
             messagesEventModule.emitMessagesEvent();
-            
+
             res.status(200).json({
                 message: 'Deleted message',
                 obj: result

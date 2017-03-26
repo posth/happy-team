@@ -21,8 +21,8 @@ export class SigninComponent {
         this.authService.signin(user)
             .subscribe(
             data => {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('userId', data.userId);
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('userId', data.userId);
                 this.router.navigateByUrl('/team');
             },
             error => console.error(error)

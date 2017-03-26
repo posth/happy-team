@@ -15,8 +15,8 @@ export class AdminService {
 
     getAdminStatus() {
 
-        const userId = localStorage.getItem('userId')
-            ? '?id=' + localStorage.getItem('userId')
+        const userId = sessionStorage.getItem('userId')
+            ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
         return this.http.get('http://localhost:3000/admin' + userId)
@@ -41,7 +41,6 @@ export class AdminService {
                 let transformedUsers: User[] = [];
 
                 for (let user of users) {
-                    console.log('service', user);
                     transformedUsers.push(new User(
                         user.email,
                         user.password,

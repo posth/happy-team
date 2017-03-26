@@ -25,6 +25,6 @@ export class MessageComponent {
     }
 
     belongsToUser() {
-        return localStorage.getItem('userId') == this.message.userId;
+        return sessionStorage.getItem('userId') == this.message.userId;
     }
 }

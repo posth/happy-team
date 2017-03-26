@@ -45,10 +45,10 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.clear();
+        sessionStorage.clear();
     }
 
     isLoggedIn() {
-        return localStorage.getItem('token') !== null;
+        return sessionStorage.getItem('token') !== null;
     }
 }
