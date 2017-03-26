@@ -8,16 +8,19 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AdminService } from '../admin/admin.service';
 
 @Injectable()
-export class UserStatusService {
+export class UserStatusService implements CanActivate{
 
     adminStatusValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     adminStatusValueChanged$: Observable<boolean> = this.adminStatusValue.asObservable();
+
+    isLoggedInValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    isLoggedInValueChanged$: Observable<boolean> = this.isLoggedInValue.asObservable();
 
     constructor(private _adminService: AdminService, private router: Router) {
         this.router.events.pairwise().subscribe((event) => {
             console.log('changing route');
             this.setAdminStatusFromService();
-            // this.canActivate();
+            this.setLoggedInStatusFromService();
         });
 
     }
@@ -35,7 +38,11 @@ export class UserStatusService {
                 this.canActivate();
             }
             );
+    }
 
-
+    setLoggedInStatusFromService() {
+        let loggedInStatus = sessionStorage.getItem('token') ? true : false;
+        console.log('logged in status of user ', loggedInStatus)
+        this.isLoggedInValue.next(loggedInStatus);
     }
 }

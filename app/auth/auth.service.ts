@@ -48,7 +48,7 @@ export class AuthService {
         sessionStorage.clear();
     }
 
-    isLoggedIn() {
-        return sessionStorage.getItem('token') !== null;
-    }
+    // isLoggedIn() {
+    //     return sessionStorage.getItem('token') !== null;
+    // }
 }

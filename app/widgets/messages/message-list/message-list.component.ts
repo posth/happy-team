@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 
 import { Message } from "../message.model";
 import { MessageService } from "../message.service";
-import { AuthService } from '../../../auth/auth.service';
 
 @Component({
     selector: 'app-message-list',
@@ -14,8 +13,7 @@ import { AuthService } from '../../../auth/auth.service';
 export class MessageListComponent implements OnInit {
     messages: Message[];
 
-    constructor(private messageService: MessageService,
-        private _authService: AuthService) { }
+    constructor(private messageService: MessageService) { }
 
     ngOnInit() {
         this.messageService.getMessages()
@@ -26,7 +24,4 @@ export class MessageListComponent implements OnInit {
             );
     }
 
-    isLoggedIn() {
-        return this._authService.isLoggedIn();
-    }
 }

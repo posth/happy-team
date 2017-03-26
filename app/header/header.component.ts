@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from "@angular/router";
-
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from "../auth/auth.service";
 import { AdminService } from '../admin/admin.service';
-// import { HeaderService } from '../header/header.service';
 import { UserStatusService } from '../user/user-status.service';
 
 @Component({
@@ -13,10 +11,13 @@ import { UserStatusService } from '../user/user-status.service';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
     private adminStatus: boolean;
     _adminStatusSubscription: Subscription;
+
+    private loggedInStatus: boolean;
+    _loggedInStatusSubscription: Subscription;
 
     constructor(private router: Router,
         private _authService: AuthService,
@@ -25,12 +26,10 @@ export class HeaderComponent implements OnInit {
         this._adminStatusSubscription = this._userStatusService.adminStatusValueChanged$.subscribe(
             adminStatusValue => this.adminStatus = adminStatusValue
         );
-    }
 
-    ngOnInit() { }
-
-    isLoggedIn(): boolean {
-        return this._authService.isLoggedIn();
+        this._loggedInStatusSubscription = this._userStatusService.isLoggedInValueChanged$.subscribe(
+            isLoggedInValue => this.loggedInStatus = isLoggedInValue
+        );
     }
 
     onLogout(): void {
