@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LineChartComponent } from './question-results/line-chart/line-chart.component';
 
@@ -26,7 +28,9 @@ import { QuestionTwoService } from './question-two/question-two.service';
     ], 
     imports: [
         CommonModule,
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule,
+        NoopAnimationsModule
     ],
     exports: [
         QuestionsResultsComponent,
