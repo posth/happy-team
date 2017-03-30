@@ -28,7 +28,6 @@ goalsExports.getAllGoals = function () {
     return new Promise((resolve, reject) => {
 
         setTimeout(function () {
-
             // Mongoose DB promise from Mongo DB results
             let allTeamGoalsPromise = Goal.find().exec();
 

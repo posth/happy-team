@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
         admin: false,
-        health: [],
+        healths: [],
         messages: [],
         questionTwoValues: []
     });
