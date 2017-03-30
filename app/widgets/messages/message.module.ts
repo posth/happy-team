@@ -8,13 +8,16 @@ import { MessageListComponent } from "./message-list/message-list.component";
 import { MessageComponent } from "./message-component/message.component";
 import { MessageInputComponent } from "./message-input/message-input.component";
 import { MessageService } from "./message.service";
+import { MessageTeamComponent } from './message-team/message-team.component';
+import { MessageTeamService } from './message-team/message-team.service';
 
 @NgModule({
     declarations: [
         MessagesComponent,
         MessageListComponent,
         MessageComponent,
-        MessageInputComponent
+        MessageInputComponent,
+        MessageTeamComponent
     ],
     imports: [
         CommonModule,
@@ -23,10 +26,12 @@ import { MessageService } from "./message.service";
     ],
     exports: [
         MessageListComponent,
-        MessageInputComponent
+        MessageInputComponent,
+        MessageTeamComponent
     ],
-    providers: [MessageService]
+    providers: [
+        MessageService,
+        MessageTeamService
+    ] 
 })
-export class MessageModule {
-
-}
+export class MessageModule { }

@@ -1,0 +1,21 @@
+<md-card class="goals-admin-card">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group">
+            <label for="content">Add new team goal:</label>
+            <input type="text" id="content" class="form-control" [ngModel]="goal?.content" name="content" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+    <p> This is the goals team component </p>
+    <ul>
+        <li *ngFor="let goal of goals">
+            <p [ngClass]="{'completed': goal.completed}">
+                {{goal.content}} 
+            </p>
+            <p>
+                <button (click)="deleteGoal(goal)">Delete</button>
+                <button (click)="completeGoal(goal)">{{ goal.completed === true ? 'Incomplete' : 'Complete'}}</button>
+            </p>
+        </li>
+    </ul>
+</md-card>

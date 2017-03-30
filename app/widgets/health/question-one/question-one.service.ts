@@ -27,14 +27,13 @@ export class QuestionOneService {
         this.socket = io(this.url);
         this.socket.on('getlatestTeamQuestionOneValue', function (latestTeamQuestionOneValue) {
             this.latestTeamQuestionOneValue.next(latestTeamQuestionOneValue);
-            console.log('question one service latest value from socket ------>', this.latestTeamQuestionOneValue.value);
         }.bind(this));
     }
 
     addQuestionOneUserValue(userHealth: number) {
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         const healthToSend = {
@@ -70,8 +69,8 @@ export class QuestionOneService {
     //Getting the users most recent health
     getUserMostRecentQuestionOneValue() {
 
-        const userId = localStorage.getItem('userId')
-            ? '?id=' + localStorage.getItem('userId')
+        const userId = sessionStorage.getItem('userId')
+            ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
         return this.http.get('http://localhost:3000/health/latest' + userId)
@@ -92,7 +91,6 @@ export class QuestionOneService {
             .map((response: Response) => {
                 const mostRecentTeamHealthObject = response.json().obj;
                 //returns a number of the team health
-                console.log('-------- getting most recent health on init', mostRecentTeamHealthObject);
                 return mostRecentTeamHealthObject;
             })
             .catch((error: Response) => {

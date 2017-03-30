@@ -1,9 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { QuestionTwoService } from '../question-two/question-two.service';
 import { Health } from '../health.model';
-
-import { AuthService } from '../../../auth/auth.service';
 
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from "rxjs/Observable";
@@ -14,7 +12,7 @@ import { Observable } from "rxjs/Observable";
     styleUrls: ['./question-two.component.css']
 })
 
-export class QuestionTwoComponent implements OnInit {
+export class QuestionTwoComponent {
 
     //User health variables
     private healths: Health[];
@@ -28,8 +26,7 @@ export class QuestionTwoComponent implements OnInit {
     //Team data subscriptions for live data feed
     private teamQuestionTwoSubscription: Subscription;
 
-    constructor(private _QuestionTwoService: QuestionTwoService,
-        private _authService: AuthService) {
+    constructor(private _QuestionTwoService: QuestionTwoService) {
 
         this.teamQuestionTwoInputDisable = true;
 
@@ -46,12 +43,6 @@ export class QuestionTwoComponent implements OnInit {
                 }
             )
 
-    }
-
-    ngOnInit() {}
- 
-    isLoggedIn() {
-        return this._authService.isLoggedIn();
     }
 
     //Setters and getters for team part

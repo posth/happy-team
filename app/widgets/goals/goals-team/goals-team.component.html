@@ -1,0 +1,9 @@
+<md-card class="goals-team-card">
+    <p> This is the goals team component </p>
+    <ul>
+        <li *ngFor="let goal of goals">
+            <p [ngClass]="{'completed': goal.completed}">{{goal.content}} 
+            </p>
+        </li>
+    </ul>
+</md-card>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HeaderService } from '../header/header.service';
+// import { HeaderService } from '../header/header.service';
 
 @Component({
     selector: 'app-team',
@@ -8,9 +8,9 @@ import { HeaderService } from '../header/header.service';
     styleUrls:  ['./team.component.css']
 })
 export class TeamComponent implements OnInit {
-    constructor(private _headerService: HeaderService) { }
+    constructor() { }
 
     ngOnInit() { 
-        this._headerService.setAdminStatusFromService();
+        // this._headerService.setAdminStatusFromService();
     }
 }

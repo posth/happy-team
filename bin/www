@@ -21,6 +21,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+//exporting the server variable to be able to use elsewhere in the application
+var serverConfig = module.exports = {};
+serverConfig.server = server;
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -102,6 +105,12 @@ var healthController = require("../server/health/question-one/healthController.j
 //Question Two Controller
 var questionTwoController = require('../server/health/question-two/questionTwoController.js');
 
+//Goal Controller
+var goalsController = require('../server/goals/goalsController.js');
+
+//Messages Events
+var messagesEventModule = require('../server/messages/messagesEvents.js');
+
 io.on('connection', function (socket) {
 
   socket.on('questionOneUpdate', function (userInfo) {
@@ -118,8 +127,6 @@ io.on('connection', function (socket) {
 
   socket.on('questionTwoUpdate', function (userInfo) {
 
-    console.log('user question two value received from socket -> ', userInfo);
-
     //Health path when a user inputs their health, it adds it to the database, sets a team value and broadcasts it
     questionTwoController.setLatestUserQuestionTwoValue(userInfo)
       .then(questionTwoController.setLatestTeamQuestionTwoValue)
@@ -128,6 +135,50 @@ io.on('connection', function (socket) {
         console.log('returned team question two result', result);
         socket.broadcast.emit('getlatestTeamQuestionTwoValue', result);
       })
+  })
+
+  //Sockets for team goals
+  socket.on('addTeamGoal', function (goal) {
+    goalsController.addGoal(goal)
+      .catch(error => {
+        console.error(error);
+      })
+      .then(goalsController.getAllGoals)
+      .then(function (allTeamGoalsResult) {
+        console.log('all new team goals results', allTeamGoalsResult);
+        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
+      })
+
+  })
+
+
+  socket.on('deleteTeamGoal', function (goal) {
+    goalsController.deleteGoal(goal)
+      .catch(error => {
+        console.error(error);
+      })
+      .then(goalsController.getAllGoals)
+      .then(function (allTeamGoalsResult) {
+        console.log('all new team goals results after deleting one', allTeamGoalsResult);
+        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
+      })
+  });
+
+  socket.on('completeTeamGoal', function(goal) {
+    goalsController.completeGoal(goal)
+      .catch(error => {
+        console.error(error);
+      })
+      .then(goalsController.getAllGoals)
+      .then(function(allTeamGoalsResult) {
+        console.log('all new team goals results after completing one', allTeamGoalsResult);
+        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
+      })
+  })
+
+  //Listening to event emitted when a new user saves a message to trigger front team page to update
+  messagesEventModule.messagesEvent.on('newUserMessageAdded', function () {
+    socket.broadcast.emit('newUserMessageAdded');
   })
 
 });

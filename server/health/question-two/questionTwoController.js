@@ -6,7 +6,7 @@ var UserQuestionTwoValue = require('./userQuestionTwoModel');
 var jwt = require('jsonwebtoken');
 
 //For exporting 
-var questionTwo = module.exports = {}
+var questionTwo = module.exports = {};
 
 questionTwo.setLatestUserQuestionTwoValue = function (userInfo) {
 

@@ -6,30 +6,36 @@ import { Observable } from "rxjs";
 import { Message } from "./message.model";
 import { ErrorService } from "../../errors/error.service";
 
+import * as io from 'socket.io-client';
+
 @Injectable()
 export class MessageService {
     private messages: Message[] = [];
     messageIsEdit = new EventEmitter<Message>();
 
-    constructor(private http: Http, private errorService: ErrorService) { }
+    private url: string = 'http://localhost:3000';
+    private socket: any = null;
 
-    addMessage(message: Message) { 
+    constructor(private http: Http,
+        private errorService: ErrorService) { }
+
+    addMessage(message: Message) {
 
         //convert the message into a JSON object
         const body = JSON.stringify(message);
 
         //Ensure we're sending JSON as that's what the backend is expecting - pass it as a third parameter in the http post service request
-        const headers = new Headers({'Content-Type': 'application/json'});
+        const headers = new Headers({ 'Content-Type': 'application/json' });
 
         //Sending the token along with the request in a query string in the URL, if it exists
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //This sets up the Observable and doesn't send the request
         //Someone needs to subscribe to this observable for it to send
         //it returns from the server a response as a json object, only gives you the data which is attached to the response and converts it to JSON    
-        return this.http.post('http://localhost:3000/message' + token, body, {headers: headers})
+        return this.http.post('http://localhost:3000/message' + token, body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const message = new Message(
@@ -85,14 +91,14 @@ export class MessageService {
         //convert the message into a JSON object
         const body = JSON.stringify(message);
 
-        const headers = new Headers({'Content-Type': 'application/json'});
+        const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //Passing message ID to the path since the back end is expecting it
-        return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, {headers: headers})
+        return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -105,8 +111,8 @@ export class MessageService {
 
         this.messages.splice(this.messages.indexOf(message), 1);
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         //Passing message ID to the path since the back end is expecting it - and deleting it

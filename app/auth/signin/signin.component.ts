@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 
 import { User } from "../../user/user.model";
 import { AuthService } from "../auth.service";
+import { UserStatusService } from '../../user/user-status.service';
 
 @Component({
     selector: 'app-signin',
@@ -14,15 +15,19 @@ export class SigninComponent {
     myForm: FormGroup;
 
     constructor(private authService: AuthService,
-        private router: Router) { }
+        private router: Router,
+        private userStatusService: UserStatusService) { }
 
     onSubmit() {
         const user = new User(this.myForm.value.email, this.myForm.value.password);
         this.authService.signin(user)
             .subscribe(
             data => {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('userId', data.userId);
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('userId', data.userId);
+
+                this.userStatusService.setAdminStatusFromService();
+
                 this.router.navigateByUrl('/team');
             },
             error => console.error(error)

@@ -27,14 +27,13 @@ export class QuestionTwoService {
         this.socket = io(this.url);
         this.socket.on('getlatestTeamQuestionTwoValue', function (latestTeamQuestionTwoValue) {
             this.latestTeamQuestionTwoValue.next(latestTeamQuestionTwoValue);
-            console.log('question two service latest value from socket ------>', this.latestTeamQuestionTwoValue.value);
         }.bind(this));
     }
 
     addQuestionTwoUserValue(userHealth: number) {
 
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
+            ? '?token=' + sessionStorage.getItem('token')
             : '';
 
         const healthToSend = {
@@ -52,9 +51,6 @@ export class QuestionTwoService {
                 const healths = response.json().obj;
                 let transformedHealths: Health[] = [];
                 for (let health of healths) {
-
-                    console.log(health);
-
                     transformedHealths.push(new Health(
                         health.userQuestionTwoValue,
                         health._id,
@@ -73,8 +69,8 @@ export class QuestionTwoService {
     //Getting the users most recent health
     getUserMostRecentQuestionTwoValue() {
 
-        const userId = localStorage.getItem('userId')
-            ? '?id=' + localStorage.getItem('userId')
+        const userId = sessionStorage.getItem('userId')
+            ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
         return this.http.get('http://localhost:3000/questiontwo/latest' + userId)
@@ -95,7 +91,6 @@ export class QuestionTwoService {
             .map((response: Response) => {
                 const mostRecentTeamHealthObject = response.json().obj;
                 //returns a number of the team health
-                console.log('-------- getting most recent question two on init', mostRecentTeamHealthObject);
                 return mostRecentTeamHealthObject;
             })
             .catch((error: Response) => {

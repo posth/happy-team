@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-
 import { QuestionOneService } from '../../question-one/question-one.service';
 import { Health } from '../../health.model';
-
-import { AuthService } from '../../../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
+import { UserStatusService } from '../../../../user/user-status.service';
 
 @Component({
     selector: 'app-question-one-user',
@@ -20,8 +18,15 @@ export class QuestionOneUserComponent implements OnInit {
 
     private mostRecentHealthObject: Object;
 
+    private loggedInStatus: boolean;
+    _loggedInStatusSubscription: Subscription;
+
     constructor(private _questionOneService: QuestionOneService,
-        private _authService: AuthService) {
+    private _userStatusService: UserStatusService) {
+
+        this._loggedInStatusSubscription = this._userStatusService.isLoggedInValueChanged$.subscribe(
+            isLoggedInValue => this.loggedInStatus = isLoggedInValue
+        );
     }
 
     ngOnInit() {
@@ -54,9 +59,9 @@ export class QuestionOneUserComponent implements OnInit {
             );
     }
 
-    isLoggedIn() {
-        return this._authService.isLoggedIn();
-    }
+    // isLoggedIn() {
+    //     return this._authService.isLoggedIn();
+    // }
 
     //On each user input send health via socket
     setUserQuestionOneValue(userHealth: number) {

@@ -1,12 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-
-import { QuestionOneService } from '../question-one/question-one.service';
-import { Health } from '../health.model';
-
-import { AuthService } from '../../../auth/auth.service';
+import { Component } from "@angular/core";
 
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from "rxjs/Observable";
+
+import { QuestionOneService } from '../question-one/question-one.service';
+import { Health } from '../health.model';
 
 @Component({
     selector: 'app-question-one',
@@ -14,7 +12,7 @@ import { Observable } from "rxjs/Observable";
     styleUrls: ['./question-one.component.css']
 })
 
-export class QuestionOneComponent implements OnInit {
+export class QuestionOneComponent {
 
     //User health variables
     private healths: Health[];
@@ -28,8 +26,7 @@ export class QuestionOneComponent implements OnInit {
     //Team data subscriptions for live data feed
     private teamQuestionOneSubscription: Subscription;
 
-    constructor(private _questionOneService: QuestionOneService,
-        private _authService: AuthService) {
+    constructor(private _questionOneService: QuestionOneService) {
 
         this.teamQuestionOneInputDisable = true;
 
@@ -41,17 +38,11 @@ export class QuestionOneComponent implements OnInit {
         //On first load of this component, you GET the latest team health
         this._questionOneService.getMostRecentTeamQuestionOneValue()
             .subscribe(
-                (mostRecentTeamHealthObject: number) => {
-                    this.teamQuestionOneValue = mostRecentTeamHealthObject
-                }
+            (mostRecentTeamHealthObject: number) => {
+                this.teamQuestionOneValue = mostRecentTeamHealthObject
+            }
             )
 
-    }
-
-    ngOnInit() {}
- 
-    isLoggedIn() {
-        return this._authService.isLoggedIn();
     }
 
     //Setters and getters for team part

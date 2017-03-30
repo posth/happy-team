@@ -1,0 +1,13 @@
+<md-card class="team-message-card">
+    <h2>Team messages</h2>
+    <article *ngFor="let message of messages" class="panel panel-default">
+        <div class="panel-body">
+            {{ message.content }}
+        </div>
+        <footer class="panel-footer">
+            <div class="author">
+                {{ message.username }}
+            </div>
+        </footer>
+    </article>
+</md-card>

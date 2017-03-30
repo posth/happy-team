@@ -9,21 +9,21 @@ import { AdminService } from '../admin/admin.service';
 @Injectable()
 export class HeaderService {
 
-    adminStatusValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    adminStatusValueChanged$: Observable<boolean> = this.adminStatusValue.asObservable();
+    // adminStatusValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    // adminStatusValueChanged$: Observable<boolean> = this.adminStatusValue.asObservable();
 
     constructor(private _adminService: AdminService) {
 
-        this.setAdminStatusFromService();
+        // this.setAdminStatusFromService();
 
     }
 
-    setAdminStatusFromService() {
-        this._adminService.getAdminStatus()
-            .subscribe(
-            (adminStatus: boolean) => {
-                this.adminStatusValue.next(adminStatus);
-            }
-            );
-    }
+    // setAdminStatusFromService() {
+    //     this._adminService.getAdminStatus()
+    //         .subscribe(
+    //         (adminStatus: boolean) => {
+    //             this.adminStatusValue.next(adminStatus);
+    //         }
+    //         );
+    // }
 }
