@@ -1,7 +1,18 @@
 .team-message-card {
-        margin: 5%;
+    margin: 20px;
+}
+
+.team-message-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    border-bottom: 1px solid lightgrey;
 }
 
 .user-message {
         background-color: lightblue;
+}
+
+.message-body {
+        margin: 20px;
 }

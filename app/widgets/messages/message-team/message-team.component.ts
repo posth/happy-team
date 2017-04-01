@@ -17,7 +17,7 @@ export class MessageTeamComponent implements OnInit {
 
     constructor(private _messageTeamService: MessageTeamService) { 
         this.teamMessagesSubscription = this._messageTeamService.latestTeamMessagesChanged$.subscribe(
-            latestTeamMessages => this.messages = latestTeamMessages
+            latestTeamMessages => this.messages = latestTeamMessages.slice(Math.max(latestTeamMessages.length - 5, 1))
         );
     }
 
