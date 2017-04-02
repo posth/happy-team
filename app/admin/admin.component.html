@@ -1,7 +1,13 @@
-<app-signup></app-signup>
-<md-card class="admin-user-description-total-card">
-    <h3>Current users:</h3>
-    <app-admin-user-description [user]="user" *ngFor="let user of users"></app-admin-user-description>
-</md-card>
+<div class="row">
+    <div class="col-md-6">
+        <app-signup></app-signup>
+    </div>
+    <div class="col-md-6">
+        <md-card class="admin-user-description-total-card">
+            <h3>Utilisateurs actuels:</h3>
+            <app-admin-user-description [user]="user" *ngFor="let user of users"></app-admin-user-description>
+        </md-card>
+    </div>
+</div>
 <app-goals-admin></app-goals-admin>
 <app-questions-results></app-questions-results>
