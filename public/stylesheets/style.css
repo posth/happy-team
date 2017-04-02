@@ -34,5 +34,6 @@ input.ng-invalid.ng-touched {
 
 .sub-container {
   height: 100%;
+  margin: 30px 50px 0px 50px;
   /*margin-top: 10rem;*/
 }

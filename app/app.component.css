@@ -1,0 +1,10 @@
+.push-app-content {
+    margin-left: 350px;   
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+
+.happy-team-container {
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}

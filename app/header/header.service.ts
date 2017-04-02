@@ -4,26 +4,16 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { AdminService } from '../admin/admin.service';
 
 @Injectable()
 export class HeaderService {
 
-    // adminStatusValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    // adminStatusValueChanged$: Observable<boolean> = this.adminStatusValue.asObservable();
+    menuIsActive: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    menuIsActiveChanged$: Observable<boolean> = this.menuIsActive.asObservable();
 
-    constructor(private _adminService: AdminService) {
+    constructor() { }
 
-        // this.setAdminStatusFromService();
-
+    toggleSideMenu() {
+        this.menuIsActive.next(!this.menuIsActive.value);
     }
-
-    // setAdminStatusFromService() {
-    //     this._adminService.getAdminStatus()
-    //         .subscribe(
-    //         (adminStatus: boolean) => {
-    //             this.adminStatusValue.next(adminStatus);
-    //         }
-    //         );
-    // }
 }

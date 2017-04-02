@@ -9,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamComponent implements OnInit {
 
-    private teamName: string = "Equipe Guichet";
-    private timeInterval: string = "Sprint 16";
+    // private teamName: string = "Equipe Guichet";
+    // private timeInterval: string = "Sprint 16";
 
     constructor() { }
 
