@@ -1,8 +1,8 @@
 <md-card class="user-message-input-card">
-    <h4>Write a message to the team: </h4>
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <h3>Ecrire un message à l'équipe: </h3>
+    <form class="message-user-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
-            <label for="content">Content</label>
+            <!--<label for="content">Content</label>-->
             <input
                     type="text"
                     id="content"

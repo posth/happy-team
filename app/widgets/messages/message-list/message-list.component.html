@@ -1,4 +1,8 @@
 <div class="message-list-card">
-    <h4>Team messages:</h4>
-    <app-message [message]="message" *ngFor="let message of messages"></app-message>
+    <h3>Messages de l'équipe:</h3>
+    <div class="message-container">
+        <div class="message-container-scroll">
+            <app-message [message]="message" *ngFor="let message of messages"></app-message>
+        </div>
+    </div>
 </div>

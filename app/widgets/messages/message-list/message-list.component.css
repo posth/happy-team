@@ -2,6 +2,19 @@ h4 {
     margin: 10px 0;
 }
 
-.message-list-card {
-    /*margin: 3% 5%;*/
+.message-list-card h3{
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}
+
+.message-container {
+    overflow: hidden;
+}
+
+.message-container-scroll {
+    overflow-y: scroll;
+    height: 510px;
 }

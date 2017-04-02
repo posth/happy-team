@@ -1,3 +1,15 @@
 .user-message-input-card {
     margin: 20px;
 }
+
+.user-message-input-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}
+
+.message-user-form{
+    margin: 40px;
+}

@@ -1,5 +1,5 @@
-<md-card *ngIf="loggedInStatus" class="user-health-mood-card">
-    <p>In my team, I feel fit and strong: </p>
+<div *ngIf="loggedInStatus" class="user-health-mood-card">
+    <p>Dans mon équipe, je me sens bien et fort: </p>
     <input #userInput (change)="setUserQuestionOneValue(userInput.value)" value="{{userQuestionOneValue}}" max="100" min="0" type="range">
     {{userQuestionOneValue}}
-</md-card>
+</div>
