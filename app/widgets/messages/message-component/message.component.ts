@@ -14,7 +14,7 @@ export class MessageComponent {
     constructor(private messageService: MessageService) {}
 
     onEdit() {
-        this.messageService.editMessage(this.message);
+        // this.messageService.editMessage(this.message);
     }
 
     onDelete() {

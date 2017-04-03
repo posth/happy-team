@@ -2,6 +2,7 @@ import { Http, Response, Headers } from "@angular/http";
 import { Injectable, EventEmitter } from "@angular/core";
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Message } from "./message.model";
 import { ErrorService } from "../../errors/error.service";
@@ -11,7 +12,10 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class MessageService {
     private messages: Message[] = [];
-    messageIsEdit = new EventEmitter<Message>();
+    // messageIsEdit = new EventEmitter<Message>();
+    messagesSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+    messagesSubjectChanged$: Observable<Message[]> = this.messagesSubject.asObservable();
+
 
     private url: string = 'http://localhost:3000';
     private socket: any = null;
@@ -44,6 +48,9 @@ export class MessageService {
                     result.obj._id,
                     result.obj.user._id);
                 this.messages.push(message);
+
+                this.messagesSubject.next(this.messages);
+
                 return message;
             })
             .catch((error: Response) => {
@@ -82,10 +89,10 @@ export class MessageService {
             });
     }
 
-    editMessage(message: Message) {
-        //Emit the message passed to this method
-        this.messageIsEdit.emit(message);
-    }
+    // editMessage(message: Message) {
+    //     //Emit the message passed to this method
+    //     this.messageIsEdit.emit(message);
+    // }
 
     updateMessage(message: Message) {
         //convert the message into a JSON object
@@ -110,6 +117,8 @@ export class MessageService {
     deleteMessage(message: Message) {
 
         this.messages.splice(this.messages.indexOf(message), 1);
+
+        this.messagesSubject.next(this.messages);
 
         const token = sessionStorage.getItem('token')
             ? '?token=' + sessionStorage.getItem('token')

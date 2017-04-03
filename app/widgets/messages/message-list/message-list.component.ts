@@ -13,7 +13,13 @@ import { MessageService } from "../message.service";
 export class MessageListComponent implements OnInit {
     messages: Message[];
 
-    constructor(private messageService: MessageService) { }
+    private _messagesSubscription: Subscription;
+
+    constructor(private messageService: MessageService) { 
+        this._messagesSubscription = this.messageService.messagesSubjectChanged$.subscribe(
+            messagesSubject => this.messages = messagesSubject
+        );
+    }
 
     ngOnInit() {
         this.messageService.getMessages()

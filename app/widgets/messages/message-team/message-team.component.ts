@@ -15,10 +15,13 @@ export class MessageTeamComponent implements OnInit {
     messages: Message[];
     teamMessagesSubscription: Subscription;
 
-    constructor(private _messageTeamService: MessageTeamService) { 
+    constructor(private _messageTeamService: MessageTeamService) {
         this.teamMessagesSubscription = this._messageTeamService.latestTeamMessagesChanged$.subscribe(
-            latestTeamMessages => this.messages = latestTeamMessages.slice(Math.max(latestTeamMessages.length - 5, 1))
+            latestTeamMessages => this.messages = latestTeamMessages.slice(Math.max(latestTeamMessages.length - 5, 0))
         );
+        // this.teamMessagesSubscription = this._messageTeamService.latestTeamMessagesChanged$.subscribe(
+        //     latestTeamMessages => this.messages = latestTeamMessages
+        // );
     }
 
     ngOnInit() {
