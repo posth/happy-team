@@ -1,21 +1,37 @@
-<md-card class="header-card">
-    <nav>
+<md-card class="header-card row">
+    <div class="col-md-10 col-sm-6">
         <ul class="nav nav-pills">
-            <li routerLinkActive="active" *ngIf="adminStatus && loggedInStatus" [routerLink]="['/admin']" class="admin">
-                <a md-button class="col-md-3 col-sm-3 btn btn-info">Admin</a>
-            </li>
-            <li routerLinkActive="active" *ngIf="loggedInStatus" [routerLink]="['/team']" class="team">
-                <a md-button class="col-md-3 col-sm-3 btn btn-primary">Team</a>
-            </li>
-            <li routerLinkActive="active" *ngIf="loggedInStatus" [routerLink]="['/user']" class="user">
-                <a md-button class="col-md-3 col-sm-3 btn btn-primary">User</a>
-            </li>
-            <li routerLinkActive="active" *ngIf="loggedInStatus" class="logout">
-                <a md-button class="col-md-3 col-sm-3 btn btn-danger" (click)="onLogout()">Logout</a>
-            </li>
-            <li routerLinkActive="active" *ngIf="!loggedInStatus" [routerLink]="['/signin']" class=" signin">
-                <a md-button class="col-md-3 col-sm-3 btn btn-primary">Sign In</a>
+            <li>
+                <a md-button (click)="showMenu()" class=" btn btn-primary">
+                    <i *ngIf="!showSideMenu" class="material-icons md-24">navigate_next</i>
+                    <i *ngIf="showSideMenu" class="material-icons md-24">navigate_before</i> Menu
+                </a>
             </li>
         </ul>
-    </nav>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <ul class="nav nav-pills">
+            <li routerLinkActive="active" *ngIf="loggedInStatus" class="logout">
+                <a md-button class="btn btn-danger" (click)="onLogout()"><i class="material-icons md-24">eject</i>Logout</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="!loggedInStatus" [routerLink]="['/signin']" class=" signin col-md-12 col-sm-12">
+                <a md-button class="btn btn-primary">Sign In</a>
+            </li>
+        </ul>
+    </div>
 </md-card>
+
+<!--Toggle Menu-->
+<nav class="slide-in-menu" [ngClass]="{'show-slide-in-menu': showSideMenu}">
+    <ul class="nav nav-pills row">
+        <li routerLinkActive="active" *ngIf="adminStatus && loggedInStatus" [routerLink]="['/admin']" class="admin col-md-12 col-sm-12 ">
+            <a md-button class="btn btn-info"><i class="material-icons md-24">person_outline</i>Admin</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="loggedInStatus" [routerLink]="['/team']" class="team col-md-12 col-sm-12">
+            <a md-button class="btn btn-primary"><i class="material-icons md-24">people</i>Team</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="loggedInStatus" [routerLink]="['/user']" class="user col-md-12 col-sm-12">
+            <a md-button class=" btn btn-primary"><i class="material-icons md-24">person</i>User</a>
+        </li>
+    </ul>
+</nav>

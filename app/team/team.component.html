@@ -1,4 +1,17 @@
-<app-goals-team></app-goals-team>
-<app-question-one></app-question-one>
-<app-question-two></app-question-two>
-<app-message-team></app-message-team>
+<!--<div class="row">
+    <h1>{{teamName}} - <span>{{timeInterval}}</span></h1>
+</div>-->
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-7">
+        <md-card class="team-health-container">
+            <h3>Notre Santé</h3>
+            <app-question-one class="team-question"></app-question-one>
+            <app-question-two class="team-question"></app-question-two>
+        </md-card>
+        <app-goals-team></app-goals-team>
+    </div>
+    <div class="col-md-5">
+        <app-message-team></app-message-team>
+    </div>
+</div>

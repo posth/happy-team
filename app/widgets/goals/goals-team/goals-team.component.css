@@ -1,5 +1,17 @@
 .goals-team-card {
-    margin: 5% 5% 0% 5%;
+    margin: 20px 20px 0% 20px;
+}
+
+.goals-team-card li {
+    margin: 15px 0;
+}
+
+.goals-team-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
 }
 
 .completed {

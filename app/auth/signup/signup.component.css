@@ -1,3 +1,11 @@
 .signup-form-card {
-    margin: 5%;
+    margin: 20px;
+}
+
+.signup-form-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
 }

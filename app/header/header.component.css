@@ -1,17 +1,59 @@
 .header-card {
-    position: fixed;
     top: 0;
     width: 100%;
     z-index: 2;
+    margin: 0;
 }
 
-h1 {
-    background-color: lightblue;
-    padding: 10px;
+.team-title {
+    text-align: center;
+    margin: 6px 0;
+    font-weight: bold;
+}
+
+.team-title span {
+    font-style: italic;
+}
+
+.slide-in-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border-right: 1px solid rgba(55, 55, 55, .3);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 5%;
+}
+
+.slide-in-menu a {
+    /*font-weight: bold;*/
+    font-size: 14px;
+}
+
+.slide-in-menu li {
+    margin: 0;
+}
+
+i {
+    margin: 0 15px;
+}
+
+.slide-in-menu a:focus, .slide-in-menu a:hover {
+    color: #fff!important;
+    background-color: #23527c;
+}
+
+.show-slide-in-menu {
+    width: 350px;
+    z-index: 99;
 }
 
 .logout {
-    text-align: right;
+    float: right;
 }
 
 .signin {

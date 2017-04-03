@@ -3,6 +3,22 @@
     font-size: 1.3em;
 }
 
+.sign-in{
+    padding: 0;
+}
+
 .signin-card {
-    margin: 10% 25%;
+    height: 100vh;
+}
+
+.signin-card form {
+    margin: 50% 10%;
+}
+
+.signin-submit-button {
+    float: right;
+}
+
+.sign-in-decoration {
+    /*background-image: url("../../../public/assets/sign_in_cover.jpg");*/
 }

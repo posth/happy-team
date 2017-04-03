@@ -1,5 +1,5 @@
-<div class="happy-team-container">
-    <app-header></app-header>
+<div class="happy-team-container" [ngClass]="{'push-app-content': pushAppContent}">
+    <!--<app-header></app-header>-->
     <div class="sub-container">
         <router-outlet></router-outlet>
     </div>

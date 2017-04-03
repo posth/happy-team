@@ -1,7 +1,27 @@
 .goals-admin-card {
-    margin: 5% 5% 0% 5%;
+    margin: 20px 20px 0% 20px;
 }
 
 .completed {
     text-decoration: line-through;
+}
+
+.goals-admin-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}
+
+.goals-admin-card li {
+    margin: 40px 0;
+}
+
+.goals-admin-card h4 {
+    
+}
+
+.goals-form {
+    margin: 40px;
 }

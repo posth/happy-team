@@ -8,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
     styleUrls:  ['./team.component.css']
 })
 export class TeamComponent implements OnInit {
+
+    // private teamName: string = "Equipe Guichet";
+    // private timeInterval: string = "Sprint 16";
+
     constructor() { }
 
     ngOnInit() { 

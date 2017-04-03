@@ -1,11 +1,16 @@
-<md-card class="signin-card">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-        <md-input-container class="signin-input">
-            <input type="email" id="email" formControlName="email" mdInput placeholder="E-mail" autocomplete="off">
-        </md-input-container>
-        <md-input-container class="signin-input">
-            <input type="password" id="password" mdInput placeholder="Password" formControlName="password" autocomplete="off">
-        </md-input-container>
-        <button md-raised-button type="submit" [disabled]="!myForm.valid">Submit</button>
-    </form>
-</md-card>
+<div class="col-md-4 col-sm-12 sign-in">
+    <md-card class="signin-card">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <md-input-container class="signin-input">
+                <input type="email" id="email" formControlName="email" mdInput placeholder="E-mail" autocomplete="off">
+            </md-input-container>
+            <md-input-container class="signin-input">
+                <input type="password" id="password" mdInput placeholder="Password" formControlName="password" autocomplete="off">
+            </md-input-container>
+            <button class="signin-submit-button" md-raised-button type="submit" [disabled]="!myForm.valid">Submit</button>
+        </form>
+    </md-card>
+</div>
+<div class="col-md-8 sign-in-decoration"> 
+    <!--Add decoration here ;)-->
+</div> 

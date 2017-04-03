@@ -1,0 +1,11 @@
+.user-health-container {
+    margin: 20px;
+}
+
+.user-health-container h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}

@@ -1,8 +1,29 @@
 h1 {
     font-size: 40px;
     text-align: center;
+    font-weight: bold;
 }
 
-/*.board-widget {
-    margin: 5em 2em;
-}*/
+.team-questions {
+
+}
+
+.team-goals {
+    
+}
+
+.team-health-container {
+    margin: 20px;
+}
+
+.team-health-container h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+}
+
+.team-question {
+    margin: 20px 0;
+}

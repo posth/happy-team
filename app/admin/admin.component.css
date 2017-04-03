@@ -3,5 +3,14 @@ h1 {
 }
 
 .admin-user-description-total-card {
-    margin: 5%;
+    margin: 20px;
+    min-height: 412px;
+}
+
+.admin-user-description-total-card h3 {
+    padding-bottom: 20px;
+    color: #1b1d1f;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
 }
