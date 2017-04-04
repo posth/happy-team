@@ -4,12 +4,11 @@
         <div class="panel-body">
             {{ message.content }}
         </div>
-        <footer class="panel-footer">
-            <div class="author">
+        <footer class="panel-footer row" [ngClass]="{ 'happy': message.status === 'happy', 'ok': message.status === 'ok', 'sad': message.status === 'sad'}">
+            <div class="author col-md-4">
                 {{ message.username }}
             </div>
-            <div class="status">{{ message.status }}</div>
-            <div class="date">{{ message.date}}</div>
+            <div class="date col-md-8">{{ message.date | date: 'yMMMdjms'}}</div>
         </footer>
     </article>
 </md-card>

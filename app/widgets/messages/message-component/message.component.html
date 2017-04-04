@@ -2,19 +2,16 @@
     <div class="panel-body">
         {{ message.content }}
     </div>
-    <footer class="panel-footer">
-        <div class="author">
+    <footer class="panel-footer row" [ngClass]="{ 'happy': message.status === 'happy', 'ok': message.status === 'ok', 'sad': message.status === 'sad'}">
+        <div class="author col-md-2">
             {{ message.username }}
         </div>
-        <div class="status">
-            {{ message.status }}
-        </div>
-        <div class="date">
-            {{ message.date}}
-        </div>
-        <div class="config" *ngIf="belongsToUser()">
+        <div class="config col-md-3" *ngIf="belongsToUser()">
             <!--<a (click)="onEdit()">Edit</a>-->
             <a (click)="onDelete()">Delete</a>
+        </div>
+        <div class="date col-md-7">
+            {{ message.date | date: 'yMMMdjms' }}
         </div>
     </footer>
 </article>

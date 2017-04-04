@@ -11,9 +11,30 @@
 }
 
 .user-message {
-        background-color: lightblue;
+    background-color: lightblue;
 }
 
 .message-body {
-        margin: 20px;
+    margin: 20px;
+}
+
+.date {
+    text-align: right;
+    font-style: italic;
+}
+
+.happy {
+    background-color: rgba(13, 249, 10, 0.48);
+}
+
+.ok {
+    background-color: whitesmoke;
+}
+
+.sad {
+    background-color: rgba(239, 0, 0, .22);
+}
+
+.panel-footer {
+    margin: 0;
 }

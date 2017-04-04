@@ -42,7 +42,7 @@ export class HeaderComponent {
 
     onLogout(): void {
         this._authService.logout();
-        this._headerService.toggleSideMenu();
+        this._headerService.menuIsActive.next(false);
         this.router.navigate(['/', 'signin']);
     }
 
