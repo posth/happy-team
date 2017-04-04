@@ -9,7 +9,9 @@ var User = require('../../user/models/user');
 var schema = new Schema({
     content: {type: String, required: true},
      //Object ID is the internal type of mongoose to store IDs of different objects we store in the MongoDB
-    // the ref is necessary as a property to be able to have mongoose make the connection to the User schema model in the database
+    // the ref is necessary as a property to be able to have mongoose make the connection to the User schema model in the database,
+    date: {type: Date, required: true},
+    status: {type: String, required: true},
     user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 

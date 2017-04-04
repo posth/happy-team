@@ -6,6 +6,12 @@
         <div class="author">
             {{ message.username }}
         </div>
+        <div class="status">
+            {{ message.status }}
+        </div>
+        <div class="date">
+            {{ message.date}}
+        </div>
         <div class="config" *ngIf="belongsToUser()">
             <!--<a (click)="onEdit()">Edit</a>-->
             <a (click)="onDelete()">Delete</a>

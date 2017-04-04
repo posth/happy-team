@@ -44,6 +44,8 @@ export class MessageService {
                 const result = response.json();
                 const message = new Message(
                     result.obj.content,
+                    new Date(),
+                    result.obj.status,
                     result.obj.user.firstName,
                     result.obj._id,
                     result.obj.user._id);
@@ -72,6 +74,8 @@ export class MessageService {
                 for (let message of messages) {
                     transformedMessages.push(new Message(
                         message.content,
+                        message.date,
+                        message.status,
                         message.user.firstName,
                         message._id,
                         message.user._id)

@@ -11,6 +11,9 @@
                     name="content"
                     required>
         </div>
+        <input type="radio" id="happy" value="happy" name="status" [ngModel]="message?.status"/>Happy
+        <input type="radio" id="ok" value="ok" name="status" [ngModel]="message?.status" checked/>OK
+        <input type="radio" id="sad" value="sad" name="status" [ngModel]="message?.status"/>Sad
         <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
         <button class="btn btn-primary" type="submit">Save</button>
     </form>

@@ -70,6 +70,8 @@ router.use('/', function (req, res, next) {
 
                 var message = new Message({
                     content: 'Let there be team!',
+                    date: new Date(),
+                    status: 'ok',
                     user: admin
                 });
 

@@ -38,6 +38,8 @@ router.post('/', function (req, res, next) {
 
     var message = new Message({
         content: 'First!',
+        date: new Date(),
+        status: 'ok',
         user: user
     });
 

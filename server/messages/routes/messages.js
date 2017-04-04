@@ -72,8 +72,12 @@ router.post('/', function (req, res, next) {
         }
         var message = new Message({
             content: req.body.content,
+            date: req.body.date,
+            status: req.body.status,
             user: user
         });
+
+        console.log('------------------------ new message to add is : ', message );
 
         //Save the message, and pass a callback function to handle errors
         message.save(function (err, result) {
