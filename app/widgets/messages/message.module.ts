@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 
 import { MessagesComponent } from "./messages.component";
@@ -22,7 +23,8 @@ import { MessageTeamService } from './message-team/message-team.service';
     imports: [
         CommonModule,
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        ReactiveFormsModule
     ],
     exports: [
         MessageListComponent,

@@ -25,7 +25,12 @@ export class UserStatusService implements CanActivate{
     }
 
     canActivate() {
-        return this.isLoggedInValue.value;
+        if(this.isLoggedInValue.value === false) {
+            this.router.navigateByUrl('/signin');
+            return this.isLoggedInValue.value;
+        } else {
+            return this.isLoggedInValue.value;
+        }
     }
 
     setAdminStatusFromService() {

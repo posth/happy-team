@@ -35,7 +35,7 @@ export class QuestionsResultsComponent implements OnInit {
             .subscribe(
             (allQuestionOneValues: TeamHealth[]) => {
                 this.questionOneResults = allQuestionOneValues
-                console.log('question one reuslts parent ', this.questionOneResults)
+                // console.log('question one reuslts parent ', this.questionOneResults)
             })
     }
 
@@ -45,7 +45,7 @@ export class QuestionsResultsComponent implements OnInit {
             .subscribe(
             (allQuestionTwoValues: TeamHealth[]) => {
                 this.questionTwoResults = allQuestionTwoValues
-                console.log('question two reuslts parent ', this.questionOneResults)
+                // console.log('question two reuslts parent ', this.questionOneResults)
             })
     }
 

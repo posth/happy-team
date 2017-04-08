@@ -60,5 +60,7 @@ export class QuestionTwoUserComponent implements OnInit {
 
         //Send health to server via socket
         this._QuestionTwoService.addQuestionTwoUserValue(userHealth);
+
+        this.userQuestionTwoValue = userHealth;
     }
 }

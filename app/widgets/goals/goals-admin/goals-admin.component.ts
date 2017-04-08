@@ -50,7 +50,6 @@ export class GoalsAdminComponent {
     }
 
     completeGoal(currentGoal: Goal) {
-
         this._goalsService.completeTeamGoal(currentGoal);
         this.getTeamGoals();
     }

@@ -12,7 +12,33 @@ import { Message } from "../message.model";
 export class MessageInputComponent implements OnInit {
     message: Message;
 
-    constructor(private messageService: MessageService) { }
+    private sad:boolean;
+    private ok:boolean;
+    private happy:boolean;
+
+    constructor(private messageService: MessageService) { 
+        this.sad = false;
+        this.ok = true;
+        this.happy = false;
+    }
+
+    toggleSad() {
+        this.sad = !this.sad;
+        this.ok = false;
+        this.happy = false;
+    }
+
+    toggleOK() {
+        this.ok = !this.ok;
+        this.happy = false;
+        this.sad = false;
+    }
+
+    toggleHappy() {
+        this.happy = !this.happy;
+        this.sad = false;
+        this.ok = false;
+    }
 
     onSubmit(form: NgForm) {
         if (this.message) {

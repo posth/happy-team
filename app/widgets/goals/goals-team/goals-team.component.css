@@ -17,3 +17,7 @@
 .completed {
     text-decoration: line-through;
 }
+
+p {
+    font-size: 18px;
+}
