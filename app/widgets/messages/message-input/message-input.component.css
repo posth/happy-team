@@ -1,5 +1,6 @@
 .user-message-input-card {
-    margin: 20px;
+    margin: 40px;
+    z-index: 3;
 }
 
 .user-message-input-card h3 {
@@ -50,7 +51,7 @@
 }
 
 .ok-active {
-    color: blue;
+    color: #3071A9;
 }
 
 .happy-active {

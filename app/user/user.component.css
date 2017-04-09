@@ -1,5 +1,10 @@
 .user-health-container {
-    margin: 20px;
+    margin: 40px;
+    z-index: 3;
+}
+
+.user-health-component {
+    z-index: 3;
 }
 
 .user-health-container h3 {

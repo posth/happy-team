@@ -1,5 +1,6 @@
 .question-two-team-card {
     margin: 25px 25px 45px 25px;
+    z-index: 3;
 }
 
 p {

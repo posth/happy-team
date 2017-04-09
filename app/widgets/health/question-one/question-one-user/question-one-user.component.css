@@ -1,5 +1,6 @@
 .user-health-mood-card {
     margin: 20px 0 50px 0;
+    z-index: 3;
 }
 
 p {

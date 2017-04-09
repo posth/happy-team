@@ -4,7 +4,7 @@
             <div class="tab-container">
                 <button class="btn btn-primary" (click)="getLatestQuestionOneResults()">Get latest results</button>
                 <p *ngFor="let questionOneResult of questionOneResults">
-                    {{questionOneResult.teamHealth}} on {{questionOneResult.teamHealthDate | date: 'yMMMdjms'}}
+                    [ {{questionOneResult.teamHealth | number : '1.0-0'}} ] - {{questionOneResult.teamHealthDate | date: 'yMMMdjms'}}
                 </p>
                 <!--<div class="chart-container">
                     <app-line-chart [arrayToDisplay]="questionOneResults"></app-line-chart>
@@ -15,7 +15,7 @@
             <div class="tab-container">
                 <button class="btn btn-primary" (click)="getLatestQuestionTwoResults()">Get latest results</button>
                 <p *ngFor="let questionTwoResult of questionTwoResults">
-                    {{questionTwoResult.teamHealth}} on {{questionTwoResult.teamHealthDate | date: 'yMMMdjms'}}
+                    [ {{questionTwoResult.teamHealth | number : '1.0-0'}} ] - {{questionTwoResult.teamHealthDate | date: 'yMMMdjms'}}
                 </p>
                 <!--<app-line-chart [arrayToDisplay]="questionTwoResults"></app-line-chart>-->
             </div>

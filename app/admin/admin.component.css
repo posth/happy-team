@@ -3,8 +3,9 @@ h1 {
 }
 
 .admin-user-description-total-card {
-    margin: 20px;
+    margin: 40px;
     min-height: 412px;
+    z-index: 3;
 }
 
 .admin-user-description-total-card h3 {
@@ -17,6 +18,7 @@ h1 {
 
 .utilisateurs-container {
     overflow: hidden;
+    border: 1px solid rgba(55, 55, 55, .3);
 }
 
 .utilisateurs-container-scroll {

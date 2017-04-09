@@ -5,21 +5,17 @@
 
 .sign-in{
     padding: 0;
+    margin-top: 15%;
 }
 
 .signin-card {
-    height: 100vh;
+    z-index: 9;
 }
 
 .signin-card form {
-    margin: 50% 10%;
+    padding: 10%;
 }
 
 .signin-submit-button {
     float: right;
-}
-
-.sign-in-decoration {
-    padding: 0;
-    /*background-image: url("../../../public/assets/sign_in_cover.jpg");*/
 }

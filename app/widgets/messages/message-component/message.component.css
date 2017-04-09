@@ -5,6 +5,10 @@
     /*width: 80%;*/
 }
 
+.message-component {
+    z-index: 3;
+}
+
 .config {
     display: inline-block;
     text-align: right;
@@ -18,7 +22,7 @@
 }
 
 .happy {
-    background-color: rgba(6, 206, 6, 0.2);
+    background-color: rgba(0, 128, 0, 0.2);;
 }
 
 .ok {
