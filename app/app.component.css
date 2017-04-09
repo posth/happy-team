@@ -22,6 +22,7 @@
     z-index: 0;
     background-color: rgba(0, 128, 255, 0.23);
 	margin-right: 15px;
+	overflow: hidden;
 }
 
 /* KEYFRAMES */

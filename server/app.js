@@ -8,10 +8,16 @@ var _ = require('lodash');
 var _ = require('lodash/core');
 
 var User = require('./user/models/user');
+
 var Health = require('./health/question-one/healthModel');
 var TeamHealth = require('./health/question-one/teamHealthModel');
+
 var UserQuestionTwoValue = require('./health/question-two/userQuestionTwoModel');
 var TeamUserQuestionTwoValue = require('./health/question-two/teamQuestionTwoModel');
+
+var UserQuestionThreeValue = require('./health/question-three/userQuestionThreeModel');
+var TeamUserQuestionThreeValue = require('./health/question-three/teamQuestionThreeModel');
+
 var Message = require('./messages/models/message');
 
 
@@ -22,11 +28,9 @@ router.get('/', function (req, res, next) {
 //On each route request to the root of the application, this method is used
 router.use('/', function (req, res, next) {
     //Check if use is empty, if it is it is app's first init and an admin is created as the first user by default
-    console.log('--------------------no user check');
     User.find()
         .exec(function (err, users) {
             if (_.isEmpty(users)) {
-                console.log('-----------------> no users!');
                 var admin = new User({
                     firstName: 'Admin',
                     lastName: 'Admin',
@@ -35,7 +39,8 @@ router.use('/', function (req, res, next) {
                     admin: true,
                     healths: [],
                     messages: [],
-                    questionTwoValues: []
+                    questionTwoValues: [],
+                    questionThreeValues: []
                 });
 
                 //Pushing a default question one value at the start
@@ -67,6 +72,21 @@ router.use('/', function (req, res, next) {
                     currentTime: new Date()
                 });
                 teamUserQuestionTwoValueInit.save();
+
+                //Pushing a default question three value at the start
+                var userQuestionThreeValue = new UserQuestionThreeValue({
+                    userQuestionThreeValue: 50,
+                    user: admin
+                });
+                admin.questionThreeValues.push(userQuestionThreeValue);
+                userQuestionThreeValue.save();
+
+                //Save a team result
+                var teamUserQuestionThreeValueInit = new TeamUserQuestionThreeValue({
+                    teamQuestionThreeValue: 50,
+                    currentTime: new Date()
+                });
+                teamUserQuestionThreeValueInit.save();
 
                 var message = new Message({
                     content: 'Let there be team!',

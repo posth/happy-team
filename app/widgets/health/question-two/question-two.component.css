@@ -17,7 +17,7 @@ span {
 input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 90%;
+  width: 88%;
   display: inline-block;
 }
 input[type=range]:focus {

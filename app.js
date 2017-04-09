@@ -12,8 +12,12 @@ var userRoutes = require('./server/user/routes/user');
 
 //Question one routes
 var healthRoutes = require('./server/health/question-one/health');
+
 //Question two routes
 var questionTwoRoutes = require('./server/health/question-two/questiontwo');
+
+//Question three routes
+var questionThreeRoutes = require('./server/health/question-three/questionthree');
 
 var adminRoutes = require('./server/admin/routes/admin');
 
@@ -47,6 +51,7 @@ app.use('/message', messageRoutes);
 app.use('/user', userRoutes);
 app.use('/health', healthRoutes);
 app.use('/questiontwo', questionTwoRoutes);
+app.use('/questionthree', questionThreeRoutes);
 app.use('/admin', adminRoutes);
 app.use('/goals', goalsRoutes);
 app.use('/', appRoutes);

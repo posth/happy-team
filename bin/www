@@ -105,6 +105,9 @@ var healthController = require("../server/health/question-one/healthController.j
 //Question Two Controller
 var questionTwoController = require('../server/health/question-two/questionTwoController.js');
 
+//Question Three Controller
+var questionThreeController = require('../server/health/question-three/questionThreeController.js');
+
 //Goal Controller
 var goalsController = require('../server/goals/goalsController.js');
 
@@ -134,6 +137,17 @@ io.on('connection', function (socket) {
       .then(function (result) {
         console.log('returned team question two result', result);
         socket.broadcast.emit('getlatestTeamQuestionTwoValue', result);
+      })
+  })
+
+  socket.on('questionThreeUpdate', function (userInfo) {
+
+    //Health path when a user inputs their health, it adds it to the database, sets a team value and broadcasts it
+    questionThreeController.setLatestUserQuestionThreeValue(userInfo)
+      .then(questionThreeController.setLatestTeamQuestionThreeValue)
+      .then(questionThreeController.getLatestQuestionThreeValue)
+      .then(function (result) {
+        socket.broadcast.emit('getlatestTeamQuestionThreeValue', result);
       })
   })
 

@@ -1,8 +1,8 @@
 <md-card class="questions-results-container">
     <md-tab-group>
-        <md-tab label="Results of Question One">
+        <md-tab label="Résultats de la première question">
             <div class="tab-container">
-                <button class="btn btn-primary" (click)="getLatestQuestionOneResults()">Get latest results</button>
+                <button class="btn btn-primary" (click)="getLatestQuestionOneResults()">Obtenez les derniers résultats</button>
                 <p *ngFor="let questionOneResult of questionOneResults">
                     [ {{questionOneResult.teamHealth | number : '1.0-0'}} ] - {{questionOneResult.teamHealthDate | date: 'yMMMdjms'}}
                 </p>
@@ -11,13 +11,22 @@
                 </div>-->
             </div>
         </md-tab>
-        <md-tab label="Results of Question Two">
+        <md-tab label="Résultats de la deuxième question">
             <div class="tab-container">
-                <button class="btn btn-primary" (click)="getLatestQuestionTwoResults()">Get latest results</button>
+                <button class="btn btn-primary" (click)="getLatestQuestionTwoResults()">Obtenez les derniers résultats</button>
                 <p *ngFor="let questionTwoResult of questionTwoResults">
                     [ {{questionTwoResult.teamHealth | number : '1.0-0'}} ] - {{questionTwoResult.teamHealthDate | date: 'yMMMdjms'}}
                 </p>
                 <!--<app-line-chart [arrayToDisplay]="questionTwoResults"></app-line-chart>-->
+            </div>
+        </md-tab>
+        <md-tab label="Résultats de la troisième question">
+            <div class="tab-container">
+                <button class="btn btn-primary" (click)="getLatestQuestionThreeResults()">Obtenez les derniers résultats</button>
+                <p *ngFor="let questionThreeResult of questionThreeResults">
+                    [ {{questionThreeResult.teamHealth | number : '1.0-0'}} ] - {{questionThreeResult.teamHealthDate | date: 'yMMMdjms'}}
+                </p>
+                <!--<app-line-chart [arrayToDisplay]="questionThreeResults"></app-line-chart>-->
             </div>
         </md-tab>
     </md-tab-group>

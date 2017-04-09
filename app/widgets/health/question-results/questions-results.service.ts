@@ -71,4 +71,34 @@ export class QuestionResultsService {
             });
     }
 
+    getAllQuestionThreeValues() {
+
+        // TODO - an object with a start and end date to receive as a parameter 
+        // to this function to precise a range of results based on dates -> To send as part of the POST
+        // const dates = JSON.stringify(dateRange);
+
+        //setting Headers
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        return this._http.post('http://localhost:3000/questionthree/questionthreeteamvalues', { headers: headers })
+            .map((response: Response) => {
+                const questionThreeTeamValuesResult = response.json();
+
+                let questionThreeTeamValuesHealths: TeamHealth[] = [];
+
+                for (let questionThreeValue of questionThreeTeamValuesResult.obj) {
+                    questionThreeTeamValuesHealths.push(new TeamHealth(
+                        questionThreeValue.teamQuestionThreeValue,
+                        questionThreeValue.currentTime
+                    ));
+                }
+
+                return questionThreeTeamValuesHealths;
+            })
+            .catch((error: Response) => {
+                this._errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
+
 }

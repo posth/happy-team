@@ -1,0 +1,5 @@
+<div *ngIf="loggedInStatus" class="user-health-mood-card">
+    <p>Je suis satisfait du travail que je fais pour mon équipe:</p>
+    <input #userInput (change)="setUserQuestionThreeValue(userInput.value)" value="{{userQuestionThreeValue}}" max="100" min="0" type="range">
+    <span>{{userQuestionThreeValue | number : '1.0-0'}}</span>
+</div>

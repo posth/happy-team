@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Health = require('../../health/question-one/healthModel');
 var UserQuestionTwoValue = require('../../health/question-two/userQuestionTwoModel');
+var UserQuestionThreeValue = require('../../health/question-three/userQuestionThreeModel');
 var Message = require('../../messages/models/message');
 
 router.post('/', function (req, res, next) {
@@ -17,7 +18,8 @@ router.post('/', function (req, res, next) {
         admin: false,
         healths: [],
         messages: [],
-        questionTwoValues: []
+        questionTwoValues: [],
+        questionThreeValues: []
     });
 
     //Pushing a default question one value at the start
@@ -35,6 +37,14 @@ router.post('/', function (req, res, next) {
     });
     user.questionTwoValues.push(userQuestionTwoValue);
     userQuestionTwoValue.save();
+
+    //Pushing a default question three value at the start
+    var userQuestionThreeValue = new UserQuestionThreeValue({
+        userQuestionThreeValue: 50,
+        user: user
+    });
+    user.questionThreeValues.push(userQuestionThreeValue);
+    userQuestionThreeValue.save();
 
     var message = new Message({
         content: 'First!',
