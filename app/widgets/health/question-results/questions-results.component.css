@@ -12,3 +12,25 @@
     width: 100%;
     height: 30rem;
 }
+
+.question-results-container {
+    overflow: hidden;
+    border: 1px solid rgba(55, 55, 55, .3);
+    margin: 20px;
+    width: 90%;
+}
+
+.question-results-container p {
+    margin: 10px;
+}
+
+.question-results-container span {
+    font-weight: bold;
+    min-width: 50px;
+    display: inline-block;
+}
+
+.question-results-container-scroll {
+    overflow-y: scroll;
+    max-height: 550px;
+}

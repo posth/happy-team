@@ -3,29 +3,41 @@
         <md-tab label="Résultats de la première question">
             <div class="tab-container">
                 <button class="btn btn-primary" (click)="getLatestQuestionOneResults()">Obtenez les derniers résultats</button>
-                <p *ngFor="let questionOneResult of questionOneResults">
-                    [ {{questionOneResult.teamHealth | number : '1.0-0'}} ] - {{questionOneResult.teamHealthDate | date: 'yMMMdjms'}}
-                </p>
+                <div class="question-results-container">
+                    <div class="question-results-container-scroll">
+                        <p *ngFor="let questionOneResult of questionOneResults">
+                            <span>[ {{questionOneResult.teamHealth | number : '1.0-0'}} ]</span> {{questionOneResult.teamHealthDate | date: 'yMMMdjms'}}
+                        </p>
+                    </div>
+                </div>
                 <!--<div class="chart-container">
                     <app-line-chart [arrayToDisplay]="questionOneResults"></app-line-chart>
                 </div>-->
             </div>
-        </md-tab>
+        </md-tab> 
         <md-tab label="Résultats de la deuxième question">
             <div class="tab-container">
                 <button class="btn btn-primary" (click)="getLatestQuestionTwoResults()">Obtenez les derniers résultats</button>
-                <p *ngFor="let questionTwoResult of questionTwoResults">
-                    [ {{questionTwoResult.teamHealth | number : '1.0-0'}} ] - {{questionTwoResult.teamHealthDate | date: 'yMMMdjms'}}
-                </p>
+                <div class="question-results-container">
+                    <div class="question-results-container-scroll">
+                        <p *ngFor="let questionTwoResult of questionTwoResults">
+                            <span>[ {{questionTwoResult.teamHealth | number : '1.0-0'}} ]</span> {{questionTwoResult.teamHealthDate | date: 'yMMMdjms'}}
+                        </p>
+                    </div>
+                </div>
                 <!--<app-line-chart [arrayToDisplay]="questionTwoResults"></app-line-chart>-->
             </div>
         </md-tab>
         <md-tab label="Résultats de la troisième question">
             <div class="tab-container">
                 <button class="btn btn-primary" (click)="getLatestQuestionThreeResults()">Obtenez les derniers résultats</button>
-                <p *ngFor="let questionThreeResult of questionThreeResults">
-                    [ {{questionThreeResult.teamHealth | number : '1.0-0'}} ] - {{questionThreeResult.teamHealthDate | date: 'yMMMdjms'}}
-                </p>
+                <div class="question-results-container">
+                    <div class="question-results-container-scroll">
+                        <p *ngFor="let questionThreeResult of questionThreeResults">
+                            <span>[ {{questionThreeResult.teamHealth | number : '1.0-0'}} ]</span> {{questionThreeResult.teamHealthDate | date: 'yMMMdjms'}}
+                        </p>
+                    </div>
+                </div>
                 <!--<app-line-chart [arrayToDisplay]="questionThreeResults"></app-line-chart>-->
             </div>
         </md-tab>
