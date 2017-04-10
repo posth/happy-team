@@ -23,9 +23,12 @@ export class QuestionsResultsComponent implements OnInit {
 
     private questionTwoResults: TeamHealth[];
 
+    private questionThreeResults: TeamHealth[];
+
     constructor(private _questionResultsService: QuestionResultsService) {
         this.getLatestQuestionOneResults();
         this.getLatestQuestionTwoResults();
+        this.getLatestQuestionThreeResults();
     }
 
     ngOnInit() { }
@@ -35,7 +38,7 @@ export class QuestionsResultsComponent implements OnInit {
             .subscribe(
             (allQuestionOneValues: TeamHealth[]) => {
                 this.questionOneResults = allQuestionOneValues
-                console.log('question one reuslts parent ', this.questionOneResults)
+                // console.log('question one reuslts parent ', this.questionOneResults)
             })
     }
 
@@ -45,7 +48,17 @@ export class QuestionsResultsComponent implements OnInit {
             .subscribe(
             (allQuestionTwoValues: TeamHealth[]) => {
                 this.questionTwoResults = allQuestionTwoValues
-                console.log('question two reuslts parent ', this.questionOneResults)
+                // console.log('question two reuslts parent ', this.questionOneResults)
+            })
+    }
+
+    getLatestQuestionThreeResults() {
+        //todo GET all team health values - need to create a route + add to front service
+        this._questionResultsService.getAllQuestionThreeValues()
+            .subscribe(
+            (allQuestionThreeValues: TeamHealth[]) => {
+                this.questionThreeResults = allQuestionThreeValues
+                // console.log('question two reuslts parent ', this.questionOneResults)
             })
     }
 

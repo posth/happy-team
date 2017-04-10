@@ -69,5 +69,6 @@ export class QuestionOneUserComponent implements OnInit {
 
         //Send health to server via socket
         this._questionOneService.addQuestionOneUserValue(userHealth);
+        this.userQuestionOneValue = userHealth;
     }
 }

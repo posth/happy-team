@@ -6,7 +6,11 @@
     <div class="col-md-6">
         <md-card class="admin-user-description-total-card">
             <h3>Utilisateurs actuels:</h3>
-            <app-admin-user-description [user]="user" *ngFor="let user of users"></app-admin-user-description>
+            <div class="utilisateurs-container">
+                <div class="utilisateurs-container-scroll">
+                    <app-admin-user-description [user]="user" *ngFor="let user of users"></app-admin-user-description>
+                </div>
+            </div>
         </md-card>
     </div>
 </div>

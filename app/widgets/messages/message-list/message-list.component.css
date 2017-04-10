@@ -12,9 +12,14 @@ h4 {
 
 .message-container {
     overflow: hidden;
+    border: 1px solid rgba(55, 55, 55, .3);
 }
 
 .message-container-scroll {
     overflow-y: scroll;
     height: 510px;
+}
+
+.message-list-card {
+    z-index: 3;
 }

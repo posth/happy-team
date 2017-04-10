@@ -17,6 +17,10 @@ import { QuestionTwoComponent } from './question-two/question-two.component';
 import { QuestionTwoUserComponent } from './question-two/question-two-user/question-two-user.component';
 import { QuestionTwoService } from './question-two/question-two.service';
 
+import { QuestionThreeComponent } from './question-three/question-three.component';
+import { QuestionThreeUserComponent } from './question-three/question-three-user/question-three-user.component';
+import { QuestionThreeService } from './question-three/question-three.service';
+
 @NgModule({
     declarations: [
         QuestionsResultsComponent,
@@ -24,7 +28,9 @@ import { QuestionTwoService } from './question-two/question-two.service';
         QuestionOneUserComponent,
         QuestionTwoComponent,
         QuestionTwoUserComponent,
-        LineChartComponent
+        LineChartComponent,
+        QuestionThreeComponent,
+        QuestionThreeUserComponent
     ], 
     imports: [
         CommonModule,
@@ -38,12 +44,15 @@ import { QuestionTwoService } from './question-two/question-two.service';
         QuestionOneUserComponent,
         QuestionTwoComponent,
         QuestionTwoUserComponent,
-        LineChartComponent
+        LineChartComponent,
+        QuestionThreeComponent,
+        QuestionThreeUserComponent
     ],
     providers: [
         QuestionOneService,
         QuestionTwoService,
-        QuestionResultsService
+        QuestionResultsService,
+        QuestionThreeService
     ]
 })
 

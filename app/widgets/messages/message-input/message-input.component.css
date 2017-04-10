@@ -1,5 +1,6 @@
 .user-message-input-card {
-    margin: 20px;
+    margin: 40px;
+    z-index: 3;
 }
 
 .user-message-input-card h3 {
@@ -13,3 +14,51 @@
 .message-user-form{
     margin: 40px;
 }
+
+.form-group i {
+    font-size: 36px;
+}
+
+.radio-input {
+    margin: 0;
+}
+
+.radio-input input {
+     margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.radio-input label {
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;
+    height:50px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+}
+
+.form-card {
+    margin: 30px;
+}
+
+.sad-active {
+    color: red;
+}
+
+.ok-active {
+    color: #3071A9;
+}
+
+.happy-active {
+    color: green;
+}
+
+.buttons {
+    float: right;
+}
+

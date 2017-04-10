@@ -4,16 +4,13 @@ h1 {
     font-weight: bold;
 }
 
-.team-questions {
-
-}
-
-.team-goals {
-    
+.team-health-component {
+    z-index: 3;
 }
 
 .team-health-container {
-    margin: 20px;
+    margin: 40px;
+    z-index: 3;
 }
 
 .team-health-container h3 {

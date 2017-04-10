@@ -1,4 +1,4 @@
-<article class="panel panel-default">
+<article class="panel panel-default message-component">
     <div class="panel-body">
         {{ message.content }}
     </div>
@@ -6,9 +6,9 @@
         <div class="author col-md-2">
             {{ message.username }}
         </div>
-        <div class="config col-md-3" *ngIf="belongsToUser()">
+        <div class="config col-md-3">
             <!--<a (click)="onEdit()">Edit</a>-->
-            <a (click)="onDelete()">Delete</a>
+            <a *ngIf="belongsToUser()" (click)="onDelete()">Delete</a>
         </div>
         <div class="date col-md-7">
             {{ message.date | date: 'yMMMdjms' }}

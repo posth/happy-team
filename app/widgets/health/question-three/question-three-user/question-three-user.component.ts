@@ -1,28 +1,28 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from 'rxjs/Subscription';
 
-import { QuestionTwoService } from '../question-two.service';
+import { QuestionThreeService } from '../question-three.service';
 import { Health } from '../../health.model';
 import { UserStatusService } from '../../../../user/user-status.service';
 
 @Component({
-    selector: 'app-question-two-user',
-    templateUrl: './question-two-user.component.html',
-    styleUrls: ['./question-two-user.component.css']
+    selector: 'app-question-three-user',
+    templateUrl: './question-three-user.component.html',
+    styleUrls: ['./question-three-user.component.css']
 })
 
-export class QuestionTwoUserComponent implements OnInit {
+export class QuestionThreeUserComponent implements OnInit {
 
     //User health variables
     private healths: Health[];
-    private userQuestionTwoValue: number;
+    private userQuestionThreeValue: number;
 
     private mostRecentHealthObject: Object;
 
     private loggedInStatus: boolean;
     _loggedInStatusSubscription: Subscription;
 
-    constructor(private _QuestionTwoService: QuestionTwoService,
+    constructor(private _questionThreeService: QuestionThreeService,
         private _userStatusService: UserStatusService) {
         this._loggedInStatusSubscription = this._userStatusService.isLoggedInValueChanged$.subscribe(
             isLoggedInValue => this.loggedInStatus = isLoggedInValue
@@ -30,7 +30,7 @@ export class QuestionTwoUserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._QuestionTwoService.getQuestionTwoValues()
+        this._questionThreeService.getQuestionThreeValues()
             .subscribe(
             (healths: Health[]) => {
                 this.healths = healths;
@@ -41,26 +41,25 @@ export class QuestionTwoUserComponent implements OnInit {
         this.getMostRecentUserHealth();
     }
 
-    //Getting individual most recent health from MongoDB
     getMostRecentUserHealth() {
-        this._QuestionTwoService.getUserMostRecentQuestionTwoValue()
+        this._questionThreeService.getUserMostRecentQuestionThreeValue()
             .subscribe(
             (mostRecentHealth: number) => {
 
                 //Grab the most recent health object from the db on initialization of this component    
-                this.userQuestionTwoValue = mostRecentHealth;
+                this.userQuestionThreeValue = mostRecentHealth;
 
             }
             );
     }
 
     //On each user input send health via socket
-    setUserQuestionTwoValue(userHealth: number) {
+    setUserQuestionThreeValue(userHealth: number) {
         const health = new Health(userHealth);
 
         //Send health to server via socket
-        this._QuestionTwoService.addQuestionTwoUserValue(userHealth);
+        this._questionThreeService.addQuestionThreeUserValue(userHealth);
 
-        this.userQuestionTwoValue = userHealth;
+        this.userQuestionThreeValue = userHealth;
     }
 }

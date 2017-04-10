@@ -1,23 +1,29 @@
 <md-card class="user-message-input-card">
     <h3>Ecrire un message à l'équipe: </h3>
-    <form class="message-user-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-group">
-            <!--<label for="content">Content</label>-->
-            <input
-                    type="text"
-                    id="content"
-                    class="form-control"
-                    [ngModel]="message?.content"
-                    name="content"
-                    required>
-        </div>
-        <div class="form-group">
-            <input type="radio" id="happy" value="happy" name="status" [ngModel]="message?.status"/>Happy
-            <input type="radio" id="ok" value="ok" name="status" [ngModel]="message?.status" checked/>OK
-            <input type="radio" id="sad" value="sad" name="status" [ngModel]="message?.status"/>Sad
-        </div>
-        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
-        <button class="btn btn-primary" type="submit">Save</button>
-    </form>
+    <md-card class="form-card">
+        <form class="message-user-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-group row">
+                <input type="text" id="content" class="form-control col-md-10 col-sm-10" [ngModel]="message?.content" name="content" required>
+            </div>
+            <div class="form-group row radio-input">
+                <div class="col-md-2 col-sm-2">
+                    <input type="radio" id="sad" value="sad" name="status" [ngModel]="message?.status" />
+                    <label [ngClass]="{'sad-active': sad }" (click)="toggleSad()" for="sad"><i class="material-icons md-36">sentiment_very_dissatisfied</i></label>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <input type="radio" id="ok" value="ok" name="status" [ngModel]="message?.status" checked/>
+                    <label [ngClass]="{'ok-active': ok }" (click)="toggleOK()" for="ok"><i class="material-icons md-36">sentiment_neutral</i></label>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <input type="radio" id="happy" value="happy" name="status" [ngModel]="message?.status" />
+                    <label [ngClass]="{'happy-active': happy }" (click)="toggleHappy()" for="happy"><i class="material-icons md-36">sentiment_very_satisfied</i></label>
+                </div>
+            </div>
+            <div class="row buttons">
+                <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </form>
+    </md-card>
     <app-message-list></app-message-list>
 </md-card>
