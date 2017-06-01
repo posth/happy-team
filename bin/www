@@ -117,7 +117,6 @@ io.on('connection', function (socket) {
       .then(healthController.setLatestTeamHealthValue)
       .then(healthController.getLatestTeamHealthValue)
       .then(function (result) {
-        console.log('returned team question one result', result);
         socket.broadcast.emit('getlatestTeamQuestionOneValue', result);
       })
   })
@@ -129,7 +128,6 @@ io.on('connection', function (socket) {
       .then(questionTwoController.setLatestTeamQuestionTwoValue)
       .then(questionTwoController.getLatestQuestionTwoValue)
       .then(function (result) {
-        console.log('returned team question two result', result);
         socket.broadcast.emit('getlatestTeamQuestionTwoValue', result);
       })
   })
