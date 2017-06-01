@@ -18,9 +18,6 @@ var TeamUserQuestionTwoValue = require('./health/question-two/teamQuestionTwoMod
 var UserQuestionThreeValue = require('./health/question-three/userQuestionThreeModel');
 var TeamUserQuestionThreeValue = require('./health/question-three/teamQuestionThreeModel');
 
-var Message = require('./messages/models/message');
-
-
 router.get('/', function (req, res, next) {
     res.render('index');
 });
@@ -38,7 +35,6 @@ router.use('/', function (req, res, next) {
                     email: 'admin@admin.com',
                     admin: true,
                     healths: [],
-                    messages: [],
                     questionTwoValues: [],
                     questionThreeValues: []
                 });
@@ -87,16 +83,6 @@ router.use('/', function (req, res, next) {
                     currentTime: new Date()
                 });
                 teamUserQuestionThreeValueInit.save();
-
-                var message = new Message({
-                    content: 'Let there be team!',
-                    date: new Date(),
-                    status: 'ok',
-                    user: admin
-                });
-
-                message.save();
-                admin.messages.push(message);
 
                 admin.save();
             }

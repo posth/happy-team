@@ -20,8 +20,6 @@ export class HeaderComponent {
     private loggedInStatus: boolean;
     _loggedInStatusSubscription: Subscription;
 
-    // private teamName: string = "Equipe Guichet";
-    // private timeInterval: string = "Sprint 16";
     private showSideMenu: boolean = false;
     _menuIsActiveSubscription: Subscription;
 

@@ -48,7 +48,6 @@ export class AdminService {
                         user.lastName,
                         user.admin,
                         user.healths,
-                        user.messages,
                         user._id
                     ))
                 }

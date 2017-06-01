@@ -7,7 +7,6 @@ var User = require('../models/user');
 var Health = require('../../health/question-one/healthModel');
 var UserQuestionTwoValue = require('../../health/question-two/userQuestionTwoModel');
 var UserQuestionThreeValue = require('../../health/question-three/userQuestionThreeModel');
-var Message = require('../../messages/models/message');
 
 router.post('/', function (req, res, next) {
     var user = new User({
@@ -17,7 +16,6 @@ router.post('/', function (req, res, next) {
         email: req.body.email,
         admin: false,
         healths: [],
-        messages: [],
         questionTwoValues: [],
         questionThreeValues: []
     });
@@ -45,16 +43,6 @@ router.post('/', function (req, res, next) {
     });
     user.questionThreeValues.push(userQuestionThreeValue);
     userQuestionThreeValue.save();
-
-    var message = new Message({
-        content: 'First!',
-        date: new Date(),
-        status: 'ok',
-        user: user
-    });
-
-    message.save();
-    user.messages.push(message);
 
     user.save(function (err, result) {
         if (err) {

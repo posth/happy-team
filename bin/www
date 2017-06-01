@@ -108,12 +108,6 @@ var questionTwoController = require('../server/health/question-two/questionTwoCo
 //Question Three Controller
 var questionThreeController = require('../server/health/question-three/questionThreeController.js');
 
-//Goal Controller
-var goalsController = require('../server/goals/goalsController.js');
-
-//Messages Events
-var messagesEventModule = require('../server/messages/messagesEvents.js');
-
 io.on('connection', function (socket) {
 
   socket.on('questionOneUpdate', function (userInfo) {
@@ -149,50 +143,6 @@ io.on('connection', function (socket) {
       .then(function (result) {
         socket.broadcast.emit('getlatestTeamQuestionThreeValue', result);
       })
-  })
-
-  //Sockets for team goals
-  socket.on('addTeamGoal', function (goal) {
-    goalsController.addGoal(goal)
-      .catch(error => {
-        console.error(error);
-      })
-      .then(goalsController.getAllGoals)
-      .then(function (allTeamGoalsResult) {
-        console.log('all new team goals results', allTeamGoalsResult);
-        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
-      })
-
-  })
-
-
-  socket.on('deleteTeamGoal', function (goal) {
-    goalsController.deleteGoal(goal)
-      .catch(error => {
-        console.error(error);
-      })
-      .then(goalsController.getAllGoals)
-      .then(function (allTeamGoalsResult) {
-        console.log('all new team goals results after deleting one', allTeamGoalsResult);
-        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
-      })
-  });
-
-  socket.on('completeTeamGoal', function(goal) {
-    goalsController.completeGoal(goal)
-      .catch(error => {
-        console.error(error);
-      })
-      .then(goalsController.getAllGoals)
-      .then(function(allTeamGoalsResult) {
-        console.log('all new team goals results after completing one', allTeamGoalsResult);
-        socket.broadcast.emit('getTeamGoals', allTeamGoalsResult);
-      })
-  })
-
-  //Listening to event emitted when a new user saves a message to trigger front team page to update
-  messagesEventModule.messagesEvent.on('newUserMessageAdded', function () {
-    socket.broadcast.emit('newUserMessageAdded');
   })
 
 });

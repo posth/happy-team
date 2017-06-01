@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { HeaderService } from '../header/header.service';
-
 @Component({
     selector: 'app-team',
     templateUrl: './team.component.html',
@@ -9,12 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamComponent implements OnInit {
 
-    // private teamName: string = "Equipe Guichet";
-    // private timeInterval: string = "Sprint 16";
-
     constructor() { }
 
-    ngOnInit() { 
-        // this._headerService.setAdminStatusFromService();
-    }
+    ngOnInit() { }
 }
