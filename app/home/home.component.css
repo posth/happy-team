@@ -1,0 +1,12 @@
+h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(55, 55, 55, .8);
+}
+
+.intro-container {
+    margin: 40px;
+    z-index: 3;
+}

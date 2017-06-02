@@ -41,7 +41,12 @@ export class HeaderComponent {
     onLogout(): void {
         this._authService.logout();
         this._headerService.menuIsActive.next(false);
-        this.router.navigate(['/', 'signin']);
+        this.loggedInStatus = false;
+        this.router.navigateByUrl('/home');
+    }
+
+    goHome(): void {
+        this.router.navigateByUrl('/home');
     }
 
     showMenu(): void {

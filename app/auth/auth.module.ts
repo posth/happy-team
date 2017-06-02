@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import { HeaderModule } from '../header/header.module';
 
 import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "../auth/signup/signup.component";
@@ -14,11 +15,12 @@ import { SignupComponent } from "../auth/signup/signup.component";
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule,
+        HeaderModule
     ],
     exports: [
         SigninComponent,
         SignupComponent
     ]
 })
-export class AuthModule {}
+export class AuthModule { }

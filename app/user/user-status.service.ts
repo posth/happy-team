@@ -26,7 +26,7 @@ export class UserStatusService implements CanActivate{
 
     canActivate() {
         if(this.isLoggedInValue.value === false) {
-            this.router.navigateByUrl('/signin');
+            // this.router.navigateByUrl('/home');
             return this.isLoggedInValue.value;
         } else {
             return this.isLoggedInValue.value;

@@ -3,11 +3,12 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { TeamComponent } from './team/team.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 
 import { UserStatusService } from './user/user-status.service';
 
 const APP_ROUTES: Routes = [
-    { path: '', redirectTo: 'signin', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
     {
         path: 'team',
@@ -24,7 +25,11 @@ const APP_ROUTES: Routes = [
         component: AdminComponent,
         canActivate: [UserStatusService]
     },
-    { path: '**', redirectTo: 'signin' }
+    {
+        path: 'home',
+        component: HomeComponent
+    },
+    { path: '**', redirectTo: 'home' }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
