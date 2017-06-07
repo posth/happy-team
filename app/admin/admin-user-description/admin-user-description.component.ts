@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { User } from '../../user/user.model';
 import { AuthService } from '../../auth/auth.service';
@@ -9,14 +9,12 @@ import { AdminService } from '../admin.service';
     templateUrl: './admin-user-description.component.html',
     styleUrls: ['./admin-user-description.component.css']
 })
-export class AdminUserDescriptionComponent implements OnInit {
+export class AdminUserDescriptionComponent {
 
     @Input() user: User;
 
     constructor(private _authService: AuthService,
         private _adminService: AdminService) { }
-
-    ngOnInit() { }
 
     deleteUser(user: User) {
 

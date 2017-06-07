@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { User } from '../user/user.model';
-
 import { AdminService } from './admin.service';
 
 @Component({

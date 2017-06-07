@@ -59,10 +59,6 @@ export class QuestionOneUserComponent implements OnInit {
             );
     }
 
-    // isLoggedIn() {
-    //     return this._authService.isLoggedIn();
-    // }
-
     //On each user input send health via socket
     setUserQuestionOneValue(userHealth: number) {
         const health = new Health(userHealth);

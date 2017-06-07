@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AdminService } from '../admin/admin.service';
 
 @Injectable()
-export class UserStatusService implements CanActivate{
+export class UserStatusService implements CanActivate {
 
     adminStatusValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     adminStatusValueChanged$: Observable<boolean> = this.adminStatusValue.asObservable();
@@ -25,8 +25,7 @@ export class UserStatusService implements CanActivate{
     }
 
     canActivate() {
-        if(this.isLoggedInValue.value === false) {
-            // this.router.navigateByUrl('/home');
+        if (this.isLoggedInValue.value === false) {
             return this.isLoggedInValue.value;
         } else {
             return this.isLoggedInValue.value;

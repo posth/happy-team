@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from "../auth/auth.service";
-import { AdminService } from '../admin/admin.service';
 import { UserStatusService } from '../user/user-status.service';
 import { HeaderService } from './header.service';
 

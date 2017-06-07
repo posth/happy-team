@@ -1,4 +1,4 @@
-import { Http, Response, Headers } from "@angular/http";
+import { Http, Response } from "@angular/http";
 import { Injectable, EventEmitter } from "@angular/core";
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -19,7 +19,6 @@ export class QuestionOneService {
     private url: string = 'http://localhost:3000';
     private socket: any = null;
 
-    // private latestTeamQuestionOneValue: number;
     latestTeamQuestionOneValue: BehaviorSubject<number> = new BehaviorSubject<number>(undefined);
     latestTeamQuestionOneValueChanged$: Observable<number> = this.latestTeamQuestionOneValue.asObservable();
 
