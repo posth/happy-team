@@ -6,12 +6,17 @@ import { Observable } from "rxjs";
 import { User } from "../user/user.model";
 import { ErrorService } from "../errors/error.service";
 
+import { ConfigService } from "../config.service";
+
 @Injectable()
 export class AdminService {
 
     private users: User[] = [];
 
-    constructor(private http: Http, private errorService: ErrorService) { }
+    constructor(private http: Http,
+        private errorService: ErrorService,
+        private configService: ConfigService
+    ) { }
 
     getAdminStatus() {
 
@@ -19,7 +24,7 @@ export class AdminService {
             ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
-        return this.http.get('http://localhost:3000/admin' + userId)
+        return this.http.get(this.configService.getServerPath() + '/admin' + userId)
             .map((response: Response) => {
                 const adminStatus = response.json().obj;
                 return adminStatus;
@@ -33,7 +38,7 @@ export class AdminService {
     //Get all users in Mongo
     getUsersList() {
 
-        return this.http.get('http://localhost:3000/admin/users')
+        return this.http.get(this.configService.getServerPath() + '/admin/users')
             .map((response: Response) => {
 
                 const users = response.json().obj;

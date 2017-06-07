@@ -10,21 +10,25 @@ import { ErrorService } from "../../../errors/error.service";
 
 import * as io from 'socket.io-client';
 
+//Config
+import { ConfigService } from "../../../config.service";
+
 @Injectable()
 export class QuestionTwoService {
 
     private healths: Health[];
     userQuestionTwoValueIsEdit = new EventEmitter<Health>();
 
-    private url: string = 'http://localhost:3000';
     private socket: any = null;
 
     // private latestTeamQuestionTwoValue: number;
     latestTeamQuestionTwoValue: BehaviorSubject<number> = new BehaviorSubject<number>(undefined);
     latestTeamQuestionTwoValueChanged$: Observable<number> = this.latestTeamQuestionTwoValue.asObservable();
 
-    constructor(private http: Http, private errorService: ErrorService) {
-        this.socket = io(this.url);
+    constructor(private http: Http,
+        private errorService: ErrorService,
+        private configService: ConfigService) {
+        this.socket = io(this.configService.getServerPath());
         this.socket.on('getlatestTeamQuestionTwoValue', function (latestTeamQuestionTwoValue) {
             this.latestTeamQuestionTwoValue.next(latestTeamQuestionTwoValue);
         }.bind(this));
@@ -46,7 +50,7 @@ export class QuestionTwoService {
 
     //Getting all the users past healths
     getQuestionTwoValues() {
-        return this.http.get('http://localhost:3000/questiontwo')
+        return this.http.get(this.configService.getServerPath() + '/questiontwo')
             .map((response: Response) => {
                 const healths = response.json().obj;
                 let transformedHealths: Health[] = [];
@@ -73,7 +77,7 @@ export class QuestionTwoService {
             ? '?id=' + sessionStorage.getItem('userId')
             : '';
 
-        return this.http.get('http://localhost:3000/questiontwo/latest' + userId)
+        return this.http.get(this.configService.getServerPath() + '/questiontwo/latest' + userId)
             .map((response: Response) => {
                 const mostRecentHealthObject = response.json().obj;
                 return mostRecentHealthObject;
@@ -84,10 +88,10 @@ export class QuestionTwoService {
             });
     }
 
-   //Getting the team most recent health
+    //Getting the team most recent health
     getMostRecentTeamQuestionTwoValue() {
 
-        return this.http.get('http://localhost:3000/questiontwo/team')
+        return this.http.get(this.configService.getServerPath() + '/questiontwo/team')
             .map((response: Response) => {
                 const mostRecentTeamHealthObject = response.json().obj;
                 //returns a number of the team health

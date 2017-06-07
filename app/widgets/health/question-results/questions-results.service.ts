@@ -6,10 +6,15 @@ import { ErrorService } from '../../../errors/error.service';
 
 import { TeamHealth } from '../teamHealth.model';
 
+//Config
+import { ConfigService } from "../../../config.service";
+
 @Injectable()
 export class QuestionResultsService {
 
-    constructor(private _http: Http, private _errorService: ErrorService) { }
+    constructor(private _http: Http,
+        private _errorService: ErrorService,
+        private configService: ConfigService) { }
 
     getAllQuestionOneValues() {
 
@@ -20,7 +25,7 @@ export class QuestionResultsService {
         //setting Headers
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this._http.post('http://localhost:3000/health/teamhealths', { headers: headers })
+        return this._http.post(this.configService.getServerPath() + '/health/teamhealths', { headers: headers })
             .map((response: Response) => {
                 const questionOneTeamValuesResult = response.json();
 
@@ -50,7 +55,7 @@ export class QuestionResultsService {
         //setting Headers
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this._http.post('http://localhost:3000/questiontwo/questiontwoteamvalues', { headers: headers })
+        return this._http.post(this.configService.getServerPath() + '/questiontwo/questiontwoteamvalues', { headers: headers })
             .map((response: Response) => {
                 const questionTwoTeamValuesResult = response.json();
 
@@ -80,7 +85,7 @@ export class QuestionResultsService {
         //setting Headers
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this._http.post('http://localhost:3000/questionthree/questionthreeteamvalues', { headers: headers })
+        return this._http.post(this.configService.getServerPath() + '/questionthree/questionthreeteamvalues', { headers: headers })
             .map((response: Response) => {
                 const questionThreeTeamValuesResult = response.json();
 

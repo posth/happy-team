@@ -24,6 +24,9 @@ import { TeamComponent } from './team/team.component';
 //Main component
 import { AppComponent } from "./app.component";
 
+//Config
+import { ConfigService } from "./config.service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -47,7 +50,8 @@ import { AppComponent } from "./app.component";
         AuthService,
         ErrorService,
         AdminService,
-        UserStatusService
+        UserStatusService,
+        ConfigService
     ],
     bootstrap: [AppComponent]
 })

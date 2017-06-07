@@ -6,14 +6,19 @@ import { Observable } from "rxjs";
 import { User } from "../user/user.model";
 import { ErrorService } from "../errors/error.service";
 
+//Config
+import { ConfigService } from "../config.service";
+
 @Injectable()
 export class AuthService {
-    constructor(private http: Http, private errorService: ErrorService) { }
+    constructor(private http: Http,
+        private errorService: ErrorService,
+        private configService: ConfigService) { }
 
     signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('http://localhost:3000/user', body, { headers: headers })
+        return this.http.post(this.configService.getServerPath() + '/user', body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -24,7 +29,7 @@ export class AuthService {
     signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('http://localhost:3000/user/signin', body, { headers: headers })
+        return this.http.post(this.configService.getServerPath() + '/user/signin', body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -36,7 +41,7 @@ export class AuthService {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this.http.post('http://localhost:3000/user/delete', body, { headers: headers })
+        return this.http.post(this.configService.getServerPath() + '/user/delete', body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -48,7 +53,4 @@ export class AuthService {
         sessionStorage.clear();
     }
 
-    // isLoggedIn() {
-    //     return sessionStorage.getItem('token') !== null;
-    // }
 }
